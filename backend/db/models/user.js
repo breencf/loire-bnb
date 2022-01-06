@@ -4,7 +4,7 @@ const { Validator } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    "Users",
+    "User",
     {
       username: {
         type: DataTypes.STRING,
@@ -42,9 +42,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   /*^^ These scopes need to be explicitly used when querying.
-  For example, User.scope('currentUser').findByPk(id)
-  will find a User by the specified id and return only the User
-  fields that the currentUser model scope allows. */
+For example, User.scope('currentUser').findByPk(id)
+will find a User by the specified id and return only the User
+fields that the currentUser model scope allows. */
 
   User.prototype.toSafeObject = function () {
     const { id, username, email } = this; //context is the user instance
@@ -60,21 +60,20 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.login = async function (credential, password) {
-    const {Op} = require('sequelize')
+    const { Op } = require("sequelize");
     const user = await User.scope("login").findOne({
-      where: { [Op.or]: { username: credential,
-                          email: credential } },
+      where: { [Op.or]: { username: credential, email: credential } },
     });
     if (user && user.validatePassword(password)) {
-      return await User.scope('currentUser').findByPk(user.id)
+      return await User.scope("currentUser").findByPk(user.id);
     }
   };
 
-  User.signup = async function ({username, email, password}) {
-    const hashedPassword = bcrypt.hashSync(password)
-    const newUser = await User.create(username, email, hashedPassword)
-    return await User.scope('currentUser').findByPk(user.id)
-  }
+  User.signup = async function ({ username, email, password }) {
+    const hashedPassword = bcrypt.hashSync(password);
+    const newUser = await User.create(username, email, hashedPassword);
+    return await User.scope("currentUser").findByPk(user.id);
+  };
 
   User.associate = function (models) {
     // associations can be defined here
