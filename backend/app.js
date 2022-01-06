@@ -6,6 +6,8 @@ const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const { ValidationError } = require("sequelize");
+const indexRouter = require("./routes/index");
+
 //import the environment to check if its dev or prod
 const { environment } = require("./config");
 const isProduction = environment === "production";
@@ -29,10 +31,8 @@ app.use(
   })
 );
 //ROUTERS
-const indexRouter = require("./routes/index");
 
 app.use(indexRouter);
-
 
 //Error Handling
 
@@ -54,11 +54,11 @@ app.use((e, _req, res, _next) => {
   res.status(e.status || 500);
   console.error(e);
   res.json({
-    title: e.title || 'Server Error',
+    title: e.title || "Server Error",
     message: e.message,
     errors: e.errors,
     stack: isProduction ? null : e.stack,
-  })
-})
+  });
+});
 
 module.exports = app;

@@ -61,7 +61,7 @@ fields that the currentUser model scope allows. */
 
   User.login = async function (credential, password) {
     const { Op } = require("sequelize");
-    const user = await User.scope("login").findOne({
+    const user = await User.scope("loginUser").findOne({
       where: { [Op.or]: { username: credential, email: credential } },
     });
     if (user && user.validatePassword(password)) {
@@ -71,8 +71,9 @@ fields that the currentUser model scope allows. */
 
   User.signup = async function ({ username, email, password }) {
     const hashedPassword = bcrypt.hashSync(password);
-    const newUser = await User.create(username, email, hashedPassword);
-    return await User.scope("currentUser").findByPk(user.id);
+    console.log(username, email, password, "------in the signup method");
+    const newUser = await User.create({ username, email, hashedPassword });
+    return await User.scope("currentUser").findByPk(newUser.id);
   };
 
   User.associate = function (models) {
