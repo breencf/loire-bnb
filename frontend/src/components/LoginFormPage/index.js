@@ -49,12 +49,13 @@ export const LoginFormPage = () => {
           <label htmlFor="password">Password:</label>
           <input
             id="password"
-            type="text"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
           />
         </div>
+        <button>Submit</button>
       </form>
     </div>
   );
