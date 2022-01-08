@@ -7,6 +7,7 @@ import {BrowserRouter} from 'react-router-dom'
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import configureStore from './store'
 import * as sessionActions from './store/session';
+import { ModalProvider } from './context/modal';
 
 const store = configureStore()
 
@@ -20,11 +21,13 @@ if(process.env.NODE_ENV !== "production") {
 
 const Root = () => {
   return(
+    <ModalProvider>
     <Provider store={store}>
       <BrowserRouter>
       <App/>
       </BrowserRouter>
     </Provider>
+    </ModalProvider>
   )
 }
 
