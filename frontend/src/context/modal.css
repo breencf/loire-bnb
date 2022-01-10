@@ -1,23 +1,18 @@
 #modal {
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-items: center;
 }
 #modal-background {
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: fuchsia;
-  opacity: 20%;
+  width: 100%;
+  height: 100%;
+  background-color: bebebe;
+  opacity: 80%;
 }
 #modal-content {
+  display: flex;
   position: absolute;
   background-color: white;
 }

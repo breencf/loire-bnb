@@ -22,7 +22,7 @@ export function ModalProvider({children}) {
     )
 }
 
-export const Modal = ({onClose, children}) => {
+const Modal = (onClose, {children}) => {
     const modalNode = useContext(ModalContext)
     if(!modalNode) return null;
     return ReactDOM.createPortal(

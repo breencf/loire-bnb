@@ -1,32 +1,43 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { ProfileButton } from "./ProfileButton";
-import {LoginFormModal} from "../LoginFormModal";
-import "./Navigation.css";
+import {ProfileButton} from "./ProfileButton";
 
-export const Navigation = ({ isLoaded }) => {
+export const Navigation = ({isLoaded}) => {
   const sessionUser = useSelector((state) => state.session.user);
 
   let dropdownLinks;
   if (sessionUser) {
-    dropdownLinks = <ProfileButton user={sessionUser} />;
+    dropdownLinks = (
+      <>
+        <li>
+          <ProfileButton user={sessionUser} />
+        </li>
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/logout">Logout</NavLink>
+        </li>
+      </>
+    );
   } else {
     dropdownLinks = (
       <>
-        <LoginFormModal />
-        <NavLink to="/signup">Sign up</NavLink>
+        <li>
+          <NavLink to="/signup">Sign up</NavLink>
+        </li>
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
       </>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
+    <nav>
+      <ul>
         {isLoaded && dropdownLinks}
-      </li>
-    </ul>
+      </ul>
+    </nav>
   );
 };
