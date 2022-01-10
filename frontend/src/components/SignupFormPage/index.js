@@ -6,7 +6,8 @@ import "./SignupForm.css";
 
 export const SignupFormPage = () => {
   const dispatch = useDispatch();
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,7 +17,7 @@ export const SignupFormPage = () => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(signup({ username, email, password })).catch(
+      return dispatch(signup({ firstName, lastName, email, password })).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
@@ -48,12 +49,22 @@ export const SignupFormPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="firstName">First Name:</label>
           <input
-            id="username"
+            id="firstName"
             type="text"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            id="lastName"
+            type="text"
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
             required
           />
         </div>

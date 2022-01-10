@@ -13,27 +13,32 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage("Please provide a valid email"),
-  check("username")
+  check("firstName")
     .exists({ checkFalsy: true })
-    .isLength({ min: 4 })
+    .isLength({ min: 3 })
     .withMessage(
-      "Please provide a username that is at least 4 characters long"
+      "Please provide a first name that is at least 3 characters long"
     ),
-  check("username").not().isEmail().withMessage("Username cannot be an email"),
+  check("lastName")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 3 })
+    .withMessage(
+      "Please provide a last name that is at least 3 characters long"
+    ),
   check("password")
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters long"),
-    handleValidationErrors
+  handleValidationErrors,
 ];
 
 router.post(
   "/",
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
-    console.log(username, email, password);
-    const user = await User.signup({ username, email, password });
+    const { firstName, lastName, email, password } = req.body;
+    console.log(firstName, lastName, email, password);
+    const user = await User.signup({ firstName, lastName, email, password });
 
     await setTokenCookie(res, user);
     return res.json({ user });

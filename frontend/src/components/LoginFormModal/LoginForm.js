@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import "./LoginForm.css";
 
-export const LoginFormPage = () => {
+export const LoginForm = () => {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ export const LoginFormPage = () => {
           </ul>
         </div>
         <div>
-          <label htmlFor="credential">Username/Email:</label>
+          <label htmlFor="credential">Email:</label>
           <input
             id="credential"
             type="text"

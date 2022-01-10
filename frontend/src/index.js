@@ -1,36 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import {Provider} from 'react-redux'
-import {BrowserRouter} from 'react-router-dom'
-import { restoreCSRF, csrfFetch } from './store/csrf';
-import configureStore from './store'
-import * as sessionActions from './store/session';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { restoreCSRF, csrfFetch } from "./store/csrf";
+import configureStore from "./store";
+import * as sessionActions from "./store/session";
+import { ModalProvider } from "./context/modal";
 
-const store = configureStore()
+const store = configureStore();
 
-if(process.env.NODE_ENV !== "production") {
-  restoreCSRF()
+if (process.env.NODE_ENV !== "production") {
+  restoreCSRF();
 
-  window.sessionActions = sessionActions
+  window.sessionActions = sessionActions;
   window.csrfFetch = csrfFetch;
   window.store = store;
 }
 
-const Root = () => {
-  return(
+function Root() {
+  return (
     <Provider store={store}>
-      <BrowserRouter>
-      <App/>
-      </BrowserRouter>
+      <ModalProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ModalProvider>
     </Provider>
-  )
+  );
 }
 
 ReactDOM.render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

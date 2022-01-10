@@ -12,7 +12,7 @@ const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Please provide a valid email or username"),
+    .withMessage("Please provide a valid email address"),
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a valid password"),
@@ -43,6 +43,7 @@ router.post(
 router.delete(
   "/",
   asyncHandler(async (_req, res) => {
+    console.log('logging out....')
     res.clearCookie("token");
     return res.json({ message: "success" });
   })
