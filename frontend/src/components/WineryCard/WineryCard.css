@@ -1,0 +1,38 @@
+.wineryCard {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90%;
+  border: 1px solid black;
+  height: 250px;
+}
+
+.wineryCardImages {
+  max-height: 300px;
+  max-width: 40%;
+  padding: 10px;
+}
+
+.wineryCardImages img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.wineryCardDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 60%;
+}
+
+.wineryCardDetails * {
+  margin: 5px;
+  text-align: left;
+}
+
+hr.wineryCard {
+  width: 20px;
+}

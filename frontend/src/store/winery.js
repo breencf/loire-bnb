@@ -22,7 +22,6 @@ const addOneWinery = (winery) => {
 
 export const getWineries = () => async (dispatch) => {
   const response = await fetch("/api/wineries");
-  console.log("response is", response);
 
   if (response.ok) {
     const data = await response.json();
@@ -46,17 +45,15 @@ export const addWinery = (payload) => async (dispatch) => {
   dispatch(addOneWinery(winery));
 };
 
-const initialState = { wineries: [] };
+const initialState = {};
 function wineryReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case LOAD:
       const allWineries = {};
-      console.log("action.wineries", action.wineries);
       action.wineries.forEach((winery) => {
         allWineries[winery.id] = winery;
       });
-      console.log("---", allWineries);
       return { ...allWineries, ...state };
     case ADD:
       if (!state[action.winery.id]) {

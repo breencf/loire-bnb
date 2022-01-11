@@ -2,8 +2,6 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { createAWinery } from "../../store/winery";
 
-const wineStyles = ["Sparkling", "White", "Orange/Skin Contact", "Rosé", "Red", "Dessert"]
-
 const CreateWineryForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");

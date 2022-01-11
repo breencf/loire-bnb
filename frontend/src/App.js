@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { SignupFormPage } from "./components/SignupFormPage";
 import { Navigation } from "./components/Navigation";
 import { WineryPage } from "./components/WineryPage";
+import { getWineries } from "./store/winery";
 
 //misc
 import { restoreUser } from "./store/session";
@@ -16,6 +17,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getWineries());
   }, [dispatch]);
 
   return (

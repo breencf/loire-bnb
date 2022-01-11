@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
-const { Winery } = require("../../db/models");
+const db = require("../../db/models");
 
 const validateWinery = [
   check("ownerId").exists({ checkFalsy: true }).notEmpty(),
@@ -22,13 +22,15 @@ const validateWinery = [
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
-    console.log("in api/wineries route");
-    const wineries = await Winery.findAll();
-    console.log("wineries are........", wineries);
+    const wineries = await db.Winery.findAll({
+      include: [db.Region, db.Image, db.Varietal /*db.WineStyle*/],
+      limit: 10,
+    });
     res.json(wineries);
   })
 );
 
+//router.get(create form, pass in regions, styles, etc to be used on front end form rendering )
 //create a winery
 router.post(
   "/",
