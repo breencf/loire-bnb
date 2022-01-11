@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 
 import wineryReducer from './winery';
 import sessionReducer from './session';
+import formReducer from './form';
 
 let enhancer;
 
@@ -20,7 +21,8 @@ const configureStore = preloadedState => {
 
 const rootReducer = combineReducers({
     sessions: sessionReducer,
-    wineries: wineryReducer
+    wineries: wineryReducer,
+    form: formReducer
 })
 
 export default configureStore;

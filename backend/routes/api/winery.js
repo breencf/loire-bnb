@@ -30,6 +30,14 @@ router.get(
   })
 );
 
+router.get('/create', asyncHandler(async (req, res, next) => {
+  const wineStyles = await db.WineStyle.findAll()
+  const varietals = await db.Varietal.findAll()
+  const regions = await db.Region.findAll()
+
+  res.json({wineStyles, varietals, regions})
+}))
+
 //router.get(create form, pass in regions, styles, etc to be used on front end form rendering )
 //create a winery
 router.post(

@@ -7,10 +7,12 @@ import { SignupFormPage } from "./components/SignupFormPage";
 import { Navigation } from "./components/Navigation";
 import { WineryPage } from "./components/WineryPage";
 import { getWineries } from "./store/winery";
+import CreateWineryForm from "./components/CreateWineryForom";
 
 //misc
 import { restoreUser } from "./store/session";
 import { WineryList } from "./components/WineryList";
+import { getForm } from "./store/form";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +20,11 @@ function App() {
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(getWineries());
+    dispatch(getForm())
   }, [dispatch]);
+
+  useEffect(() => {
+  },[]);
 
   return (
     isLoaded && (
@@ -27,14 +33,19 @@ function App() {
         <Switch>
           <Route exact path="/">
             <h1>loirebnb</h1>
+            {/* <Route path="/wineries"> */}
             <WineryList />
+            {/* </Route> */}
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          {/* <Route path="/wineries">
+          {/* <Route exact path="/wineries/:id">
             <WineryPage />
           </Route> */}
+          <Route exact path="/wineries/create">
+            <CreateWineryForm />
+          </Route>
         </Switch>
       </>
     )

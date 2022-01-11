@@ -26,7 +26,7 @@ module.exports = {
         { type: "Folle Blanche", createdAt: new Date(), updatedAt: new Date() },
         { type: "Tressailier", createdAt: new Date(), updatedAt: new Date() },
         { type: "Pinot Noir", createdAt: new Date(), updatedAt: new Date() },
-        { type: "10", createdAt: new Date(), updatedAt: new Date() },
+        { type: "Gamay", createdAt: new Date(), updatedAt: new Date() },
         { type: "Grolleau", createdAt: new Date(), updatedAt: new Date() },
         { type: "Côt/Malbec", createdAt: new Date(), updatedAt: new Date() },
         {
