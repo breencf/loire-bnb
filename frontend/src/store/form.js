@@ -25,12 +25,11 @@ function formReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case LOAD:
-      newState = {
-        ...state,
-        varietalList: [action.varietals],
-        wineStyleList: [action.wineStyles],
-        regionList: [action.regions],
-      };
+      newState = { ...state };
+      console.log("newSTATE", newState);
+        newState["varietalList"]= [action.varietals],
+        newState["wineStyleList"]= [action.wineStyles],
+        newState["regionList"]= [action.regions];
       return newState;
     default:
       return state;

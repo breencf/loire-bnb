@@ -48,9 +48,9 @@ const CreateWineryForm = () => {
     });
   };
 
-  // useEffect(() => {
-  //   dispatch(getForm());
-  // }, []);
+  useEffect(() => {
+    dispatch(getForm());
+  }, [dispatch]);
 
   const updateCheckedVarietals = (index) => {
     setVarietals(
