@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 //components
 import { SignupFormPage } from "./components/SignupFormPage";
 import { Navigation } from "./components/Navigation";
+import { WineryPage } from "./components/WineryPage";
 
 //misc
 import { restoreUser } from "./store/session";
+import { WineryList } from "./components/WineryList";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,10 +25,14 @@ function App() {
         <Switch>
           <Route exact path="/">
             <h1>loirebnb</h1>
+            <WineryList />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          {/* <Route path="/wineries">
+            <WineryPage />
+          </Route> */}
         </Switch>
       </>
     )

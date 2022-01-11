@@ -6,7 +6,7 @@ import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
 
 export function Navigation({ isLoaded }) {
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.sessions.user);
 
   let sessionLinks;
   if (sessionUser) {

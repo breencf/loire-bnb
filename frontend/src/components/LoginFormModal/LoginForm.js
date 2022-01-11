@@ -8,7 +8,7 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.sessions.user);
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;

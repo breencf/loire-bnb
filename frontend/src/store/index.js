@@ -1,5 +1,7 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
+
+import wineryReducer from './winery';
 import sessionReducer from './session';
 
 let enhancer;
@@ -17,7 +19,8 @@ const configureStore = preloadedState => {
 }
 
 const rootReducer = combineReducers({
-    session: sessionReducer,
+    sessions: sessionReducer,
+    wineries: wineryReducer
 })
 
 export default configureStore;
