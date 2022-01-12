@@ -31,6 +31,16 @@ router.get(
 );
 
 router.get(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const winery = await db.Winery.findOne({
+      include: [db.Region, db.Image, db.Varietal, db.WineStyle]
+    })
+    res.json(winery)
+  })
+);
+
+router.get(
   "/create",
   asyncHandler(async (req, res, next) => {
     const wineStyles = await db.WineStyle.findAll();
@@ -89,10 +99,7 @@ router.post(
   })
 );
 
-//get a winery by id
-router.get(
-  "/:id",
-  asyncHandler(async (req, res, next) => {})
-);
+
+
 
 module.exports = router;

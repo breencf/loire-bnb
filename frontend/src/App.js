@@ -13,6 +13,7 @@ import CreateWineryForm from "./components/CreateWineryForm";
 import { restoreUser } from "./store/session";
 import { WineryList } from "./components/WineryList";
 import { getForm } from "./store/form";
+import { Homepage } from "./components/Homepage";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function App() {
         <Navigation isLoaded={isLoaded} />
         <Switch>
           <Route exact path="/">
-            <h1>Homepage</h1>
+            <Homepage/>
           </Route>
             <Route exact path="/wineries">
             <WineryList />
@@ -40,9 +41,9 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          {/* <Route path="/wineries/:id">
+          <Route path="/wineries/:id">
             <WineryPage />
-          </Route> */}
+          </Route>
           <Route exact path="/wineries/create">
             <CreateWineryForm />
           </Route>

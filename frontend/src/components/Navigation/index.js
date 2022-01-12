@@ -7,28 +7,17 @@ import "./Navigation.css";
 import { SearchBar } from "./SearchBar/SearchBar";
 
 export function Navigation({ isLoaded }) {
-  // const sessionUser = useSelector((state) => state.sessions.user);
 
-  // let sessionLinks;
-  // if (sessionUser) {
-  //   sessionLinks = <ProfileButton user={sessionUser} />;
-  // } else {
-  //   sessionLinks = (
-  //     <>
-  //       <LoginFormModal />
-  //       <NavLink to="/signup">Sign Up</NavLink>
-  //     </>
-  //   );
-  // }
+
 
   return (
-    <div className="nav">
+    <div className="nav-black" >
       <div id="navigation-top">
         <div className="navigation-left">
-          <NavLink to="/"><img width="80" height="80"src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-white_u8jgo8.png"/></NavLink>
+          <NavLink to="/"><img width="50" height="50"src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-white_u8jgo8.png"/></NavLink>
         </div>
         <div className="navLinks-center">
-          <NavLink exact to="/" className="NavLink">
+          <NavLink exact to="/wineries" className="NavLink">
             Explore Wineries
           </NavLink>
           <NavLink exact to="/wineries/create" className="NavLink">

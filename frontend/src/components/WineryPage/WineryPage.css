@@ -1,1 +1,26 @@
+.imageSlider {
+    height: 500px;
+    width: 100vw
+}
 
+.imageSlider img {
+    width: 90%;
+    height: 450px;
+    object-fit: cover;
+}
+
+.varietalButton {
+    border: 2px solid #bebebe;
+    padding: 15px;
+    border-radius: 32px;
+}
+
+#leftButton {
+    position:absolute;
+    height: 450px;
+    opacity: 100%;
+    background-color: transparent;
+    border: none;
+    color:#bebebe;
+    font-size: 72px;
+}

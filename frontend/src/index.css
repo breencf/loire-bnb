@@ -1,20 +1,19 @@
 /* TODO Add site wide styles */
 
 #fixie {
-    position: fixed;
-    font-size: 300px;
-    z-index: 0;
+  position: fixed;
+  font-size: 300px;
+  z-index: 0;
 }
 
 body {
   font-family: "Raleway", "Futura", "Helvetica", sans-serif;
-  max-width: 100%;
+  width: 100vw;
   margin: 0px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-
 }
 
 h1 {

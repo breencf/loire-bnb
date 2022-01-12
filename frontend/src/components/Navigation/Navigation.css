@@ -2,13 +2,24 @@ h1 {
   color: #ff385c;
 }
 
-.nav {
+.nav-black {
   background-color: black;
-  width: 100%;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-bottom: 30px;
+}
+
+.nav-white {
+  background-color: white;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 30px;
 }
 
 .profile-dropdown {
@@ -22,6 +33,10 @@ h1 {
   width: 225px;
 }
 
+.navigation-left {
+  padding-left: 20px;
+}
+
 .profile-dropdown li {
   padding: 10px;
 }
@@ -33,6 +48,11 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+#navigation-top a{
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 #user-button {
@@ -62,6 +82,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-right: 10px;
 }
 
 .nav a {
@@ -95,7 +116,6 @@ h1 {
   font-weight: 600;
   font-size: 12px;
   padding: 14px 24px;
-  border: 1px solid fuchsia;
   border-radius: 32px;
 }
 

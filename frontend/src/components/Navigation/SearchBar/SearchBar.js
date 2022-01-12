@@ -1,6 +1,13 @@
 import { useState } from "react";
 
 export const SearchBar = () => {
+
+  // const year = new Date.getFullYear()
+  // const month = new Date.getMonth()
+  // const day = new Date.getDay()
+
+  // const hour = new Date().getHours
+  // const minute= new Date().getMinutes
   const [location, setLocation] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
@@ -30,7 +37,7 @@ export const SearchBar = () => {
             value={location}
             placeholder="Where are you going?"
           />
-        </div>
+        </div>|
         <div>
           <label htmlFor="date">Date</label>
           <input
@@ -39,9 +46,9 @@ export const SearchBar = () => {
             onChange={(e) => setDate(e.target.value)}
             value={date}
             placeholder="Choose a date"
-            // min={new Date()}
+            // min={year, month, day}
           />
-        </div>
+        </div>|
         <div>
           <label htmlFor="time">Time</label>
           <input
@@ -51,7 +58,7 @@ export const SearchBar = () => {
             value={time}
             placeholder="Choose a time"
           />
-        </div>
+        </div>|
         <div>
           <label htmlFor="location">Guests</label>
           <input

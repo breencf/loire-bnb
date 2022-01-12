@@ -31,6 +31,7 @@ export const getWineries = () => async (dispatch) => {
 
 export const getOneWinery = (id) => async (dispatch) => {
   const response = await fetch(`api/wineries/${id}`);
+  console.log('tapping the winery frontend')
   const winery = await response.json();
   dispatch(addOneWinery(winery));
 };
