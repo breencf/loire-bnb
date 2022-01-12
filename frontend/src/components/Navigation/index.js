@@ -31,14 +31,14 @@ export function Navigation({ isLoaded }) {
           <NavLink exact to="/" className="NavLink">
             Explore Wineries
           </NavLink>
-          <NavLink exact to="/api/wineries/create" className="NavLink">
+          <NavLink exact to="/wineries/create" className="NavLink">
             Hire this Developer
           </NavLink>
         </div>
 
 
         <div className="navLinks-right">
-          <NavLink exact to="/api/wineries/create" className="NavLink">
+          <NavLink exact to="/wineries/create" className="NavLink">
             List your Winery
           </NavLink>
           {/* {isLoaded && sessionLinks} */}

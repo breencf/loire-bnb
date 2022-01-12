@@ -20,7 +20,7 @@ export const getForm = () => async (dispatch) => {
   }
 };
 
-const initialState = { varietalList: [], wineStyleList: [], regionList: [] };
+const initialState = {};
 function formReducer(state = initialState, action) {
   let newState;
   switch (action.type) {

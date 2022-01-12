@@ -25,11 +25,11 @@ export const WineryList = () => {
         })}
       </ul>
 
-      <Switch>
+      {/* <Switch>
         <Route path="/wineries/:id">
           <WineryPage wineries={wineries} />
         </Route>
-      </Switch>
+      </Switch> */}
     </div>
   );
 };

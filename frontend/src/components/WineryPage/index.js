@@ -9,8 +9,8 @@ export const WineryPage = () => {
 
   return (
     <div>
-      <h1>{winery.name} </h1>
-      <p>{winery.content}</p>
+      <h1>winery.name </h1>
+      <p>winery.content</p>
     </div>
   );
 };

@@ -10,13 +10,20 @@ function ProfileButton({ user, isLoaded }) {
   const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector((state) => state.sessions.user);
 
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+    closeMenu()
+  };
+
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <>
-      <li>{user.firstName} {user.lastName}</li>
-      <li>{user.email}</li>
-      <li><NavLink to="/tastings">Tastings</NavLink></li>x
+      <li>{sessionUser.firstName} {sessionUser.lastName}</li>
+      <li>{sessionUser.email}</li>
+      <li><NavLink to="/tastings">Tastings</NavLink></li>
       <li><NavLink to="/mywineries">My Wineries</NavLink></li>
       <li><button onClick={logout}>Log Out</button></li>
 
@@ -37,22 +44,20 @@ function ProfileButton({ user, isLoaded }) {
     setShowMenu(true);
   };
 
+  const closeMenu = () => {
+    setShowMenu(false);
+  };
+
   useEffect(() => {
     if (!showMenu) return;
 
-    const closeMenu = () => {
-      setShowMenu(false);
-    };
 
-    document.addEventListener('click', closeMenu);
 
-    return () => document.removeEventListener("click", closeMenu);
+    // document.addEventListener('click', closeMenu);
+
+    // return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
 
   return (
     <>
@@ -62,9 +67,12 @@ function ProfileButton({ user, isLoaded }) {
         <div id="user-circle"><i className="fas fa-user-circle" /></div>
       </button>
       {showMenu &&  (
+        <>
+        <div className="profile-button-background" onClick={closeMenu}></div>
         <ul className="profile-dropdown">
           {isLoaded && sessionLinks}
         </ul>
+        </>
       )}
     </>
   );

@@ -47,7 +47,6 @@ export const addWinery = (payload) => async (dispatch) => {
 
 const initialState = {};
 function wineryReducer(state = initialState, action) {
-  let newState;
   switch (action.type) {
     case LOAD:
       const allWineries = {};

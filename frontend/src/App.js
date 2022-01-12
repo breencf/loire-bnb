@@ -7,7 +7,7 @@ import { SignupFormPage } from "./components/SignupFormPage";
 import { Navigation } from "./components/Navigation";
 import { WineryPage } from "./components/WineryPage";
 import { getWineries } from "./store/winery";
-import CreateWineryForm from "./components/CreateWineryForom";
+import CreateWineryForm from "./components/CreateWineryForm";
 
 //misc
 import { restoreUser } from "./store/session";
@@ -32,14 +32,15 @@ function App() {
         <Navigation isLoaded={isLoaded} />
         <Switch>
           <Route exact path="/">
-            {/* <Route path="/wineries"> */}
+            <h1>Homepage</h1>
+          </Route>
+            <Route exact path="/wineries">
             <WineryList />
-            {/* </Route> */}
           </Route>
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          {/* <Route exact path="/wineries/:id">
+          {/* <Route path="/wineries/:id">
             <WineryPage />
           </Route> */}
           <Route exact path="/wineries/create">
