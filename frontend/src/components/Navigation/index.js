@@ -25,7 +25,7 @@ export function Navigation({ isLoaded }) {
     <div className="nav">
       <div id="navigation-top">
         <div className="navigation-left">
-          <NavLink to="/"><h1>loirebnb</h1></NavLink>
+          <NavLink to="/"><img width="80" height="80"src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-white_u8jgo8.png"/></NavLink>
         </div>
         <div className="navLinks-center">
           <NavLink exact to="/" className="NavLink">

@@ -23,14 +23,14 @@ module.exports = {
         allowNull: false,
       },
       lat: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
       },
       long: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
       },
-       address: {
-         type: Sequelize.STRING,
-       },
+      address: {
+        type: Sequelize.STRING,
+      },
       town: {
         type: Sequelize.STRING(300),
         allowNull: false,

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   WineStyle.associate = function (models) {
     // associations can be defined here
     const columnMapping = {
-      through: "WineStyleToWinery", //joinTable
+      through: "WineStyleToWineries", //joinTable
       otherKey: "wineryId", //join other key
       foreignKey: "wineStyleId", //join key that references this
     };

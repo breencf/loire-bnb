@@ -3,60 +3,13 @@ import { useEffect, useState } from "react";
 import { addWinery } from "../../store/winery";
 import { getForm } from "../../store/form";
 import { MultiSelect } from "react-multi-select-component";
+import {Redirect} from 'react-router-dom'
 import "./CreateWinery.css";
-
-const varietalList = [
-  { label: "Melon de Bourgogne", id: 1 },
-  { label: "Chenin Blanc", id: 2 },
-  { label: "Cabernet Franc", id: 3 },
-  { label: "Romorantin", id: 4 },
-  { label: "Chardonnay", id: 5 },
-  { label: "Sauvignon Blanc", id: 6 },
-  { label: "Folle Blanche", id: 7 },
-  { label: "Tressailier", id: 8 },
-  { label: "Pinot Noir", id: 9 },
-  { label: "Gamay", id: 10 },
-  { label: "Grolleau", id: 11 },
-  { label: "Côt/Malbec", id: 12 },
-  { label: "Pineau d'Aunis", id: 13 },
-];
-
-const wineStyleList = [
-  { label: "Sparkling", id: 1 },
-  { label: "White", id: 2 },
-  { label: "Orange/Skin-Contact", id: 3 },
-  { label: "Rosé", id: 4 },
-  { label: "Red", id: 5 },
-  { label: "Dessert/Fortified", id: 6 },
-];
-
-const regionList = [
-  { label: "Pays Nantais", id: 1 },
-  { label: "Anjou", id: 2 },
-  { label: "Saumur", id: 3 },
-  { label: "Touraine", id: 4 },
-  { label: "Coteaux-du-Giennois", id: 5 },
-
-  { label: "Sancerre", id: 6 },
-  { label: "Pouilly-fumé/Pouilly-sur-Loire", id: 7 },
-  { label: "Menetou Salon", id: 8 },
-  { label: "Valençay", id: 9 },
-  { label: "Quincy", id: 10 },
-
-  { label: "Reuilly", id: 11 },
-  { label: "Châteaumeillant", id: 12 },
-  { label: "Saint-Pourçain", id: 13 },
-  { label: "Côtes Roannaises", id: 14 },
-  { label: "Côtes d’Auvergne", id: 15 },
-
-  { label: "Côtes du Forez", id: 16 },
-  { label: "Vouvray", id: 17 },
-  { label: "Chinon", id: 18 },
-  { label: "Bourgueil", id: 19 },
-];
+import { varietalList, wineStyleList, regionList } from "./form-lists";
 
 const CreateWineryForm = () => {
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.sessions.user.id);
   // const { varietalList, wineStyleList, regionList } = useSelector(
   //   (state) => state.form
   // );
@@ -67,14 +20,11 @@ const CreateWineryForm = () => {
   const [address, setAddress] = useState("");
   const [town, setTown] = useState("");
   const [maxGuests, setMaxGuests] = useState("");
-  const [region, setRegion] = useState(0);
+  const [region, setRegion] = useState("");
   const [varietals, setVarietals] = useState([]);
   const [wineStyles, setWineStyles] = useState([]);
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
-
-  // console.log(varietalList, wineStyleList);
-  // console.log(varietalList[0].length, wineStyleList[0].length);
 
   useEffect(() => {
     dispatch(getForm());
@@ -83,24 +33,30 @@ const CreateWineryForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    const regionId = regionList.find((regionObj) => regionObj.label === region);
     const winery = {
       name,
+      ownerId: userId,
       content,
       lat,
       long,
       address,
       town,
       maxGuests,
-      region,
+      regionId: regionId.id,
       varietals,
       wineStyles,
       images,
     };
     console.log(winery);
-    return dispatch(addWinery(winery)).catch(async (res) => {
+    const newWinery = dispatch(addWinery(winery)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
     });
+
+    console.log(newWinery)
+    // if (!data.errors) <Redirect to="/wineries/:id"/>
+
   };
 
   return (
@@ -115,72 +71,72 @@ const CreateWineryForm = () => {
           </ul>
         </div>
         <div className="formDiv">
-          <label htmlFor="name"></label>
+          <label htmlFor="name">Winery Name</label>
           <input
             id="name"
             label="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
             required
-            placeholder="Winery Name"
+            placeholder="Domaine Didier Dagueneau"
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="content"></label>
+          <label htmlFor="content">Winery Description</label>
           <textarea
             id="content"
             label="textarea"
             onChange={(e) => setContent(e.target.value)}
             value={content}
-            placeholder="Winery Description: give customers an idea of what makes your winery so special -- WHY should they book a tasting with you?"
+            placeholder="In a few sentences, give customers an idea of what makes your winery so special -- WHY should they book a tasting with you?"
             required
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="lat"></label>
+          <label htmlFor="lat">Latitude</label>
           <input
             id="lat"
             label="text"
             onChange={(e) => setLat(e.target.value)}
             value={lat}
             required
-            placeholder="Latitude"
+            placeholder="47.306860"
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="long"></label>
+          <label htmlFor="long">Longitude</label>
           <input
             id="long"
             label="text"
             onChange={(e) => setLong(e.target.value)}
             value={long}
             required
-            placeholder="Longitude"
+            placeholder="2.959046"
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="address"></label>
+          <label htmlFor="address">Address(optional)</label>
           <input
             id="address"
             label="string"
             onChange={(e) => setAddress(e.target.value)}
             value={address}
-            placeholder="Address (optional)"
+            placeholder="1 Le Bourg"
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="town"></label>
+          <label htmlFor="town">Town</label>
           <input
             id="town"
             label="string"
             onChange={(e) => setTown(e.target.value)}
             value={town}
             required
-            placeholder="Town/City"
+            placeholder="Saint-Andelain"
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="maxGuests"></label>
+          <label htmlFor="maxGuests">Maximum number of guests</label>
           <input
             id="maxGuests"
             label="number"
@@ -191,7 +147,7 @@ const CreateWineryForm = () => {
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="images"></label>
+          <label htmlFor="images">Images</label>
           <textarea
             id="images"
             label="textarea"
@@ -201,7 +157,7 @@ const CreateWineryForm = () => {
             placeholder="Images: enter each url separated by a comma (,) with no spaces. For example: https://wine.com/wine.jpg,https://loire.com/loire.jpg"
           />
         </div>
-        <div>
+        <div className="dropdown">
           <h4>Select Varietals</h4>
           <MultiSelect
             options={varietalList}
@@ -212,7 +168,7 @@ const CreateWineryForm = () => {
         </div>
 
         <hr />
-        <div>
+        <div className="dropdown">
           <h4>Select Wine Styles</h4>
           <MultiSelect
             options={wineStyleList}
@@ -221,11 +177,19 @@ const CreateWineryForm = () => {
             labelledBy="Select"
           />
         </div>
-        <div>
+        <div className="dropdown">
           <h4>Select Region</h4>
-          <select>
+          <select onChange={(e) => setRegion(e.target.value)}>
             {regionList.map((region) => {
-              return(<option value={`${region.label}`} id={`${region.id}`}>{region.label}</option>)
+              return (
+                <option
+                  key={`${region.label}`}
+                  value={`${region.label}`}
+                  id={`${region.id}`}
+                >
+                  {region.label}
+                </option>
+              );
             })}
           </select>
         </div>

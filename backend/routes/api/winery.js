@@ -30,22 +30,62 @@ router.get(
   })
 );
 
-router.get('/create', asyncHandler(async (req, res, next) => {
-  const wineStyles = await db.WineStyle.findAll()
-  const varietals = await db.Varietal.findAll()
-  const regions = await db.Region.findAll()
+router.get(
+  "/create",
+  asyncHandler(async (req, res, next) => {
+    const wineStyles = await db.WineStyle.findAll();
+    const varietals = await db.Varietal.findAll();
+    const regions = await db.Region.findAll();
 
-  res.json({wineStyles, varietals, regions})
-}))
+    res.json({ wineStyles, varietals, regions });
+  })
+);
 
 //router.get(create form, pass in regions, styles, etc to be used on front end form rendering )
 //create a winery
 router.post(
   "/",
+  requireAuth,
   validateWinery,
   asyncHandler(async (req, res, next) => {
-    const winery = await Winery.create(req.body);
-    res.json(winery);
+    const {
+      name,
+      content,
+      ownerId,
+      lat,
+      long,
+      address,
+      town,
+      maxGuests,
+      regionId,
+      varietals,
+      wineStyles,
+    } = req.body;
+
+    const winery = await db.Winery.create({
+      name,
+      content,
+      lat,
+      long,
+      address,
+      town,
+      maxGuests,
+      regionId,
+      ownerId,
+    });
+
+    for (const varietalObj of varietals) {
+      await db.VarietalToWineries.create({
+        wineryId: winery.id,
+        varietalId: varietalObj.value,
+      });
+    }
+    for (const styleObj of wineStyles) {
+      await db.WineStyleToWineries.create({
+        wineryId: winery.id,
+        wineStyleId: styleObj.value,
+      });
+    }
   })
 );
 

@@ -1,15 +1,15 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const WineStyleToWinery = sequelize.define(
-    "WineStyleToWinery",
+  const WineStyleToWineries = sequelize.define(
+    "WineStyleToWineries",
     {
       wineryId: { type: DataTypes.INTEGER, allowNull: false },
       wineStyleId: { type: DataTypes.INTEGER, allowNull: false },
     },
     {}
   );
-  WineStyleToWinery.associate = function (models) {
+  WineStyleToWineries.associate = function (models) {
     // associations can be defined here
   };
-  return WineStyleToWinery;
+  return WineStyleToWineries;
 };

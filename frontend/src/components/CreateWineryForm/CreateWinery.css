@@ -1,30 +1,34 @@
-#create-winery-form  {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
+#create-winery-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .formDiv {
-    width: 100%;
+  width: 100%;
 }
-.formDiv > input, textarea {
-    width: 100%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    font-size: 16px;
-    margin: 10px;
-    font-family: inherit;
-
+.formDiv > input,
+textarea {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 16px;
+  margin: 10px;
+  font-family: inherit;
 }
 
 .formDiv > label {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .formDiv > textarea {
-    height: 150px;
-    border-width: 2px;
+  height: 150px;
+  border-width: 2px;
 }
+
+/* .dropdown {
+  width: 100%;
+} */

@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       content: { type: DataTypes.TEXT, allowNull: false },
       lat: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         // allowNull: false,
       },
       long: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         // allowNull: false,
       },
       address: {
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     Winery.belongsTo(models.Region, { foreignKey: "regionId" });
 
     const wineStyleColumnMapping = {
-      through: "WineStyleToWinery", //joinTable
+      through: "WineStyleToWineries", //joinTable
       otherKey: "wineStyleId", //join other key
       foreignKey: "WineryId", //join key that references this
     };

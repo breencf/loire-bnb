@@ -9,7 +9,6 @@ h1 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 3;
 }
 
 .profile-dropdown {
@@ -126,4 +125,3 @@ h1 {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
 }
-

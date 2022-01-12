@@ -1,7 +1,4 @@
 /* TODO Add site wide styles */
-* {
-  box-sizing: border-box;
-}
 
 #fixie {
     position: fixed;
@@ -11,8 +8,13 @@
 
 body {
   font-family: "Raleway", "Futura", "Helvetica", sans-serif;
-  width: 100%;
+  max-width: 100%;
   margin: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
 }
 
 h1 {
