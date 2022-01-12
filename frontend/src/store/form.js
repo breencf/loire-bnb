@@ -3,12 +3,12 @@ import { csrfFetch } from "./csrf";
 const LOAD = "wineries/create/LOAD";
 const ADD = "wineries/create";
 
-const load = ({ varietals, wineStyles, regions }) => {
+const load = ({ varietalList, wineStyleList, regionList }) => {
   return {
     type: LOAD,
-    varietals,
-    wineStyles,
-    regions,
+    varietalList,
+    wineStyleList,
+    regionList,
   };
 };
 
@@ -26,10 +26,9 @@ function formReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD:
       newState = { ...state };
-      console.log("newSTATE", newState);
-        newState["varietalList"]= [action.varietals],
-        newState["wineStyleList"]= [action.wineStyles],
-        newState["regionList"]= [action.regions];
+      // newState["varietalList"] = [action.varietalList],
+      // newState["wineStyleList"]= [action.wineStyleList],
+      // newState["regionList"]= [action.regionList];
       return newState;
     default:
       return state;

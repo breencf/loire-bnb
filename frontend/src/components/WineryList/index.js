@@ -19,7 +19,6 @@ export const WineryList = () => {
 
   return (
     <div>
-      <h1>Wineries List</h1>
       <ul>
         {Object.values(wineries).map((winery) => {
           return <WineryCard key={winery.id} id={winery.id} winery={winery} />;

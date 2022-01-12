@@ -32,7 +32,6 @@ function App() {
         <Navigation isLoaded={isLoaded} />
         <Switch>
           <Route exact path="/">
-            <h1>loirebnb</h1>
             {/* <Route path="/wineries"> */}
             <WineryList />
             {/* </Route> */}

@@ -22,35 +22,35 @@ const CreateWineryForm = () => {
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
 
-  console.log(varietalList, wineStyleList);
-  console.log(varietalList[0].length, wineStyleList[0].length);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setErrors([]);
-    return dispatch(
-      addWinery({
-        name,
-        content,
-        lat,
-        long,
-        address,
-        town,
-        maxGuests,
-        regionId,
-        varietals,
-        wineStyles,
-        images,
-      })
-    ).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
-  };
+  // console.log(varietalList, wineStyleList);
+  // console.log(varietalList[0].length, wineStyleList[0].length);
 
   useEffect(() => {
     dispatch(getForm());
   }, [dispatch]);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setErrors([]);
+    const winery = {
+      name,
+      content,
+      lat,
+      long,
+      address,
+      town,
+      maxGuests,
+      regionId,
+      varietals,
+      wineStyles,
+      images,
+    };
+    console.log(winery);
+    return dispatch(addWinery(winery)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+  };
 
   const updateCheckedVarietals = (index) => {
     setVarietals(
@@ -141,7 +141,6 @@ const CreateWineryForm = () => {
             type="string"
             onChange={(e) => setAddress(e.target.value)}
             value={address}
-            required
           />
         </div>
         <div>
