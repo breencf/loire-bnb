@@ -9,12 +9,12 @@ export const MyWineries = () => {
     const user = useSelector ((state) => state.sessions.user)
     const wineryArr = Object.values(wineries)
 
-    const myWineries = wineryArr?.filter((winery) => (winery.ownerId === user.id))
+    const myWineries = Object.values(wineryArr?.filter((winery) => (winery.ownerId === user.id)))
 
     return (
         <div>
           <ul>
-            {Object.values(myWineries).map((winery) => {
+            {myWineries?.map((winery) => {
               return(
                 <div>
                 <Link to={`/wineries/${winery.id}`}>

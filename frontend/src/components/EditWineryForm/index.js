@@ -6,7 +6,11 @@ import { updateWinery } from "../../store/winery";
 import { MultiSelect } from "react-multi-select-component";
 import "../CreateWineryForm/CreateWinery.css";
 import { useHistory, useParams } from "react-router-dom";
-import { staticVarietalList, staticRegionList, staticWineStyleList } from "../CreateWineryForm/form-lists";
+import {
+  staticVarietalList,
+  staticRegionList,
+  staticWineStyleList,
+} from "../CreateWineryForm/form-lists";
 
 export const EditWineryForm = () => {
   const dispatch = useDispatch();
@@ -18,31 +22,37 @@ export const EditWineryForm = () => {
   const ownerId = useSelector((state) => state.sessions.user.id);
 
   const { wineries } = useSelector((state) => state);
-  const winery = wineries[id]
-  console.log(winery)
+  const winery = wineries[id];
 
-
-  const varietalsInState = []
+  const varietalsInState = [];
   for (const key in winery.Varietals) {
-    varietalsInState.push({"label" : winery.Varietals[key].type, "value": winery.Varietals[key].id})
+    varietalsInState.push({
+      label: winery.Varietals[key].type,
+      value: winery.Varietals[key].id,
+    });
   }
-  const stylesInState = []
+
+  const stylesInState = [];
   for (const key in winery.WineStyles) {
-    stylesInState.push({"label" : winery.WineStyles[key].type, "value": winery.WineStyles[key].id})
+    stylesInState.push({
+      label: winery.WineStyles[key].type,
+      value: winery.WineStyles[key].id,
+    });
   }
-  const [name, setName] = useState(winery?.name);
-  const [content, setContent] = useState(winery?.content);
-  const [lat, setLat] = useState(winery?.lat);
-  const [long, setLong] = useState(winery?.long);
-  const [address, setAddress] = useState(winery?.address);
-  const [town, setTown] = useState(winery?.town);
-  const [maxGuests, setMaxGuests] = useState(winery?.maxGuests);
-  const [region, setRegion] = useState(winery?.Region.name); //?
-  const [varietals, setVarietals] = useState(varietalsInState); //?
-  const [wineStyles, setWineStyles] = useState(stylesInState); //?
-  const [image1, setImage1] = useState(winery?.Images[0].imageURL); //?
-  const [image2, setImage2] = useState(winery?.Images[1].imageURL); //?
-  const [image3, setImage3] = useState(winery?.Images[2].imageURL); //?
+
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
+  const [address, setAddress] = useState("");
+  const [town, setTown] = useState("");
+  const [maxGuests, setMaxGuests] = useState(0);
+  const [region, setRegion] = useState(1);
+  const [varietals, setVarietals] = useState(varietalsInState);
+  const [wineStyles, setWineStyles] = useState(stylesInState);
+  const [image1, setImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [image3, setImage3] = useState("");
   const [errors, setErrors] = useState([]);
 
   const updateName = (e) => setName(e.target.value);
@@ -53,11 +63,25 @@ export const EditWineryForm = () => {
   const updateTown = (e) => setTown(e.target.value);
   const updateMaxGuests = (e) => setMaxGuests(e.target.value);
   const updateRegion = (e) => setRegion(e.target.value);
-  const updateVarietals = (e) => setVarietals(e.target.value);
-  const updateWineStyles = (e) => setWineStyles(e.target.value);
   const updateImage1 = (e) => setImage1(e.target.value);
   const updateImage2 = (e) => setImage2(e.target.value);
   const updateImage3 = (e) => setImage3(e.target.value);
+
+  useEffect(() => {
+    setName(winery.name);
+    setContent(winery.content);
+    setLat(winery.lat);
+    setLong(winery.long);
+    setAddress(winery.address);
+    setTown(winery.town);
+    setMaxGuests(winery.maxGuests);
+    setRegion(winery.Region.name);
+    setVarietals(varietalsInState);
+    setWineStyles(stylesInState);
+    setImage1(winery.Images[0].imageURL);
+    setImage2(winery.Images[1].imageURL);
+    setImage3(winery.Images[2].imageURL);
+  }, [winery]);
 
   useEffect(() => {
     dispatch(getForm());
@@ -66,33 +90,37 @@ export const EditWineryForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    const regionId = regionList.find((regionObj) => regionObj.label === region);
+    const regionId = staticRegionList.find(
+      (regionObj) => regionObj.label === region
+    );
     const images = [];
     if (image1) images.push(image1);
     if (image2) images.push(image2);
     if (image3) images.push(image3);
 
-    // const winery = {
-    //   name,
-    //   ownerId,
-    //   content,
-    //   lat,
-    //   long,
-    //   address,
-    //   town,
-    //   maxGuests,
-    //   regionId: regionId.id,
-    //   varietals,
-    //   wineStyles,
-    //   images,
-    // };
-    // console.log(winery);
-    // const newWinery = dispatch(updateWinery(winery)).catch(async (res) => {
-    //   const data = await res.json();
-    //   if (data && data.errors) setErrors(data.errors);
-    // });
+    const winery = {
+      id,
+      name,
+      ownerId,
+      content,
+      lat,
+      long,
+      address,
+      town,
+      maxGuests,
+      regionId: regionId.id,
+      varietals,
+      wineStyles,
+      images,
+    };
+    const updatedWinery = dispatch(updateWinery(winery)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
 
-    // if (newWinery) history.push(`/wineries/${newWinery.id}`);
+    if (updatedWinery) history.push(`/wineries/${id}`);
+
+    console.log("---------", varietals);
   };
   return (
     <div>
@@ -173,17 +201,15 @@ export const EditWineryForm = () => {
         <div className="dropdown">
           <h4>Select Region</h4>
           <select onChange={updateRegion}>
-            <option value="" disabled selected hidden>
-              Select...
-            </option>
             {regionList?.map((region) => {
               return (
                 <option
-                  key={`${region.label}`}
-                  value={`${region.label}`}
-                  id={`${region.id}`}
+                  key={`${region?.label}`}
+                  value={`${region?.label}`}
+                  id={`${region?.id}`}
+                  // {region.label === winery.Region.name? selected : null}
                 >
-                  {region.label}
+                  {region?.label}
                 </option>
               );
             })}
@@ -205,7 +231,7 @@ export const EditWineryForm = () => {
           <MultiSelect
             options={staticVarietalList}
             value={varietals}
-            onChange={updateVarietals}
+            onChange={setVarietals}
             labelledBy="Select"
           />
         </div>
@@ -216,7 +242,7 @@ export const EditWineryForm = () => {
           <MultiSelect
             options={staticWineStyleList}
             value={wineStyles}
-            onChange={updateWineStyles}
+            onChange={setWineStyles}
             labelledBy="Select"
           />
         </div>
@@ -249,7 +275,7 @@ export const EditWineryForm = () => {
         </div>
         <hr />
         <div>
-          <button className="submitButton">Save</button>
+          <button className="submitButton">Save Changes</button>
         </div>
       </form>
     </div>

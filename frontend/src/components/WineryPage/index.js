@@ -4,6 +4,7 @@ import { ImageSlider } from "./ImageSlider";
 import { useEffect, useState } from "react";
 import { getOneWinery } from "../../store/winery";
 import { EditWineryForm } from "../EditWineryForm";
+import { deleteWinery} from '../../store/winery'
 import("./WineryPage.css");
 
 export const WineryPage = () => {
@@ -12,6 +13,11 @@ export const WineryPage = () => {
   const winery = useSelector((state) => state.wineries[id]);
   const [showEditWinery, setShowEditWinery] = useState(false);
   const sessionUser = useSelector((state) => state.sessions.user);
+
+  const setDelete = () => {
+    console.log('setDelete')
+    dispatch(deleteWinery(id))
+  }
 
   useEffect(() => {
     setShowEditWinery(false);
@@ -25,7 +31,7 @@ export const WineryPage = () => {
     page = (
       <>
         <h4>
-          {winery?.User.firstName} {winery?.User.lastName}
+          {winery?.User?.firstName} {winery?.User?.lastName}
         </h4>
         <p>
           {winery?.town}, {winery?.Region.name}
@@ -69,7 +75,10 @@ export const WineryPage = () => {
     <div id="wineryPage">
       <h3>{winery?.name} </h3>
       {!showEditWinery && sessionUser.id === winery?.ownerId && (
+        <>
         <button onClick={() => setShowEditWinery(true)}>Edit</button>
+        <button onClick={setDelete}>Delete Winery</button>
+        </>
       )}
       <div>{page}</div>
     </div>

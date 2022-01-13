@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const LOAD = "wineries/LOAD";
 const ADD = "wineries/ADD";
 const UPDATE = "wineries/UPDATE";
+const DELETE = "wineries/DELETE";
 
 const load = (wineries) => {
   return {
@@ -22,7 +23,14 @@ const addOneWinery = (winery) => {
 const updateOneWinery = (winery) => {
   return {
     type: UPDATE,
-    winery
+    winery,
+  };
+};
+
+const deleteOneWinery = (id) => {
+  return {
+    type: DELETE,
+    id,
   };
 };
 
@@ -52,17 +60,29 @@ export const addWinery = (payload) => async (dispatch) => {
   dispatch(addOneWinery(winery));
 };
 
-export const updateWinery = (payload) => async dispatch => {
-  const response = await csrfFetch('/api/wineries/:id', {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(payload)
-  })
-  const winery = await response.json()
-  dispatch(updateOneWinery(winery))
-}
+export const updateWinery = (payload) => async (dispatch) => {
+  const response = await csrfFetch(`/api/wineries/${payload.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const winery = await response.json();
+  dispatch(updateOneWinery(winery));
+};
+
+export const deleteWinery = (id) => async (dispatch) => {
+  console.log("in the delete thunk");
+  const response = await csrfFetch(`/api/wineries/${id}`, {
+    method: "DELETE",
+  });
+  console.log(response.json());
+  if (response.ok) {
+    const deleted = await response.json();
+    dispatch(deleteOneWinery(deleted))}
+};
 
 const initialState = {};
+let newState;
 function wineryReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD:
@@ -73,18 +93,23 @@ function wineryReducer(state = initialState, action) {
       return { ...allWineries, ...state };
     case ADD:
       if (!state[action.winery.id]) {
-        const newState = {
+        newState = {
           ...state,
           [action.winery.id]: action.winery,
         };
         const wineryList = newState.wineries?.map((id) => newState[id]);
         wineryList?.push(action.winery);
         newState.wineries = wineryList;
-        return newState
-      };
+        return newState;
+      }
     case UPDATE:
-      const newState = { ...state}
-      newState.wineries[action.winery.id] = action.winery
+      newState = { ...state };
+      newState.wineries[action.winery.id] = action.winery;
+      return newState;
+    case DELETE:
+      newState = { ...state };
+      const deleted = delete newState.wineries[action.id];
+      console.log("deleted in reducer", deleted);
       return newState;
     default:
       return state;
