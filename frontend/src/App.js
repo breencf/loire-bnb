@@ -12,6 +12,8 @@ import CreateWineryForm from "./components/CreateWineryForm";
 import { restoreUser } from "./store/session";
 import { WineryList } from "./components/WineryList";
 import { Homepage } from "./components/Homepage";
+import {WineryPage} from './components/WineryPage'
+import { MyWineries } from "./components/WineryList/MyWineries";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +46,12 @@ function App() {
           </Route>
           <Route exact path="/wineries/create">
             <CreateWineryForm />
+          </Route>
+          <Route exact path="/wineries/:id">
+            <WineryPage />
+          </Route>
+          <Route exact path="/mywineries">
+            <MyWineries/>
           </Route>
         </Switch>
       </>

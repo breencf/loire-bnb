@@ -36,5 +36,17 @@ h3 {
   padding: 10px;
   border-radius: 20px;
   font-size: inherit;
-  color: #ff385c
+  color: #ff385c;
+  font-weight: 500;
+  margin:5px;
+}
+
+input {
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+  font-family: inherit;
+  font-size: inherit;
+  margin:5px
+
 }

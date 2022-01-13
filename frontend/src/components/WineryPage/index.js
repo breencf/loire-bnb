@@ -7,10 +7,8 @@ import { EditWineryForm } from "../EditWineryForm";
 import("./WineryPage.css");
 
 export const WineryPage = () => {
-  console.log('in winery page component!~')
   const dispatch = useDispatch()
   const { id } = useParams();
-  console.log( id, 'id is...')
   const winery = useSelector((state) => state.wineries[id]);
   const [showEditWinery, setShowEditWinery] = useState(false);
   const sessionUser = useSelector((state) => state.sessions.user);

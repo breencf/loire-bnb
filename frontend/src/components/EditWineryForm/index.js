@@ -11,23 +11,25 @@ import { staticVarietalList, staticRegionList, staticWineStyleList } from "../Cr
 export const EditWineryForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
   const { varietalList, wineStyleList, regionList } = useSelector(
     (state) => state.form
   );
   const ownerId = useSelector((state) => state.sessions.user.id);
 
-  const { id } = useParams();
-  // console.log("=================", id);
+  const { wineries } = useSelector((state) => state);
+  const winery = wineries[id]
+  console.log(winery)
 
-  const { wineries } = useSelector((state) => state.wineries);
-  const winery = wineries?.id;
 
-  useEffect (() => {
-    // console.log("===================================");
-
-    // console.log(winery)
-  },[winery])
-
+  const varietalsInState = []
+  for (const key in winery.Varietals) {
+    varietalsInState.push({"label" : winery.Varietals[key].type, "value": winery.Varietals[key].id})
+  }
+  const stylesInState = []
+  for (const key in winery.WineStyles) {
+    stylesInState.push({"label" : winery.WineStyles[key].type, "value": winery.WineStyles[key].id})
+  }
   const [name, setName] = useState(winery?.name);
   const [content, setContent] = useState(winery?.content);
   const [lat, setLat] = useState(winery?.lat);
@@ -35,12 +37,12 @@ export const EditWineryForm = () => {
   const [address, setAddress] = useState(winery?.address);
   const [town, setTown] = useState(winery?.town);
   const [maxGuests, setMaxGuests] = useState(winery?.maxGuests);
-  const [region, setRegion] = useState(winery?.region); //?
-  const [varietals, setVarietals] = useState(winery?.varietals); //?
-  const [wineStyles, setWineStyles] = useState(winery?.wineStyles); //?
-  const [image1, setImage1] = useState(winery?.Images[0]); //?
-  const [image2, setImage2] = useState(winery?.Images[1]); //?
-  const [image3, setImage3] = useState(winery?.Images[2]); //?
+  const [region, setRegion] = useState(winery?.Region.name); //?
+  const [varietals, setVarietals] = useState(varietalsInState); //?
+  const [wineStyles, setWineStyles] = useState(stylesInState); //?
+  const [image1, setImage1] = useState(winery?.Images[0].imageURL); //?
+  const [image2, setImage2] = useState(winery?.Images[1].imageURL); //?
+  const [image3, setImage3] = useState(winery?.Images[2].imageURL); //?
   const [errors, setErrors] = useState([]);
 
   const updateName = (e) => setName(e.target.value);
@@ -108,7 +110,7 @@ export const EditWineryForm = () => {
           <input
             id="name"
             label="text"
-            onChange={(e) => updateName(e.target.value)}
+            onChange={updateName}
             value={name}
             required
             placeholder="Domaine Didier Dagueneau"
@@ -119,7 +121,7 @@ export const EditWineryForm = () => {
           <textarea
             id="content"
             label="textarea"
-            onChange={(e) => updateContent(e.target.value)}
+            onChange={updateContent}
             value={content}
             placeholder="In a few sentences, give customers an idea of what makes your winery so special -- WHY should they book a tasting with you?"
             required
@@ -130,7 +132,7 @@ export const EditWineryForm = () => {
           <input
             id="lat"
             label="text"
-            onChange={(e) => updateLat(e.target.value)}
+            onChange={updateLat}
             value={lat}
             required
             placeholder="47.306860"
@@ -141,7 +143,7 @@ export const EditWineryForm = () => {
           <input
             id="long"
             label="text"
-            onChange={(e) => updateLong(e.target.value)}
+            onChange={updateLong}
             value={long}
             required
             placeholder="2.959046"
@@ -152,7 +154,7 @@ export const EditWineryForm = () => {
           <input
             id="address"
             label="string"
-            onChange={(e) => updateAddress(e.target.value)}
+            onChange={updateAddress}
             value={address}
             placeholder="1 Le Bourg"
           />
@@ -162,7 +164,7 @@ export const EditWineryForm = () => {
           <input
             id="town"
             label="string"
-            onChange={(e) => updateTown(e.target.value)}
+            onChange={updateTown}
             value={town}
             required
             placeholder="Saint-Andelain"
@@ -170,7 +172,7 @@ export const EditWineryForm = () => {
         </div>
         <div className="dropdown">
           <h4>Select Region</h4>
-          <select onChange={(e) => updateRegion(e.target.value)}>
+          <select onChange={updateRegion}>
             <option value="" disabled selected hidden>
               Select...
             </option>
@@ -192,7 +194,7 @@ export const EditWineryForm = () => {
           <input
             id="maxGuests"
             label="number"
-            onChange={(e) => updateMaxGuests(e.target.value)}
+            onChange={updateMaxGuests}
             value={maxGuests}
             required
             placeholder="Maximum number of guests"
@@ -224,7 +226,7 @@ export const EditWineryForm = () => {
           <input
             id="image1"
             label="text"
-            onChange={(e) => updateImage1(e.target.value)}
+            onChange={updateImage1}
             value={image1}
             placeholder="Image URL #1"
           />
@@ -232,7 +234,7 @@ export const EditWineryForm = () => {
           <input
             id="image2"
             label="text"
-            onChange={(e) => updateImage2(e.target.value)}
+            onChange={updateImage2}
             value={image2}
             placeholder="Image URL #2"
           />
@@ -240,14 +242,14 @@ export const EditWineryForm = () => {
           <input
             id="image3"
             label="text"
-            onChange={(e) => updateImage3(e.target.value)}
+            onChange={updateImage3}
             value={image3}
             placeholder="Image URL #3"
           />
         </div>
         <hr />
         <div>
-          <button className="submitButton">Submit</button>
+          <button className="submitButton">Save</button>
         </div>
       </form>
     </div>
