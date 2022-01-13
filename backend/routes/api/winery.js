@@ -23,8 +23,7 @@ router.get(
   "/",
   asyncHandler(async (req, res, next) => {
     const wineries = await db.Winery.findAll({
-      include: [db.Region, db.Image, db.Varietal /*db.WineStyle*/],
-      limit: 10,
+      include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User],
     });
     res.json(wineries);
   })
@@ -34,7 +33,7 @@ router.get(
   "/:id",
   asyncHandler(async (req, res, next) => {
     const winery = await db.Winery.findOne({
-      include: [db.Region, db.Image, db.Varietal, db.WineStyle]
+      include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User]
     })
     res.json(winery)
   })

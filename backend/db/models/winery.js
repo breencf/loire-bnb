@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     const wineStyleColumnMapping = {
       through: "WineStyleToWineries", //joinTable
       otherKey: "wineStyleId", //join other key
-      foreignKey: "WineryId", //join key that references this
+      foreignKey: "wineryId", //join key that references this
     };
     Winery.belongsToMany(models.WineStyle, wineStyleColumnMapping);
 
