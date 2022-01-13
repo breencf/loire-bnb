@@ -1,0 +1,89 @@
+#homepageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#bigGreen{
+    z-index: 0;
+    position: absolute;
+    width: 100vw;
+    height: 650px;
+    background-color: rgb(148,189,5);
+}
+#bigCTA {
+  width: 100vw;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#bigCTA img{
+  object-fit: cover;
+  width: 100%;
+  height: 500px;
+  z-index: 0;
+  position: absolute;
+}
+
+#bigCTAtext {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#bigCTAtext button {
+    font-family: inherit;
+    color: #ff385c;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 32px;
+    padding: 12px 24px;
+    border:none;
+}
+
+#bigCTAtext h3 {
+    color:white;
+    font-weight: 500;
+    font-size: 3.5vw;
+    filter:drop-shadow(0.75rem 0.75rem 0.75rem black);
+}
+
+#giftCard{
+    width: 90vw;
+    margin: 30px;
+    padding:30px;
+    display: flex;
+    background-color: rgb(230, 230, 230);
+    border-radius: 32px;
+    z-index: 1
+}
+
+#gcText {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#gcText h3, h4{
+    margin: 10px 0px
+}
+
+#gcImage {
+    width: 50%;
+}
+
+#gcImage img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+}

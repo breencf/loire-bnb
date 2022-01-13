@@ -26,7 +26,8 @@ export const LoginForm = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <img width="100" height="100" src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-red_zjwezu.png"/>
+      <h4>Login</h4>
       <form onSubmit={onSubmit}>
         <div>
           <ul>
@@ -55,7 +56,7 @@ export const LoginForm = () => {
             required
           />
         </div>
-        <button>Submit</button>
+        <button className="submitButton">Submit</button>
       </form>
     </div>
   );

@@ -1,5 +1,5 @@
 
-export const varietalList = [
+export const staticVarietalList = [
     { label: "Melon de Bourgogne", value: 1,},
     { label: "Chenin Blanc", value: 2,},
     { label: "Cabernet Franc", value: 3, },
@@ -15,7 +15,7 @@ export const varietalList = [
     { label: "Pineau d'Aunis", value: 13 },
   ];
 
-  export const wineStyleList = [
+  export const staticWineStyleList = [
     { label: "Sparkling", value: 1 },
     { label: "White", value: 2 },
     { label: "Orange/Skin-Contact", value: 3 },
@@ -24,7 +24,7 @@ export const varietalList = [
     { label: "Dessert/Fortified", value: 6 },
   ];
 
-  export const regionList = [
+  export const staticRegionList = [
     { label: "Pays Nantais", id: 1 },
     { label: "Anjou", id: 2 },
     { label: "Saumur", id: 3 },

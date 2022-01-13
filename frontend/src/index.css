@@ -28,3 +28,13 @@ h3 {
   font-size: 5vw;
   font-weight: 500;
 }
+
+.submitButton {
+  font-family: inherit;
+  border: 1px solid #ff385c;
+  background-color: inherit;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: inherit;
+  color: #ff385c
+}

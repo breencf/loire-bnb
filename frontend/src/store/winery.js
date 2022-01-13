@@ -3,8 +3,7 @@ import { csrfFetch } from "./csrf";
 //
 const LOAD = "wineries/LOAD";
 const ADD = "wineries/ADD";
-const REMOVE = "/api/wineries/delete";
-const LOAD_ONE = "/api/wineries/:id";
+const UPDATE = "wineries/UPDATE";
 
 const load = (wineries) => {
   return {
@@ -20,6 +19,13 @@ const addOneWinery = (winery) => {
   };
 };
 
+const updateOneWinery = (winery) => {
+  return {
+    type: UPDATE,
+    winery
+  };
+};
+
 export const getWineries = () => async (dispatch) => {
   const response = await fetch("/api/wineries");
 
@@ -31,7 +37,7 @@ export const getWineries = () => async (dispatch) => {
 
 export const getOneWinery = (id) => async (dispatch) => {
   const response = await fetch(`api/wineries/${id}`);
-  console.log('tapping the winery frontend')
+  console.log("tapping the winery frontend");
   const winery = await response.json();
   dispatch(addOneWinery(winery));
 };
@@ -45,6 +51,16 @@ export const addWinery = (payload) => async (dispatch) => {
   const winery = await response.json();
   dispatch(addOneWinery(winery));
 };
+
+export const updateWinery = (payload) => async dispatch => {
+  const response = await csrfFetch('/api/wineries/:id', {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  })
+  const winery = await response.json()
+  dispatch(updateOneWinery(winery))
+}
 
 const initialState = {};
 function wineryReducer(state = initialState, action) {
@@ -61,10 +77,15 @@ function wineryReducer(state = initialState, action) {
           ...state,
           [action.winery.id]: action.winery,
         };
-        const wineryList = newState.wineries.map((id) => newState[id]);
-        wineryList.push(action.winery);
+        const wineryList = newState.wineries?.map((id) => newState[id]);
+        wineryList?.push(action.winery);
         newState.wineries = wineryList;
-      }
+        return newState
+      };
+    case UPDATE:
+      const newState = { ...state}
+      newState.wineries[action.winery.id] = action.winery
+      return newState;
     default:
       return state;
   }

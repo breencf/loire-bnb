@@ -1,8 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
 import { SearchBar } from "./SearchBar/SearchBar";
 
@@ -14,14 +12,14 @@ export function Navigation({ isLoaded }) {
     <div className="nav-black" >
       <div id="navigation-top">
         <div className="navigation-left">
-          <NavLink to="/"><img width="50" height="50"src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-white_u8jgo8.png"/></NavLink>
+          <NavLink to="/"><img alt="logo"  height="50"src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-logo_tekkvp.png"/></NavLink>
         </div>
         <div className="navLinks-center">
           <NavLink exact to="/wineries" className="NavLink">
             Explore Wineries
           </NavLink>
-          <NavLink exact to="/wineries/create" className="NavLink">
-            Hire this Developer
+          <NavLink exact to="/" className="NavLink">
+            About Loirebnb
           </NavLink>
         </div>
 

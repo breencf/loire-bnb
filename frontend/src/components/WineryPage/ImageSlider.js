@@ -5,7 +5,7 @@ export const ImageSlider = ({ images }) => {
 
   let slideRight = () => {
     let nextIndex = index + 1
-    if(nextIndex === images.length -1) {
+    if(nextIndex === images?.length -1) {
       setIndex(0)
     }
     else setIndex(nextIndex)
@@ -13,14 +13,14 @@ export const ImageSlider = ({ images }) => {
   let slideLeft = () => {
     let nextIndex = index - 1;
     if (nextIndex < 0) {
-      setIndex(images.length - 1);
+      setIndex(images?.length - 1);
     } else {
       setIndex(nextIndex);
     }
   };
   return(
     <>
-    {images.length > 0 && (
+    {images?.length > 0 && (
       <div className="imageSlider">
         <button id="leftButton" onClick={slideLeft}>{"<"}</button>
         <img src={images[index].imageURL} alt={index} />

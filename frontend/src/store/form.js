@@ -1,7 +1,4 @@
-import { csrfFetch } from "./csrf";
-
-const LOAD = "wineries/create/LOAD";
-const ADD = "wineries/create";
+const LOAD = "wineries/bazinga/LOAD";
 
 const load = ({ varietalList, wineStyleList, regionList }) => {
   return {
@@ -13,7 +10,7 @@ const load = ({ varietalList, wineStyleList, regionList }) => {
 };
 
 export const getForm = () => async (dispatch) => {
-  const response = await fetch("/api/wineries/create");
+  const response = await fetch("/api/wineries");
   if (response.ok) {
     const data = await response.json();
     dispatch(load(data));

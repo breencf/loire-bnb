@@ -5,14 +5,12 @@ import { useDispatch } from "react-redux";
 //components
 import { SignupFormPage } from "./components/SignupFormPage";
 import { Navigation } from "./components/Navigation";
-import { WineryPage } from "./components/WineryPage";
 import { getWineries } from "./store/winery";
 import CreateWineryForm from "./components/CreateWineryForm";
 
 //misc
 import { restoreUser } from "./store/session";
 import { WineryList } from "./components/WineryList";
-import { getForm } from "./store/form";
 import { Homepage } from "./components/Homepage";
 
 function App() {
@@ -21,7 +19,7 @@ function App() {
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(getWineries());
-    dispatch(getForm())
+    //dispatch(getForm())
   }, [dispatch]);
 
   useEffect(() => {
@@ -34,15 +32,15 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Homepage/>
+          {/* <Route exact path="/wineries/:id/edit">
+            <EditWineryForm />
+          </Route> */}
           </Route>
             <Route exact path="/wineries">
             <WineryList />
           </Route>
           <Route exact path="/signup">
             <SignupFormPage />
-          </Route>
-          <Route path="/wineries/:id">
-            <WineryPage />
           </Route>
           <Route exact path="/wineries/create">
             <CreateWineryForm />

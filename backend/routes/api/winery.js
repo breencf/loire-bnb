@@ -15,13 +15,13 @@ const validateWinery = [
   check("town").exists({ checkFalsy: true }).notEmpty(),
   check("maxGuests").exists({ checkFalsy: true }).notEmpty().isInt(),
   check("regionId").exists({ checkFalsy: true }).notEmpty(),
+  handleValidationErrors,
 ];
-
-//get 5 wineries
 
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
+    console.log('getting wineries')
     const wineries = await db.Winery.findAll({
       include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User],
     });
@@ -29,29 +29,36 @@ router.get(
   })
 );
 
-router.get(
+// router.get(
+//   "/:id",
+//   asyncHandler(async (req, res, next) => {
+//     console.log('hitting the get /:id backend')
+//     const winery = await db.Winery.findOne({
+//       where: { id },
+//       include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User],
+//     });
+//     res.json(winery);
+//   })
+// );
+
+// router.get(
+//   "/create",
+//   asyncHandler(async (req, res, next) => {
+//     const wineStyles = await db.WineStyle.findAll();
+//     const varietals = await db.Varietal.findAll();
+//     const regions = await db.Region.findAll();
+
+//     res.json({ wineStyles, varietals, regions });
+//   })
+// );
+
+router.put(
   "/:id",
   asyncHandler(async (req, res, next) => {
-    const winery = await db.Winery.findOne({
-      include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User]
-    })
-    res.json(winery)
+    console.log(req.body);
   })
 );
 
-router.get(
-  "/create",
-  asyncHandler(async (req, res, next) => {
-    const wineStyles = await db.WineStyle.findAll();
-    const varietals = await db.Varietal.findAll();
-    const regions = await db.Region.findAll();
-
-    res.json({ wineStyles, varietals, regions });
-  })
-);
-
-//router.get(create form, pass in regions, styles, etc to be used on front end form rendering )
-//create a winery
 router.post(
   "/",
   requireAuth,
@@ -69,6 +76,7 @@ router.post(
       regionId,
       varietals,
       wineStyles,
+      images,
     } = req.body;
 
     const winery = await db.Winery.create({
@@ -95,10 +103,36 @@ router.post(
         wineStyleId: styleObj.value,
       });
     }
+    for (const imgURL of images) {
+      await db.Image.create({
+        wineryId: winery.id,
+        imageURL: imgURL,
+      });
+    }
+    return res.json({ winery });
   })
 );
 
-
-
+router.put(
+  "/:id",
+  requireAuth,
+  validateWinery,
+  asyncHandler(async (req, res) => {
+    const {
+      name,
+      content,
+      ownerId,
+      lat,
+      long,
+      address,
+      town,
+      maxGuests,
+      regionId,
+      varietals,
+      wineStyles,
+      images,
+    } = req.body;
+  })
+);
 
 module.exports = router;

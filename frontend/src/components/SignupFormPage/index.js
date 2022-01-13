@@ -88,7 +88,7 @@ export const SignupFormPage = () => {
             required
           />
         </div>
-        <button>Submit</button>
+        <button className="submitButton">Submit</button>
       </form>
     </div>
   );
