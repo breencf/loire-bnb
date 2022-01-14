@@ -20,11 +20,16 @@ export const ImageSlider = ({ images }) => {
   };
   return(
     <>
-    {images?.length > 0 && (
+    {images?.length > 1 && (
       <div className="imageSlider">
         <button id="leftButton" onClick={slideLeft}>{"<"}</button>
         <img src={images[index].imageURL} alt={index} />
         <button id="rightButton" onClick={slideRight}>{">"}</button>
+      </div>
+    )}
+      {images?.length < 2 && (
+      <div className="imageSlider">
+        <img src={images[index].imageURL} alt={index} />
       </div>
     )}
     </>

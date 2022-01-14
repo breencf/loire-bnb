@@ -38,10 +38,9 @@ h3 {
   font-size: inherit;
   color: #ff385c;
   font-weight: 500;
-  margin:5px;
 }
 
-input {
+input:not(#location, #date, #time, #guests) {
   padding: 10px;
   border: none;
   border-bottom: 1px solid black;

@@ -24,9 +24,14 @@ export const WineryPage = () => {
     dispatch(getOneWinery(id)); //?
   }, [id, dispatch]);
 
+  useEffect(() => {
+    setShowEditWinery(false)
+  },[])
+
   let page = null;
-  if (setShowEditWinery && sessionUser.id === winery?.ownerId) {
-    page = <EditWineryForm hideForm={() => setShowEditWinery(false)} />;
+
+  if (showEditWinery && sessionUser.id === winery?.ownerId) {
+    page = <EditWineryForm hideForm={() => setShowEditWinery(false)}/>;
   } else {
     page = (
       <>
@@ -37,7 +42,6 @@ export const WineryPage = () => {
           {winery?.town}, {winery?.Region.name}
         </p>
 
-        <ImageSlider images={winery?.Images} />
 
         <div className="varietals">
           <h4>Varietals</h4>
@@ -56,7 +60,7 @@ export const WineryPage = () => {
             return (
               <span className="styleButton" key={styleObj.id}>
                 <span className={`styledot-${styleObj.id}`}>
-                  {/* <i className="fas fa-wine-glass"></i> */}
+
                   <i className="fas fa-circle"></i>
                 </span>
                 {styleObj.type}
@@ -73,6 +77,8 @@ export const WineryPage = () => {
   }
   return (
     <div id="wineryPage">
+      <ImageSlider images={winery?.Images} />
+      <div name>
       <h3>{winery?.name} </h3>
       {!showEditWinery && sessionUser.id === winery?.ownerId && (
         <>
@@ -80,6 +86,8 @@ export const WineryPage = () => {
         <button onClick={setDelete}>Delete Winery</button>
         </>
       )}
+      </div>
+
       <div>{page}</div>
     </div>
   );

@@ -5,7 +5,11 @@ import { getForm } from "../../store/form";
 import { MultiSelect } from "react-multi-select-component";
 import { useHistory } from "react-router-dom";
 import "./CreateWinery.css";
-import { staticVarietalList, staticWineStyleList, staticRegionList } from "./form-lists";
+import {
+  staticVarietalList,
+  staticWineStyleList,
+  staticRegionList,
+} from "./form-lists";
 
 const CreateWineryForm = () => {
   const dispatch = useDispatch();
@@ -37,7 +41,9 @@ const CreateWineryForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    const regionId = staticRegionList.find((regionObj) => regionObj.label === region);
+    const regionId = staticRegionList.find(
+      (regionObj) => regionObj.label === region
+    );
     const images = [];
     if (image1) images.push(image1);
     if (image2) images.push(image2);
@@ -62,12 +68,11 @@ const CreateWineryForm = () => {
       if (data && data.errors) setErrors(data.errors);
     });
 
-    if (newWinery) history.push(`/wineries/${newWinery.id}`);
+    if (newWinery) history.push(`/mywineries`);
   };
 
   return (
     <div id="create-winery-form">
-      
       <h1>Add a winery</h1>
       <form onSubmit={onSubmit} id="create-winery-form">
         <div className="formDiv">
@@ -145,9 +150,6 @@ const CreateWineryForm = () => {
         <div className="dropdown">
           <h4>Select Region</h4>
           <select onChange={(e) => setRegion(e.target.value)}>
-            <option value="" disabled selected hidden>
-              Select...
-            </option>
             {staticRegionList.map((region) => {
               return (
                 <option
@@ -218,14 +220,6 @@ const CreateWineryForm = () => {
             value={image3}
             placeholder="Image URL #3"
           />
-          {/* <textarea
-            id="images"
-            label="textarea"
-            onChange={(e) => setImages(e.target.value.split(","))}
-            value={images}
-            required
-            placeholder="Images: enter each url separated by a comma (,) with no spaces. For example: https://wine.com/wine.jpg,https://loire.com/loire.jpg"
-          /> */}
         </div>
 
         <hr />

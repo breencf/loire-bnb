@@ -44,7 +44,7 @@ export const getWineries = () => async (dispatch) => {
 };
 
 export const getOneWinery = (id) => async (dispatch) => {
-  const response = await fetch(`api/wineries/${id}`);
+  const response = await fetch(`/api/wineries/${id}`);
   console.log("tapping the winery frontend");
   const winery = await response.json();
   dispatch(addOneWinery(winery));
@@ -78,7 +78,8 @@ export const deleteWinery = (id) => async (dispatch) => {
   console.log(response.json());
   if (response.ok) {
     const deleted = await response.json();
-    dispatch(deleteOneWinery(deleted))}
+    dispatch(deleteOneWinery(deleted));
+  }
 };
 
 const initialState = {};

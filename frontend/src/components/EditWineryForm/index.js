@@ -12,7 +12,7 @@ import {
   staticWineStyleList,
 } from "../CreateWineryForm/form-lists";
 
-export const EditWineryForm = () => {
+export const EditWineryForm = ({ hideForm }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -47,7 +47,7 @@ export const EditWineryForm = () => {
   const [address, setAddress] = useState("");
   const [town, setTown] = useState("");
   const [maxGuests, setMaxGuests] = useState(0);
-  const [region, setRegion] = useState(1);
+  const [region, setRegion] = useState("");
   const [varietals, setVarietals] = useState(varietalsInState);
   const [wineStyles, setWineStyles] = useState(stylesInState);
   const [image1, setImage1] = useState("");
@@ -75,12 +75,12 @@ export const EditWineryForm = () => {
     setAddress(winery.address);
     setTown(winery.town);
     setMaxGuests(winery.maxGuests);
-    setRegion(winery.Region.name);
     setVarietals(varietalsInState);
     setWineStyles(stylesInState);
     setImage1(winery.Images[0].imageURL);
     setImage2(winery.Images[1].imageURL);
     setImage3(winery.Images[2].imageURL);
+    setRegion(winery.Region.name);
   }, [winery]);
 
   useEffect(() => {
@@ -88,6 +88,7 @@ export const EditWineryForm = () => {
   }, [dispatch]);
 
   const onSubmit = async (e) => {
+    console.log("submitted");
     e.preventDefault();
     setErrors([]);
     const regionId = staticRegionList.find(
@@ -113,14 +114,15 @@ export const EditWineryForm = () => {
       wineStyles,
       images,
     };
-    const updatedWinery = dispatch(updateWinery(winery)).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+    const updatedWinery = dispatch(updateWinery(winery));
+    if (updatedWinery) {
+      history.push(`wineries/${id}`);
+    }
+  };
 
-    if (updatedWinery) history.push(`/wineries/${id}`);
-
-    console.log("---------", varietals);
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    hideForm();
   };
   return (
     <div>
@@ -201,13 +203,12 @@ export const EditWineryForm = () => {
         <div className="dropdown">
           <h4>Select Region</h4>
           <select onChange={updateRegion}>
-            {regionList?.map((region) => {
+            {staticRegionList?.map((region) => {
               return (
                 <option
                   key={`${region?.label}`}
                   value={`${region?.label}`}
                   id={`${region?.id}`}
-                  // {region.label === winery.Region.name? selected : null}
                 >
                   {region?.label}
                 </option>
@@ -276,6 +277,9 @@ export const EditWineryForm = () => {
         <hr />
         <div>
           <button className="submitButton">Save Changes</button>
+          <button type="button" onClick={handleCancelClick}>
+            Cancel
+          </button>
         </div>
       </form>
     </div>

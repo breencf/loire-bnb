@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 90%;
-  border: 1px solid black;
+  border-top: 1px solid lightgray;
   height: 250px;
 }
 
@@ -15,9 +15,8 @@
 
 .wineryCardImages img {
   max-width: 100%;
-  height: auto;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .wineryCardDetails {
@@ -35,4 +34,25 @@
 
 hr.wineryCard {
   width: 20px;
+}
+
+h6 {
+  font-size: 14px;
+  color: gray;
+  font-weight: 400;
+}
+
+h4 {
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+hr {
+  color: lightgray;
+  width: 30px;
+}
+
+.cardVarietalButton {
+  font-size: 14px;
+  color: gray;
 }

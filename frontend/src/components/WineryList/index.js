@@ -3,6 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 
 import { WineryCard } from "../WineryCard";
 import { WineryPage } from "../WineryPage";
+import ("./WineryList.css")
 
 
 export const WineryList = () => {
@@ -16,7 +17,7 @@ export const WineryList = () => {
           return(
             <div>
             <Link to={`/wineries/${winery.id}`}>
-            <WineryCard key={winery.id} id={winery.id} winery={winery} />;
+            <WineryCard key={winery.id} id={winery.id} winery={winery} />
             </Link>
             </div>)
         })}

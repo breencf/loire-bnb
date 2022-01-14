@@ -5,19 +5,35 @@ export const WineryCard = ({ winery }) => {
 
   if (imgObj) {
     return (
-        <div className="wineryCard">
-          <div className="wineryCardImages" id={`${imgObj[0].wineryId}`}>
-            <img src={`${imgObj[0].imageURL}`} alt={`${imgObj[0].id}`} width="300" height="200"></img>
-          </div>
+      <div className="wineryCard">
+        <div className="wineryCardImages" id={`${imgObj[0].wineryId}`}>
+          <img
+            src={`${imgObj[0].imageURL}`}
+            alt={`${imgObj[0].id}`}
+            width="300"
+            height="200"
+          ></img>
+        </div>
 
-          <div className="wineryCardDetails">
-            <p>{winery.Region.name}</p>
+        <div className="wineryCardDetails">
+          <div>
+            <h6>{winery.Region.name}</h6>
             <h4>{winery.name}</h4>
             <hr />
-            <p>{winery.town}</p>
-            <span></span>
+            <h6>{winery.town}</h6>
+          </div>
+          <div className="varietals">
+            {winery.Varietals?.map((varietalObj) => {
+              return (
+                <span className="cardVarietalButton" key={varietalObj.id}><i className="fas fa-wine-glass"></i>{varietalObj.type} </span>
+              );
+            })}
+          </div>
+          <div className="parties">
+            <h6>Welcomes parties of up to {winery.maxGuests} guests </h6>
           </div>
         </div>
+      </div>
     );
   }
 };

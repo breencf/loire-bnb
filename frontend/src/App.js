@@ -51,7 +51,7 @@ function App() {
             <WineryPage />
           </Route>
           <Route exact path="/mywineries">
-            <MyWineries/>
+            <MyWineries isLoaded={isLoaded}/>
           </Route>
         </Switch>
       </>

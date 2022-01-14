@@ -6,7 +6,7 @@
 }
 .imageSlider {
   height: 500px;
-  width: 90vw;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
 .imageSlider img {
   width: 100%;
   height: 450px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .styles {
