@@ -1,3 +1,5 @@
+import {LikeButton} from "../LikeButton";
+
 import("./WineryCard.css");
 
 export const WineryCard = ({ winery }) => {
@@ -32,6 +34,7 @@ export const WineryCard = ({ winery }) => {
           <div className="parties">
             <h6>Welcomes parties of up to {winery.maxGuests} guests </h6>
           </div>
+          <LikeButton wineryId={winery.id}/>
         </div>
       </div>
     );

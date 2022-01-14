@@ -14,6 +14,7 @@ import { WineryList } from "./components/WineryList";
 import { Homepage } from "./components/Homepage";
 import {WineryPage} from './components/WineryPage'
 import { MyWineries } from "./components/WineryList/MyWineries";
+import { loadLikes } from "./store/like";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(getWineries());
+    dispatch(loadLikes())
     //dispatch(getForm())
   }, [dispatch]);
 
@@ -50,7 +52,7 @@ function App() {
           <Route exact path="/wineries/:id">
             <WineryPage />
           </Route>
-          <Route exact path="/mywineries">
+          <Route path="/mywineries">
             <MyWineries isLoaded={isLoaded}/>
           </Route>
         </Switch>

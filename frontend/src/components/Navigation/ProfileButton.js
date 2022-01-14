@@ -25,11 +25,11 @@ function ProfileButton({ user, isLoaded }) {
         <li>{sessionUser.email}</li>
         <hr />
         <li>
-          <NavLink to="/tastings">Tastings</NavLink>
+          <NavLink to="/tastings" clsssName="NavLink">Tastings</NavLink>
         </li>
         <hr />
         <li>
-          <NavLink to="/mywineries">My Wineries</NavLink>
+          <NavLink to="/mywineries" className="NavLink">My Wineries</NavLink>
         </li>
         <hr />
         <li>

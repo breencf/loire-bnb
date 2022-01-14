@@ -29,7 +29,6 @@ router.get(
   })
 );
 
-
 router.put(
   "/:id",
   asyncHandler(async (req, res, next) => {
@@ -187,7 +186,26 @@ router.delete(
     await db.VarietalToWineries.destroy({ where: { wineryId: winery.id } });
     await db.WineStyleToWineries.destroy({ where: { wineryId: winery.id } });
     await winery.destroy();
-    return res.json('success');
+    return res.json("success");
+  })
+);
+
+router.post(
+  "/:id/like",
+  asyncHandler(async (req, res) => {
+    const { userId, winery } = req.body;
+    const exists = await db.Like.findOne({
+      where: { wineryId: winery, userId },
+    });
+    if (exists) {
+      await db.Like.destroy({ where: { wineryId: winery, userId } });
+      console.log("unlike");
+      res.json({ message: "unlike" });
+    } else {
+      await db.Like.create({ wineryId: winery, userId });
+      console.log("like");
+      res.json({ message: "like" });
+    }
   })
 );
 

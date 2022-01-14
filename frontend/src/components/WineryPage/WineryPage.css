@@ -1,8 +1,10 @@
-#wineryPage {
+
+#wineryContainer {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
+  width: 90vw;
 }
 .imageSlider {
   height: 500px;
@@ -85,8 +87,40 @@
   width: 10px;
 }
 .styledot-6 {
-  color: fuchsia;
+  color: brown;
   padding-right: 10px;
   height: 10px;
   width: 10px;
+}
+
+.deleteButton {
+  font-family: inherit;
+  border: 1px solid #ff385c;
+  background-color: inherit;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: inherit;
+  background-color: #ff385c;
+  color: white;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.wineryContainerTitle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+#wineryContainer h4{
+  font-weight: 500;
+  font-size: 1.5vw;
+}
+
+.styleButtons {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }

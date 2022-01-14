@@ -88,6 +88,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function (models) {
     // associations can be defined here
     User.hasMany(models.Winery, { foreignKey: "ownerId" });
+    User.hasMany(models.Like, {foreignKey: "userId"})
   };
   return User;
 };

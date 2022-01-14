@@ -64,7 +64,7 @@ const CreateWineryForm = () => {
       images,
     };
     const newWinery = dispatch(addWinery(winery)).catch(async (res) => {
-      const data = await res.json();
+      const data = await newWinery.json();
       if (data && data.errors) setErrors(data.errors);
     });
 

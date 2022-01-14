@@ -2,17 +2,12 @@ import { useState } from "react";
 
 export const SearchBar = () => {
 
-  // const year = new Date.getFullYear()
-  // const month = new Date.getMonth()
-  // const day = new Date.getDay()
 
-  // const hour = new Date().getHours
-  // const minute= new Date().getMinutes
   const [location, setLocation] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
   const [guests, setGuests] = useState(0);
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState([]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +32,8 @@ export const SearchBar = () => {
             value={location}
             placeholder="Where are you going?"
           />
-        </div>|
+        </div>
+        |
         <div>
           <label htmlFor="date">Date</label>
           <input
@@ -48,7 +44,8 @@ export const SearchBar = () => {
             placeholder="Choose a date"
             // min={year, month, day}
           />
-        </div>|
+        </div>
+        |
         <div>
           <label htmlFor="time">Time</label>
           <input
@@ -58,7 +55,8 @@ export const SearchBar = () => {
             value={time}
             placeholder="Choose a time"
           />
-        </div>|
+        </div>
+        |
         <div>
           <label htmlFor="location">Guests</label>
           <input

@@ -19,8 +19,7 @@ app.use(cookieParser());
 app.use(express.json());
 //security middleware
 app.use(cors());
-app.use(helmet({ contentSecurityPolicy: false }));
-//send the csurf cookie for any http besides GET
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(
   csurf({
     cookie: {

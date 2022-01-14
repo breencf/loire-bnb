@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import wineryReducer from './winery';
 import sessionReducer from './session';
 import formReducer from './form';
-
+import {likeReducer} from './like'
 let enhancer;
 
 if(process.env.NODE_ENV === 'production') {
@@ -22,7 +22,8 @@ const configureStore = preloadedState => {
 const rootReducer = combineReducers({
     sessions: sessionReducer,
     wineries: wineryReducer,
-    form: formReducer
+    form: formReducer,
+    like: likeReducer
 })
 
 export default configureStore;

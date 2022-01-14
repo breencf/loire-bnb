@@ -49,3 +49,8 @@ input:not(#location, #date, #time, #guests) {
   margin:5px
 
 }
+
+hr.full {
+  width: 100%;
+  color: lightgray;
+}

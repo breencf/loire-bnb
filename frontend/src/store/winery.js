@@ -84,6 +84,8 @@ export const deleteWinery = (id) => async (dispatch) => {
 
 const initialState = {};
 let newState;
+
+
 function wineryReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD:

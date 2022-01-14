@@ -16,7 +16,7 @@
 .wineryCardImages img {
   max-width: 100%;
   border-radius: 10px;
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .wineryCardDetails {

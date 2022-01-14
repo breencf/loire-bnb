@@ -9,14 +9,11 @@ export const MyWineries = ({ isLoaded }) => {
   const { wineries } = useSelector((state) => state);
   const user = useSelector((state) => state.sessions.user);
   const wineryArr = Object.values(wineries);
-
-  let myWineries = [];
-
-  useEffect(() => {
-    myWineries = Object.values(
+  
+  const  myWineries = Object.values(
       wineryArr.filter((winery) => winery.ownerId === user.id)
     );
-  });
+
 
   return (
     <div>

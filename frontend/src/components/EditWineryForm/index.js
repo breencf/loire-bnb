@@ -116,7 +116,8 @@ export const EditWineryForm = ({ hideForm }) => {
     };
     const updatedWinery = dispatch(updateWinery(winery));
     if (updatedWinery) {
-      history.push(`wineries/${id}`);
+      hideForm()
+      history.push(`/wineries/${id}`);
     }
   };
 
