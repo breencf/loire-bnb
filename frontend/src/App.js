@@ -22,12 +22,10 @@ function App() {
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(getWineries());
-    dispatch(loadLikes())
+
     //dispatch(getForm())
   }, [dispatch]);
 
-  useEffect(() => {
-  },[]);
 
   return (
     isLoaded && (

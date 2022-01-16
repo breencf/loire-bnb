@@ -10,6 +10,8 @@ h1 {
   background-color: black;
   z-index: 3000;
   position: sticky;
+  top: 0;
+  width: 100vw;
 }
 
 .nav-black a {
@@ -24,6 +26,8 @@ h1 {
   flex-direction: column;
   z-index: 3000;
   position: sticky;
+  top: 0;
+  width: 100vw;
 }
 
 .profile-dropdown {
@@ -44,6 +48,7 @@ h1 {
 
 .navigation-left {
   padding-left: 20px;
+  width: 150px;
 }
 
 .profile-dropdown li {

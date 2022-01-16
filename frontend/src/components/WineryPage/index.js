@@ -70,7 +70,6 @@ export const WineryPage = () => {
         <div>
           <h4>About</h4>
           <p>{winery?.content}</p>
-          <LikeButton wineryId={winery?.id} />
 
         </div>
       </>
@@ -81,7 +80,8 @@ export const WineryPage = () => {
       <ImageSlider images={winery?.Images} />
       <div id="wineryContainer">
         <div className="wineryContainerTitle">
-          <h3>{winery?.name} </h3>
+          <h3>{winery?.name} </h3> <LikeButton wineryId={winery?.id} />
+
           {!showEditWinery && sessionUser.id === winery?.ownerId && (
             <div>
               <button

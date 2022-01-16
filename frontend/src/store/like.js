@@ -24,7 +24,7 @@ export const loadLikes = (userId) => async (dispatch) => {
   const response = await csrfFetch(`api/users/${userId}/likes`);
 
   if (response.ok) {
-    const likes = await response.json;
+    const likes = await response.json();
     dispatch(load({ likes, userId }));
   }
 };

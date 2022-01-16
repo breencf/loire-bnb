@@ -17,21 +17,22 @@ export const LikeButton = ({ wineryId }) => {
   };
 
   useEffect(() => {
-    dispatch(loadLikes());
-  });
+    dispatch(loadLikes(id));
+  }, [dispatch]);
 
   useEffect(() => {
     userLikes[wineryId] ? setLiked(true) : setLiked(false);
-  });
+  }, [userLikes]);
 
   return (
     <div>
       <button
+        id="likeButton"
         type="button"
         onClick={onClick}
         className={liked ? "buttonLiked" : "buttonNotLiked"}
       >
-        <i class="fas fa-heart"></i>
+        <i className="fas fa-heart"></i>
       </button>
     </div>
   );

@@ -1,0 +1,39 @@
+.destination-card {
+  height: 30vw;
+  width: 25%;
+  padding: 0px;
+  margin: 10px;
+  border-radius: 21px;
+  background-color: #ff385c;
+}
+
+#destination-card-image {
+    height: 50%;
+    width: 100%;
+    border-radius: 21px;
+
+
+
+}
+
+#destination-card-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 21px 21px 0px 0px;
+}
+
+#destination-card-text {
+    padding: 0px 10px;
+}
+
+#destination-card-text h3{
+    font-size: 2.5vw;
+    color: white;
+}
+
+#destination-card-text h5 {
+    color: white;
+    font-size: 1.5vw;
+    font-weight: 400;
+}

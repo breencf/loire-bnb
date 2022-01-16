@@ -9,7 +9,7 @@
 
 .wineryCardImages {
   max-height: 300px;
-  max-width: 40%;
+  width: 40%;
   padding: 10px;
 }
 
@@ -24,13 +24,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: 60%;
+  width: 60%;
 }
 
 .wineryCardDetails * {
   margin: 5px;
   text-align: left;
 }
+
+
 
 hr.wineryCard {
   width: 20px;
@@ -55,4 +57,18 @@ hr {
 .cardVarietalButton {
   font-size: 14px;
   color: gray;
+}
+
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.parties {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 }

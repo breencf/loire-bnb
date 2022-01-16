@@ -12,18 +12,24 @@ export function Navigation({ isLoaded }) {
   window.addEventListener("scroll", () => {
     if (window.scrollY >= 50) {
       setbigBlackNav(false);
-    } else setbigBlackNav(true);
+    } else {
+      setbigBlackNav(true);
+    }
   });
 
   return (
-    <div className={bigBlackNav ? "nav-black" : "nav-white"}>
+    <div id="nav" className={bigBlackNav ? "nav-black" : "nav-white"}>
       <div id="navigation-top">
         <div className="navigation-left">
           <Link to="/">
             <img
               alt="logo"
               height="50"
-              src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-logo_tekkvp.png"
+              src={
+                bigBlackNav
+                  ? "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-white_u8jgo8.png"
+                  : "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-logo_tekkvp.png"
+              }
             />
           </Link>
         </div>
@@ -44,7 +50,9 @@ export function Navigation({ isLoaded }) {
           <ProfileButton isLoaded={isLoaded} />
         </div>
       </div>
-      <div id="navigation-bottom">
+      <div
+        id="navigation-bottom"
+      >
         <SearchBar />
       </div>
     </div>

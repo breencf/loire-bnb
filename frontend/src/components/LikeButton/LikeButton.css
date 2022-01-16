@@ -1,7 +1,15 @@
+#likeButton {
+  font-size: 50px;
+  border: none;
+  background-color: inherit;
+  transition: all 0.1s ease
+}
+
 .buttonLiked {
-  color: red;
+  color: #ff385c;
 }
 
 .buttonNotLiked {
-  color: blue;
+  color: #bebebe;
 }
+
