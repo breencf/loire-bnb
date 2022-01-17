@@ -27,8 +27,8 @@ export function Navigation({ isLoaded }) {
               height="50"
               src={
                 bigBlackNav
-                  ? "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-white_u8jgo8.png"
-                  : "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-logo_tekkvp.png"
+                  ? "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-white_u8jgo8.png"
+                  : "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-logo_tekkvp.png"
               }
             />
           </Link>

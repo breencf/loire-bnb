@@ -59,20 +59,22 @@ function ProfileButton({ user, isLoaded }) {
 
   const openMenu = () => {
     if (showMenu) return;
+    console.log('openMenu onclick')
     setShowMenu(true);
   };
 
   const closeMenu = () => {
+    console.log('closeMenut onclick')
     setShowMenu(false);
   };
 
-  useEffect(() => {
-    if (!showMenu) return;
+  // useEffect(() => {
+  //   if (!showMenu) return;
 
-    // document.addEventListener('click', closeMenu);
+  //   // document.addEventListener('click', closeMenu);
 
-    // return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  //   // return () => document.removeEventListener("click", closeMenu);
+  // }, [showMenu]);
 
   return (
     <>

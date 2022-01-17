@@ -16,24 +16,29 @@ export const LoginForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(login({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+    console.log("in login dispatch");
+    return dispatch(login({ credential, password })).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
   };
 
   const onSubmitDemo = async (e) => {
     e.preventDefault();
-    return dispatch(login({credential: "didier@dagueneau.com", password: "password"}))
-  }
+    return dispatch(
+      login({ credential: "didier@dagueneau.com", password: "password" })
+    );
+  };
 
   return (
     <div>
-      <img width="100" height="100" src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/icon-red_zjwezu.png"/>
+      <img
+        width="100"
+        height="100"
+        src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-red_zjwezu.png"
+      />
       <h4>Login</h4>
-     <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <div>
           <ul>
             {errors.map((error, i) => (
@@ -61,9 +66,12 @@ export const LoginForm = () => {
             required
           />
         </div>
-        <button className="submitButton">Submit</button>
-        <button className="submitButton" onClick={onSubmitDemo}>Demo User</button>
-
+        <button type="submit" className="submitButton">
+          Submit
+        </button>
+        <button className="submitButton" onClick={onSubmitDemo}>
+          Demo User
+        </button>
       </form>
     </div>
   );

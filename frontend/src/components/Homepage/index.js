@@ -6,7 +6,7 @@ export const Homepage = () => {
   return (
     <>
       <div id="bigGreen"></div>
-      <div id="homepageContainer">
+      {/* <div id="homepageContainer"> */}
         <div id="bigCTA">
           <img src="https://daily.sevenfifty.com/app/uploads/2020/10/SFD_Loire_Valley_1755_vignes-et-chateau-_chinon_Stevens_Fremont_1536x1152.jpg" />
           <div id="bigCTAtext">
@@ -25,7 +25,7 @@ export const Homepage = () => {
             </h3>
           </div>
           <div id="gcImage">
-            <img src="https://res.cloudinary.com/jadecabbage/image/upload/v1642362193/giftcards_shgox9.png" />
+            <img src="https://res.cloudinary.com/jadecabbage/image/upload/v1642362193/loirebnb%20assets/giftcards_shgox9.png" />
           </div>
         </div>
         <div id="inspiration">
@@ -47,21 +47,21 @@ export const Homepage = () => {
             </div>
             <div id="links">
               <a href="mailto:breencf@gmail.com">
-                <button classname="developerCTA">Email</button>
+                <button className="developerCTA">Email</button>
               </a>
               <a href="http://www.github.com/breencf">
-                <button classname="developerCTA">
+                <button className="developerCTA">
                   <i className="fab fa-github-square"></i> Github
                 </button>
               </a>
               <a href="https://www.linkedin.com/in/breencf/">
-                <button classname="developerCTA">
+                <button className="developerCTA">
                   <i className="fab fa-linkedin"></i> Linkedin
                 </button>
               </a>
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </>
   );

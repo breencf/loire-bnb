@@ -16,6 +16,7 @@ h1 {
 
 .nav-black a {
   color: white !important;
+  font-size: 1.2vw !important;
 }
 
 .nav-white {
@@ -28,6 +29,10 @@ h1 {
   position: sticky;
   top: 0;
   width: 100vw;
+}
+
+.nav-white a {
+  font-size: 1.2vw !important;
 }
 
 .profile-dropdown {
@@ -44,11 +49,12 @@ h1 {
 }
 
 .profile-dropdown a {
-  color: black !important;
+  color: #000000 !important;
+  font-size: 20px !important;
 }
 
 .profile-dropdown .NavLink {
-  padding-left: 0px !important
+  padding-left: 0px !important;
 }
 .navigation-left {
   padding-left: 20px;
@@ -175,7 +181,7 @@ h1 {
   background-color: inherit;
   border: none;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 20px;
   padding: 0px;
   font-weight: 500;
 }

@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 300;
+  z-index: 3000;
 }
 
 #modal-background {
@@ -17,14 +17,14 @@
   left: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 300;
+  z-index: 3000;
 }
 
 #modal-content {
   position: absolute;
-  background-color:white;
-  z-index: 300;
-  padding:20px;
+  background-color: white;
+  z-index: 3000;
+  padding: 20px;
   border-radius: 20px;
 }
 
@@ -33,4 +33,5 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 5px;
 }
