@@ -27,9 +27,11 @@ function ProfileButton({ user, isLoaded }) {
         <li>
           <NavLink to="/tastings" className="NavLink">Tastings</NavLink>
         </li>
-        <hr />
         <li>
           <NavLink to="/mywineries" className="NavLink">My Wineries</NavLink>
+        </li>
+        <li>
+          <NavLink to="???????" className="NavLink">My Saved Wineries</NavLink>
         </li>
         <hr />
         <li>

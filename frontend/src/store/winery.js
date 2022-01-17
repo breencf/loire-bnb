@@ -45,7 +45,6 @@ export const getWineries = () => async (dispatch) => {
 
 export const getOneWinery = (id) => async (dispatch) => {
   const response = await fetch(`/api/wineries/${id}`);
-  console.log("tapping the winery frontend");
   const winery = await response.json();
   dispatch(addOneWinery(winery));
 };
@@ -71,11 +70,9 @@ export const updateWinery = (payload) => async (dispatch) => {
 };
 
 export const deleteWinery = (id) => async (dispatch) => {
-  console.log("in the delete thunk");
   const response = await csrfFetch(`/api/wineries/${id}`, {
     method: "DELETE",
   });
-  console.log(response.json());
   if (response.ok) {
     const deleted = await response.json();
     dispatch(deleteOneWinery(deleted));
@@ -84,7 +81,6 @@ export const deleteWinery = (id) => async (dispatch) => {
 
 const initialState = {};
 let newState;
-
 
 function wineryReducer(state = initialState, action) {
   switch (action.type) {
@@ -111,8 +107,7 @@ function wineryReducer(state = initialState, action) {
       return newState;
     case DELETE:
       newState = { ...state };
-      const deleted = delete newState.wineries[action.id];
-      console.log("deleted in reducer", deleted);
+      delete newState.wineries[action.id];
       return newState;
     default:
       return state;

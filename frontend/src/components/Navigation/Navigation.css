@@ -42,10 +42,14 @@ h1 {
   z-index: 100;
   filter: drop-shadow(1rem, 1rem, 1rem, black);
 }
+
 .profile-dropdown a {
   color: black !important;
 }
 
+.profile-dropdown .NavLink {
+  padding-left: 0px !important
+}
 .navigation-left {
   padding-left: 20px;
   width: 150px;

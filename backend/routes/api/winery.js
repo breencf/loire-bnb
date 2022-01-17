@@ -21,7 +21,6 @@ const validateWinery = [
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
-    console.log("getting wineries");
     const wineries = await db.Winery.findAll({
       include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User],
     });
@@ -61,23 +60,26 @@ router.put(
       ownerId,
     });
 
-    let varietalsToBeDeleted = [];
-    const oldVarietals = await db.VarietalToWineries.findAll({
-      where: { wineryId: id },
+    let updatedVarietals = [];
+    varietals.forEach((varietalObj) => {
+      inputVarietals.push(varietalObj.value);
     });
-    oldVarietals.forEach((entry) => {
-      if (!varietals.includes(entry.varietalId)) {
-        varietalsToBeDeleted.push(entry.varietalId);
-      }
-    });
-    for (const varietalObj of varietals) {
+    console.log(updatedVarietals);
+
+    for (const varietalId of updatedVarietals) {
       const existing = await db.VarietalToWineries.findOne({
-        where: { wineryId: id, varietalId: varietalObj.value },
+        where: { wineryId: id, varietalId },
       });
       if (!existing) {
         await db.VarietalToWineries.create({
           wineryId: id,
-          varietalId: varietalObj.value,
+          varietalId: varietalId,
+        });
+      }
+      if (existing && !updatedVarietals.includes(existing.varietalId)) {
+        await db.VarietalToWineries.destroy({
+          wineryId: id,
+          varietalId: existing.varietalId,
         });
       }
     }
@@ -199,11 +201,9 @@ router.post(
     });
     if (exists) {
       await db.Like.destroy({ where: { wineryId: winery, userId } });
-      console.log("unlike");
       res.json({ message: "unlike" });
     } else {
       await db.Like.create({ wineryId: winery, userId });
-      console.log("like");
       res.json({ message: "like" });
     }
   })

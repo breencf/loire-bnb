@@ -8,7 +8,6 @@ const router = express.Router();
 router.post(
   "/wineries/:id/like",
   asyncHandler(async (req, res) => {
-    console.log("in the post");
     const exists = await db.Like.findOne({ where: { storyId, userId } });
     if (exists) {
       await db.Like.destroy({ where: { storyId, userId } });

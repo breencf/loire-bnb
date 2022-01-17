@@ -8,7 +8,6 @@ import("./WineryList.css");
 
 export const WineryList = () => {
   const wineries = useSelector((state) => state.wineries);
-  console.log("in winery list");
 
   return (
     <div>

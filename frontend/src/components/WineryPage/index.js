@@ -16,7 +16,6 @@ export const WineryPage = () => {
   const sessionUser = useSelector((state) => state.sessions.user);
 
   const setDelete = () => {
-    console.log("setDelete");
     dispatch(deleteWinery(id));
   };
 

@@ -54,3 +54,15 @@ hr.full {
   width: 100%;
   color: lightgray;
 }
+
+#fourzerofour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#fourzerofour > * {
+  margin: 10px;
+}

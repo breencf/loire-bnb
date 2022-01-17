@@ -1,6 +1,6 @@
 //packages
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 //components
 import { SignupFormPage } from "./components/SignupFormPage";
@@ -41,17 +41,28 @@ function App() {
             <Route exact path="/wineries">
             <WineryList />
           </Route>
-          <Route exact path="/signup">
+          <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/wineries/create">
+          <Route path="/wineries/create">
             <CreateWineryForm />
           </Route>
-          <Route exact path="/wineries/:id">
+          <Route path="/wineries/:id">
             <WineryPage />
           </Route>
           <Route path="/mywineries">
             <MyWineries isLoaded={isLoaded}/>
+          </Route>
+          <Route>
+          <div id="fourzerofour">
+      <h2>Zut!</h2>
+      <p>We can't seem to find that page. </p>
+      <Link to="/">
+        <button className="submitButton">Take me home!</button>
+      </Link>
+      <img src="https://res.cloudinary.com/jadecabbage/image/upload/v1642365991/loirebnb%20assets/IMG_2308_hsx7nn.jpg" height="500"/>
+
+    </div>
           </Route>
         </Switch>
       </>

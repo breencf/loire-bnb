@@ -88,7 +88,6 @@ export const EditWineryForm = ({ hideForm }) => {
   }, [dispatch]);
 
   const onSubmit = async (e) => {
-    console.log("submitted");
     e.preventDefault();
     setErrors([]);
     const regionId = staticRegionList.find(
