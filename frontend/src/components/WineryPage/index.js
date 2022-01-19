@@ -79,10 +79,11 @@ export const WineryPage = () => {
       <ImageSlider images={winery?.Images} />
       <div id="wineryContainer">
         <div className="wineryContainerTitle">
-          <h3>{winery?.name} </h3> <LikeButton wineryId={winery?.id} />
-
+          <h3>{winery?.name} </h3>
+        </div>
           {!showEditWinery && sessionUser.id === winery?.ownerId && (
             <div>
+              <LikeButton wineryId={winery.id}/>
               <button
                 onClick={() => setShowEditWinery(true)}
                 className="submitButton"
@@ -98,7 +99,7 @@ export const WineryPage = () => {
         <hr className="full" />
 
         <div>{page}</div>
-      </div>
+
     </div>
   );
 };

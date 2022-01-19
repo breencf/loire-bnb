@@ -12,13 +12,13 @@ export const LikeButton = ({ wineryId }) => {
   const onClick = async (e) => {
     e.preventDefault();
     setLiked(!liked);
-
+    dispatch(loadLikes(id));
     dispatch(likeButton({ userId: id, winery: wineryId }));
   };
 
-  useEffect(() => {
-    dispatch(loadLikes(id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadLikes(id));
+  // }, [dispatch]);
 
   useEffect(() => {
     userLikes[wineryId] ? setLiked(true) : setLiked(false);

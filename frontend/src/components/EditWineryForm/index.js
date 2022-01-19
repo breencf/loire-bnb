@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 //ADD STORE
 import { getForm } from "../../store/form";
-import { updateWinery } from "../../store/winery";
+import { getWineries, updateWinery } from "../../store/winery";
 import { MultiSelect } from "react-multi-select-component";
 import "../CreateWineryForm/CreateWinery.css";
 import { useHistory, useParams } from "react-router-dom";
@@ -115,6 +115,7 @@ export const EditWineryForm = ({ hideForm }) => {
     };
     const updatedWinery = dispatch(updateWinery(winery));
     if (updatedWinery) {
+      dispatch(getWineries())
       hideForm()
       history.push(`/wineries/${id}`);
     }

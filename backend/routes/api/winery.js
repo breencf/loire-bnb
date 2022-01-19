@@ -60,11 +60,15 @@ router.put(
       ownerId,
     });
 
-    let updatedVarietals = [];
+    let updatedVarietals = []; ///[3,4,5,6,7,8,9] /[3]
     varietals.forEach((varietalObj) => {
-      inputVarietals.push(varietalObj.value);
+      updatedVarietals.push(varietalObj.value);
     });
     console.log(updatedVarietals);
+
+    const varietalsInDb = await db.VarietalToWineries.findAll({
+      where: { wineryId: id },
+    });
 
     for (const varietalId of updatedVarietals) {
       const existing = await db.VarietalToWineries.findOne({
@@ -83,11 +87,11 @@ router.put(
         });
       }
     }
-    for (const i in varietalsToBeDeleted) {
-      await db.VarietalToWineries.destroy({
-        where: { wineryId: id, varietalId: varietalsToBeDeleted[i] },
-      });
-    }
+    // for (const i in varietalsToBeDeleted) {
+    //   await db.VarietalToWineries.destroy({
+    //     where: { wineryId: id, varietalId: varietalsToBeDeleted[i] },
+    //   });
+    // }
 
     /*********** */
     let stylesToBeDeleted = [];
@@ -205,6 +209,20 @@ router.post(
     } else {
       await db.Like.create({ wineryId: winery, userId });
       res.json({ message: "like" });
+    }
+  })
+);
+
+router.post(
+  "/:id/book",
+  asyncHandler(async (req, res) => {
+    const { userId, wineryId, date, numGuests } = req.body;
+    const exists = await db.Tasting.findOne({
+      where: { userId, wineryId, date, numGuests },
+    });
+    if (!exists) {
+      await db.Tasting.create({userId, wineryId, date, numGuests})
+      res.json('created')
     }
   })
 );

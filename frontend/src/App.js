@@ -12,9 +12,10 @@ import CreateWineryForm from "./components/CreateWineryForm";
 import { restoreUser } from "./store/session";
 import { WineryList } from "./components/WineryList";
 import { Homepage } from "./components/Homepage";
-import {WineryPage} from './components/WineryPage'
+import { WineryPage } from "./components/WineryPage";
 import { MyWineries } from "./components/WineryList/MyWineries";
 import { loadLikes } from "./store/like";
+import { SavedWineries } from "./components/WineryList/SavedWineries";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,19 +27,18 @@ function App() {
     //dispatch(getForm())
   }, [dispatch]);
 
-
   return (
     isLoaded && (
       <>
         <Navigation isLoaded={isLoaded} />
         <Switch>
           <Route exact path="/">
-            <Homepage/>
-          {/* <Route exact path="/wineries/:id/edit">
+            <Homepage />
+            {/* <Route exact path="/wineries/:id/edit">
             <EditWineryForm />
           </Route> */}
           </Route>
-            <Route exact path="/wineries">
+          <Route exact path="/wineries">
             <WineryList />
           </Route>
           <Route path="/signup">
@@ -51,18 +51,23 @@ function App() {
             <WineryPage />
           </Route>
           <Route path="/mywineries">
-            <MyWineries isLoaded={isLoaded}/>
+            <MyWineries isLoaded={isLoaded} />
+          </Route>
+          <Route path="/savedwineries">
+            <SavedWineries />
           </Route>
           <Route>
-          <div id="fourzerofour">
-      <h2>Zut!</h2>
-      <p>We can't seem to find that page. </p>
-      <Link to="/">
-        <button className="submitButton">Take me home!</button>
-      </Link>
-      <img src="https://res.cloudinary.com/jadecabbage/image/upload/v1642365991/loirebnb%20assets/IMG_2308_hsx7nn.jpg" height="500"/>
-
-    </div>
+            <div id="fourzerofour">
+              <h2>Zut!</h2>
+              <p>We can't seem to find that page. </p>
+              <Link to="/">
+                <button className="submitButton">Take me home!</button>
+              </Link>
+              <img
+                src="https://res.cloudinary.com/jadecabbage/image/upload/v1642365991/loirebnb%20assets/IMG_2308_hsx7nn.jpg"
+                height="500"
+              />
+            </div>
           </Route>
         </Switch>
       </>

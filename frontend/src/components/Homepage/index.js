@@ -6,7 +6,7 @@ export const Homepage = () => {
   return (
     <>
       <div id="bigGreen"></div>
-      {/* <div id="homepageContainer"> */}
+      <div id="homepageContainer">
         <div id="bigCTA">
           <img src="https://daily.sevenfifty.com/app/uploads/2020/10/SFD_Loire_Valley_1755_vignes-et-chateau-_chinon_Stevens_Fremont_1536x1152.jpg" />
           <div id="bigCTAtext">
@@ -61,7 +61,7 @@ export const Homepage = () => {
               </a>
             </div>
           </div>
-        {/* </div> */}
+        </div>
       </div>
     </>
   );

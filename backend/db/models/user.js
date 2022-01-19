@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.login = async function (credential, password) {
-    console.log('trying to login')
+    console.log("trying to login");
     const user = await User.scope("loginUser").findOne({
       where: { email: credential },
     });
@@ -81,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
       firstName,
       lastName,
       email,
-      passwordHash: passwordHash
+      passwordHash: passwordHash,
     });
     return await User.scope("currentUser").findByPk(newUser.id);
   };
@@ -89,7 +89,9 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function (models) {
     // associations can be defined here
     User.hasMany(models.Winery, { foreignKey: "ownerId" });
-    User.hasMany(models.Like, {foreignKey: "userId"})
+    User.hasMany(models.Like, { foreignKey: "userId" });
+    User.hasMany(models.Review, { foreignKey: "userId" });
+    User.hasMany(models.Tasting, { foreignKey: "userId" });
   };
   return User;
 };

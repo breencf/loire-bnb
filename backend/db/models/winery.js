@@ -45,6 +45,9 @@ module.exports = (sequelize, DataTypes) => {
     Winery.belongsTo(models.User, { foreignKey: "ownerId" });
     Winery.belongsTo(models.Region, { foreignKey: "regionId" });
     Winery.hasMany(models.Like, { foreignKey: "wineryId" });
+    Winery.hasMany(models.Review, { foreignKey: "wineryId" });
+    Winery.hasMany(models.Tasting, { foreignKey: "wineryId" });
+
 
     const wineStyleColumnMapping = {
       through: "WineStyleToWineries", //joinTable

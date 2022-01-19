@@ -4,20 +4,22 @@ import { Route, Switch, Link } from "react-router-dom";
 import { WineryCard } from "../WineryCard";
 import { WineryPage } from "../WineryPage";
 
-export const MyWineries = () => {
+export const SavedWineries = () => {
   const { wineries } = useSelector((state) => state);
-  const user = useSelector((state) => state.sessions.user);
+  const { userLikes } = useSelector((state) => state.like);
   const wineryArr = Object.values(wineries);
+  const likeArr = Object.keys(userLikes);
+  console.log(wineryArr, "==========", likeArr);
 
-  const  myWineries = Object.values(
-      wineryArr.filter((winery) => winery.ownerId === user.id)
-    );
+  const likedWineries = Object.values(
+    wineryArr.filter((winery) => likeArr.includes((winery.id).toString()))
+  );
 
-
+  console.log("========", likedWineries);
   return (
     <div>
       <ul>
-        {myWineries?.map((winery) => {
+        {likedWineries?.map((winery) => {
           return (
             <div>
               <Link to={`/wineries/${winery.id}`}>
