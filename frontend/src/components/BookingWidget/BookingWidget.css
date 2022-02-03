@@ -1,0 +1,67 @@
+#bookingWidget {
+  border: 1px solid rgb(221, 221, 221);
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+  border-radius: 12px;
+  margin: 30px;
+}
+
+#bookingWidget > form > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#bookingWidget > form {
+  border: 1px solid black;
+  border-radius: 12px;
+  width: 100%;
+}
+
+#bookingWidget > form label {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+}
+
+#bookingWidget > form > div:first-child, #bookingWidget > form > div:nth-child(2)  {
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+}
+
+.bookingDiv {
+  border-radius: 12px;
+  padding: 12px 10px;
+}
+
+#bookingWidget input#date, input#numGuests, #bookingWidget input#time {
+  font-size: 16px !important;
+  font-family: "Raleway", "Futura", "Helvetica", sans-serif;
+  border: none;
+  padding: 10px;
+}
+
+
+
+.bookingSubmitButton {
+  margin-top: 10px;
+  padding: 20px;
+  width: 300px;
+  background-color: #ff385c;
+  font-family: "Raleway", "Futura", "Helvetica", sans-serif;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+
+}

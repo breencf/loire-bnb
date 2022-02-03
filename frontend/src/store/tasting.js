@@ -14,8 +14,7 @@ const load = ({ tastings, userId }) => {
 const book = ({ tasting }) => {
   return {
     type: BOOK,
-    userId,
-    wineryId,
+    tasting
   };
 };
 

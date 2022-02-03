@@ -8,6 +8,7 @@
 
 body {
   font-family: "Raleway", "Futura", "Helvetica", sans-serif;
+  font-size: 18px;
   width: 100vw;
   margin: 0px;
   top: 0;
@@ -16,16 +17,20 @@ body {
   bottom: 0;
 }
 
+p {
+  line-height: 24px;
+}
+
 h1 {
   font-size: 5vw;
   font-weight: 700;
 }
 h2 {
-  font-size: 5vw;
+  font-size: 4vw;
   font-weight: 600;
 }
 h3 {
-  font-size: 5vw;
+  font-size: 3vw;
   font-weight: 500;
 }
 

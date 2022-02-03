@@ -34,10 +34,10 @@ export function Navigation({ isLoaded }) {
           </Link>
         </div>
         <div className="navLinks-center">
-          <Link exact to="/wineries" className="NavLink">
+          <Link to="/wineries" className="NavLink">
             Explore Wineries
           </Link>
-          <Link exact to="/" className="NavLink">
+          <Link to="/" className="NavLink">
             About Loirebnb
           </Link>
         </div>

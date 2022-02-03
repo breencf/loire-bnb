@@ -6,6 +6,7 @@ import { getOneWinery } from "../../store/winery";
 import { EditWineryForm } from "../EditWineryForm";
 import { deleteWinery } from "../../store/winery";
 import { LikeButton } from "../LikeButton";
+import {BookingWidget, bookingWidget} from '../BookingWidget'
 import("./WineryPage.css");
 
 export const WineryPage = () => {
@@ -34,7 +35,8 @@ export const WineryPage = () => {
     page = <EditWineryForm hideForm={() => setShowEditWinery(false)} />;
   } else {
     page = (
-      <>
+      <div className="fullDetails">
+      <div className="wineryPageDetails">
         <h4>
           Hosted by {winery?.User?.firstName} {winery?.User?.lastName} in{" "}
           {winery?.town}, {winery?.Region.name}
@@ -69,21 +71,21 @@ export const WineryPage = () => {
         <div>
           <h4>About</h4>
           <p>{winery?.content}</p>
-
         </div>
-      </>
+      </div>
+      <BookingWidget />
+      </div>
+
     );
   }
   return (
     <div className="wineryPage">
-      <ImageSlider images={winery?.Images} />
       <div id="wineryContainer">
         <div className="wineryContainerTitle">
           <h3>{winery?.name} </h3>
-        </div>
           {!showEditWinery && sessionUser.id === winery?.ownerId && (
             <div>
-              <LikeButton wineryId={winery.id}/>
+              {/* <LikeButton wineryId={winery.id}/> */}
               <button
                 onClick={() => setShowEditWinery(true)}
                 className="submitButton"
@@ -96,9 +98,13 @@ export const WineryPage = () => {
             </div>
           )}
         </div>
+        <ImageSlider images={winery?.Images} />
+
+
         <hr className="full" />
 
         <div>{page}</div>
+        </div>
 
     </div>
   );
