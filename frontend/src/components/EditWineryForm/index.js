@@ -23,6 +23,7 @@ export const EditWineryForm = ({ hideForm }) => {
 
   const { wineries } = useSelector((state) => state);
   const winery = wineries[id];
+  console.log(winery.region);
 
   const varietalsInState = [];
   for (const key in winery.Varietals) {
@@ -47,7 +48,9 @@ export const EditWineryForm = ({ hideForm }) => {
   const [address, setAddress] = useState("");
   const [town, setTown] = useState("");
   const [maxGuests, setMaxGuests] = useState(0);
-  const [region, setRegion] = useState("");
+  const [region, setRegion] = useState(
+    staticRegionList.find((region) => region.id === winery.regionId)
+  );
   const [varietals, setVarietals] = useState(varietalsInState);
   const [wineStyles, setWineStyles] = useState(stylesInState);
   const [image1, setImage1] = useState("");
@@ -115,8 +118,8 @@ export const EditWineryForm = ({ hideForm }) => {
     };
     const updatedWinery = dispatch(updateWinery(winery));
     if (updatedWinery) {
-      dispatch(getWineries())
-      hideForm()
+      dispatch(getWineries());
+      hideForm();
       history.push(`/wineries/${id}`);
     }
   };
@@ -203,7 +206,7 @@ export const EditWineryForm = ({ hideForm }) => {
         </div>
         <div className="dropdown">
           <h4>Select Region</h4>
-          <select onChange={updateRegion}>
+          <select onChange={updateRegion} value={region}>
             {staticRegionList?.map((region) => {
               return (
                 <option

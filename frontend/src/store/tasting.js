@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD = "users/:id/tastings";
 const BOOK = "wineries/:id/BOOK";
 const DELETE = "tastings/:id/delete";
+const UPDATE = "tastings/:id/update";
 
 const load = ({ tastings, userId }) => {
   return {
@@ -15,6 +16,13 @@ const load = ({ tastings, userId }) => {
 const book = ({ tasting }) => {
   return {
     type: BOOK,
+    tasting,
+  };
+};
+
+const update = (tasting) => {
+  return {
+    type: UPDATE,
     tasting,
   };
 };
@@ -47,6 +55,16 @@ export const bookOneTasting =
     return tasting;
   };
 
+export const updateTasting = (tasting) => async (dispatch) => {
+  const response = await csrfFetch(`/api/tastings/${tasting.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(tasting),
+  });
+  const updatedTasting = await response.json();
+  dispatch(update(updatedTasting));
+};
+
 export const deleteTasting = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/tastings/${id}/delete`, {
     method: "DELETE",
@@ -73,6 +91,10 @@ export function tastingReducer(state = {}, action) {
     case DELETE:
       newState = { ...state };
       delete newState[action.id];
+      return newState;
+    case UPDATE:
+      newState = { ...state };
+      newState[action.tasting.id] = action.tasting;
       return newState;
     default:
       return state;

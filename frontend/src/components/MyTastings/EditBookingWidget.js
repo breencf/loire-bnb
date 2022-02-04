@@ -1,0 +1,98 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { updateTasting } from "../../store/tasting";
+import { staticTimeList } from "../CreateWineryForm/form-lists";
+
+export const EditBookingWidget = ({ id, closeModal }) => {
+  console.log(id);
+  const dispatch = useDispatch();
+  const tasting = useSelector((state) => state.tasting[id]);
+  console.log("=======================", tasting);
+
+  const now = new Date();
+  const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;
+  const nowDate = now.getDate() > 9 ? now.getDate() : `0${now.getDate()}`;
+
+  const [date, setDate] = useState(tasting.date);
+  const [time, setTime] = useState(tasting.time);
+  const [numGuests, setNumGuests] = useState(tasting.numGuests);
+  const [errors, setErrors] = useState([]);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setErrors([]);
+    const updatedTastingInput = {
+      id: tasting.id,
+      userId: tasting.userId,
+      wineryId: tasting.wineryId,
+      date,
+      time,
+      numGuests,
+    };
+
+    const updatedTasting = dispatch(updateTasting(updatedTastingInput));
+    if (updatedTasting) {
+      closeModal();
+    }
+  };
+
+  const onCancelClick = async (e) => {
+    e.preventDefault();
+    closeModal();
+  };
+
+  return (
+    <div>
+      <h3>Update tasting</h3>
+      <form onSubmit={onSubmit} id="book-tasting-form">
+        <div className="bookingDiv">
+          <label htmlFor="date">Date</label>
+          <input
+            id="date"
+            label="date"
+            type="date"
+            onChange={(e) => setDate(e.target.value)}
+            required
+            min={`${now.getFullYear()}-${nowMonth}-${nowDate}`}
+            value={date}
+          />
+        </div>
+        <div className="bookingDiv" id="timeDropdown">
+          <label htmlFor="time">Time</label>
+          <select onChange={(e) => setTime(e.target.value)} value={time}>
+            {staticTimeList.map((time) => {
+              return (
+                <option
+                  key={`${time.label}`}
+                  value={`${time.label}`}
+                  id={`${time.id}`}
+                >
+                  {time.label}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="bookingDiv">
+          <label htmlFor="numGuests">Guests</label>
+          <input
+            id="numGuests"
+            label="number"
+            type="number"
+            onChange={(e) => setNumGuests(e.target.value)}
+            value={numGuests}
+            required
+          />
+        </div>
+        <div>
+          <button className="cancelButton" onClick={onCancelClick}>
+            Cancel
+          </button>
+          <button className="bookingSubmitButton" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};

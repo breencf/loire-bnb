@@ -21,4 +21,20 @@ router.delete(
   })
 );
 
+router.put(
+  "/:id/",
+  asyncHandler(async (req, res) => {
+    const { id, userId, wineryId, date, time, numGuests } = req.body;
+    const tasting = await db.Tasting.findByPk(id);
+    const updatedWinery = await tasting.update({
+      userId,
+      wineryId,
+      date,
+      time,
+      numGuests,
+    });
+    console.log(updatedWinery)
+    res.json(updatedWinery);
+  })
+);
 module.exports = router;
