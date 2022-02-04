@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ImageSlider } from "./ImageSlider";
 import { useEffect, useState } from "react";
-import { getOneWinery } from "../../store/winery";
+// import { getOneWinery } from "../../store/winery";
 import { EditWineryForm } from "../EditWineryForm";
 import { deleteWinery } from "../../store/winery";
 import { LikeButton } from "../LikeButton";
@@ -22,7 +22,7 @@ export const WineryPage = () => {
 
   useEffect(() => {
     setShowEditWinery(false);
-    dispatch(getOneWinery(id)); //?
+    // dispatch(getOneWinery(id)); //?
   }, [id, dispatch]);
 
   useEffect(() => {

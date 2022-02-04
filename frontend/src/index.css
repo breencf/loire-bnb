@@ -32,6 +32,7 @@ h2 {
 h3 {
   font-size: 3vw;
   font-weight: 500;
+  display: inline-block;
 }
 
 .submitButton {

@@ -48,3 +48,8 @@ export const staticVarietalList = [
     { label: "Chinon", id: 18 },
     { label: "Bourgueil", id: 19 },
   ];
+
+  export const staticTimeList = [
+    {label: "11:00"},{label: "13:00"},{label: "14:00"},{label: "15:00"},{label: "16:00"},{label: "17:00"},
+
+  ]

@@ -1,7 +1,7 @@
 //packages
 import React, { useEffect, useState } from "react";
 import { Route, Switch, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //components
 import { SignupFormPage } from "./components/SignupFormPage";
 import { Navigation } from "./components/Navigation";
@@ -17,16 +17,17 @@ import { MyWineries } from "./components/WineryList/MyWineries";
 import { loadLikes } from "./store/like";
 import { SavedWineries } from "./components/WineryList/SavedWineries";
 import { MyTastings } from "./components/MyTastings";
+import { loadTastings } from "./store/tasting";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
+  const {user} = useSelector(state => state.sessions)
+    useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(getWineries());
-
-    //dispatch(getForm())
   }, [dispatch]);
+
 
   return (
     isLoaded && (

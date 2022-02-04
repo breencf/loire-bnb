@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
 
 function ProfileButton({ user, isLoaded }) {
+  const history = useHistory()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector((state) => state.sessions.user);
@@ -12,6 +13,7 @@ function ProfileButton({ user, isLoaded }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push('/')
     closeMenu();
   };
 
@@ -33,7 +35,7 @@ function ProfileButton({ user, isLoaded }) {
         <li>
           <NavLink to="/savedwineries" className="NavLink">My Saved Wineries</NavLink>
         </li>
-        
+
         <hr />
         <li>
           <button onClick={logout} className="loginlogout">

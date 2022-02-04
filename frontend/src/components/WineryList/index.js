@@ -1,13 +1,19 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Link } from "react-router-dom";
+import { getWineries } from "../../store/winery";
 
 import { WineryCard } from "../WineryCard";
 import { WineryPage } from "../WineryPage";
 import("./WineryList.css");
 
 export const WineryList = () => {
+  const dispatch = useDispatch()
   const wineries = useSelector((state) => state.wineries);
+
+  useEffect (() => {
+    dispatch(getWineries())
+  },[])
 
   return (
     <div>

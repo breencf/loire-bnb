@@ -21,12 +21,23 @@ const validateWinery = [
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
+    console.log('in the get all route!!!!!')
     const wineries = await db.Winery.findAll({
       include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User],
     });
     res.json(wineries);
   })
 );
+
+// router.get(
+//   "/:id",
+//   asyncHandler(async (req, res) => {
+//     const id = req.params.id;
+//     const winery = await db.Winery.findByPk(parseInt(id));
+//     console.log(winery);
+//     res.json(winery);
+//   })
+// );
 
 router.put(
   "/:id",

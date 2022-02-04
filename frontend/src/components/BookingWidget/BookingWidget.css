@@ -45,7 +45,7 @@
 }
 
 #bookingWidget input#date, input#numGuests, #bookingWidget input#time {
-  font-size: 16px !important;
+  font-size: 20px !important;
   font-family: "Raleway", "Futura", "Helvetica", sans-serif;
   border: none;
   padding: 10px;
@@ -54,7 +54,6 @@
 
 
 .bookingSubmitButton {
-  margin-top: 10px;
   padding: 20px;
   width: 300px;
   background-color: #ff385c;
@@ -62,7 +61,15 @@
   color: white;
   font-weight: 600;
   font-size: 18px;
-  border-radius: 12px;
+  border-radius: 0px 0px 12px 12px;
   border: none;
 
+}
+
+#timeDropdown select{
+  width: 80%;
+  border: none;
+  font-size: 20px;
+  margin: 10px;
+  font-family: inherit;
 }

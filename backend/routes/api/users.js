@@ -51,4 +51,9 @@ router.get("/:id/likes", asyncHandler(async (req, res) => {
   return res.json(likes)
 }))
 
+router.get("/:id/tastings", asyncHandler(async (req, res) => {
+  const {id} = req.params
+  const tastings = await db.Tasting.findAll({where: {userId: id} })
+  return res.json(tastings)
+}))
 module.exports = router;

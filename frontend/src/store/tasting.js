@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD = "users/:id/tastings";
 const BOOK = "wineries/:id/BOOK";
+const DELETE = "tastings/:id/delete";
 
 const load = ({ tastings, userId }) => {
   return {
@@ -15,6 +16,13 @@ const book = ({ tasting }) => {
   return {
     type: BOOK,
     tasting,
+  };
+};
+
+const deleteOneTasting = (id) => {
+  return {
+    type: DELETE,
+    id,
   };
 };
 
@@ -35,25 +43,36 @@ export const bookOneTasting =
       body: JSON.stringify({ userId, wineryId, date, numGuests, time }),
     });
     const tasting = await response.json();
-    console.log(tasting);
     dispatch(book({ tasting }));
     return tasting;
   };
 
-const initialState = { userTastings: {} };
-let newState;
+export const deleteTasting = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/tastings/${id}/delete`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const deleted = await response.json();
+    dispatch(deleteOneTasting(deleted));
+  }
+};
 
-export function tastingReducer(state = initialState, action) {
+let newState;
+export function tastingReducer(state = {}, action) {
   switch (action.type) {
     case LOAD:
       newState = { ...state };
       action.tastings.forEach((tasting) => {
-        newState.userTastings[tasting.wineryId] = tasting;
+        newState[tasting.id] = tasting;
       });
       return newState;
     case BOOK:
       newState = { ...state };
-      newState.userTastings[action.tasting.wineryId] = action.tasting;
+      newState[action.tasting.id] = action.tasting;
+      return newState;
+    case DELETE:
+      newState = { ...state };
+      delete newState[action.id];
       return newState;
     default:
       return state;

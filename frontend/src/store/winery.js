@@ -5,6 +5,7 @@ const LOAD = "wineries/LOAD";
 const ADD = "wineries/ADD";
 const UPDATE = "wineries/UPDATE";
 const DELETE = "wineries/DELETE";
+const GET = "wineries/GET"
 
 const load = (wineries) => {
   return {
@@ -19,6 +20,13 @@ const addOneWinery = (winery) => {
     winery,
   };
 };
+
+// const getWinery = winery => {
+//   return {
+//     type: GET,
+//     winery
+//   }
+// }
 
 const updateOneWinery = (winery) => {
   return {
@@ -43,11 +51,11 @@ export const getWineries = () => async (dispatch) => {
   }
 };
 
-export const getOneWinery = (id) => async (dispatch) => {
-  const response = await fetch(`/api/wineries/${id}`);
-  const winery = await response.json();
-  dispatch(addOneWinery(winery));
-};
+// export const getOneWinery = (id) => async (dispatch) => {
+//   const response = await fetch(`/api/wineries/${id}`);
+//   const winery = await response.json();
+//   dispatch(getWinery(winery));
+// };
 
 export const addWinery = (payload) => async (dispatch) => {
   const response = await csrfFetch(`/api/wineries`, {

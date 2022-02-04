@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./BookingWidget.css";
 import { useParams } from "react-router-dom";
 import { bookOneTasting } from "../../store/tasting";
+import { staticTimeList } from "../CreateWineryForm/form-lists";
 
 export const BookingWidget = ({ wineryId }) => {
   const dispatch = useDispatch();
@@ -10,15 +11,14 @@ export const BookingWidget = ({ wineryId }) => {
   const { id } = useParams(); /////????????
   const now = new Date();
 
-  const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`
-  const nowDate = now.getDate() > 9 ? now.getDate() : `0${now.getDate()}`
-
+  const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;
+  const nowDate = now.getDate() > 9 ? now.getDate() : `0${now.getDate()}`;
 
   const [date, setDate] = useState(
-    `${now.getFullYear()}-${nowMonth}-${nowDate}`
+    `${now.getFullYear()}-${nowMonth}-${nowDate + 1}`
   );
-  const [numGuests, setNumGuests] = useState(0);
-  const [time, setTime] = useState(`${now.getHours()}:${now.getMinutes()}`);
+  const [numGuests, setNumGuests] = useState(1);
+  const [time, setTime] = useState(staticTimeList[0]);
   const [errors, setErrors] = useState([]);
 
   const onSubmit = async (e) => {
@@ -50,20 +50,27 @@ export const BookingWidget = ({ wineryId }) => {
             label="date"
             type="date"
             onChange={(e) => setDate(e.target.value)}
-            value={date}
             required
+            min={`${now.getFullYear()}-${nowMonth}-${nowDate}`}
+            value={date}
+
           />
         </div>
-        <div className="bookingDiv">
+        <div className="bookingDiv" id="timeDropdown">
           <label htmlFor="time">Time</label>
-          <input
-            id="time"
-            label="time"
-            type="time"
-            onChange={(e) => setTime(e.target.value)}
-            value={time}
-            required
-          />
+          <select onChange={(e) => setTime(e.target.value)}>
+            {staticTimeList.map((time) => {
+              return (
+                <option
+                  key={`${time.label}`}
+                  value={`${time.label}`}
+                  id={`${time.id}`}
+                >
+                  {time.label}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <div className="bookingDiv">
           <label htmlFor="numGuests">Guests</label>
