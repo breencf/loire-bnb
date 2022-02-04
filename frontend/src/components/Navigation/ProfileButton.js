@@ -33,6 +33,7 @@ function ProfileButton({ user, isLoaded }) {
         <li>
           <NavLink to="/savedwineries" className="NavLink">My Saved Wineries</NavLink>
         </li>
+        
         <hr />
         <li>
           <button onClick={logout} className="loginlogout">

@@ -5,7 +5,7 @@ import { WineryCard } from "../WineryCard";
 import { WineryPage } from "../WineryPage";
 
 export const MyWineries = () => {
-  const { wineries } = useSelector((state) => state);
+  const wineries = useSelector((state) => state.wineries);
   const user = useSelector((state) => state.sessions.user);
   const wineryArr = Object.values(wineries);
 

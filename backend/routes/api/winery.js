@@ -216,13 +216,23 @@ router.post(
 router.post(
   "/:id/book",
   asyncHandler(async (req, res) => {
-    const { userId, wineryId, date, numGuests } = req.body;
+    const { userId, wineryId, date, numGuests, time } = req.body;
+    console.log(req.body);
+    console.log("time is", time);
+    console.log("date is", date);
     const exists = await db.Tasting.findOne({
-      where: { userId, wineryId, date, numGuests },
+      where: { userId, wineryId: +wineryId, date, numGuests, time },
     });
     if (!exists) {
-      await db.Tasting.create({userId, wineryId, date, numGuests})
-      res.json('created')
+      const tasting = await db.Tasting.create({
+        userId,
+        wineryId: +wineryId,
+        date,
+        numGuests,
+        time,
+      });
+      console.log("created");
+      res.json(tasting);
     }
   })
 );

@@ -2,15 +2,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import "./BookingWidget.css";
 import { useParams } from "react-router-dom";
+import { bookOneTasting } from "../../store/tasting";
 
 export const BookingWidget = ({ wineryId }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.sessions.user.id);
   const { id } = useParams(); /////????????
+  const now = new Date();
 
-  const [date, setDate] = useState(new Date());
+  const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`
+  const nowDate = now.getDate() > 9 ? now.getDate() : `0${now.getDate()}`
+
+
+  const [date, setDate] = useState(
+    `${now.getFullYear()}-${nowMonth}-${nowDate}`
+  );
   const [numGuests, setNumGuests] = useState(0);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(`${now.getHours()}:${now.getMinutes()}`);
   const [errors, setErrors] = useState([]);
 
   const onSubmit = async (e) => {
@@ -21,9 +29,11 @@ export const BookingWidget = ({ wineryId }) => {
       wineryId: id,
       date,
       numGuests,
+      time,
     };
 
-    const newTasting = dispatch; ///////////////////
+    const newTasting = dispatch(bookOneTasting(tasting)); ///////////////////
+    if (newTasting) console.log("tasting successful!");
   };
   return (
     <div id="bookingWidget">
@@ -66,10 +76,10 @@ export const BookingWidget = ({ wineryId }) => {
             required
           />
         </div>
+        <div>
+          <button className="bookingSubmitButton">Submit</button>
+        </div>
       </form>
-      <div>
-        <button className="bookingSubmitButton">Submit</button>
-      </div>
     </div>
   );
 };

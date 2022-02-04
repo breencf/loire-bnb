@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Tastings', {
+    return queryInterface.createTable("Tastings", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -20,23 +20,27 @@ module.exports = {
       },
       date: {
         type: Sequelize.DATEONLY,
-        allowNull:false
+        allowNull: false,
+      },
+      time: {
+        type: Sequelize.STRING(5),
+        allowNull: false,
       },
       numGuests: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Tastings');
-  }
+    return queryInterface.dropTable("Tastings");
+  },
 };

@@ -16,6 +16,7 @@ import { WineryPage } from "./components/WineryPage";
 import { MyWineries } from "./components/WineryList/MyWineries";
 import { loadLikes } from "./store/like";
 import { SavedWineries } from "./components/WineryList/SavedWineries";
+import { MyTastings } from "./components/MyTastings";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path="/mywineries">
             <MyWineries isLoaded={isLoaded} />
+          </Route>
+          <Route path="/tastings">
+            <MyTastings isLoaded={isLoaded} />
           </Route>
           <Route path="/savedwineries">
             <SavedWineries />

@@ -14,7 +14,7 @@ const load = ({ tastings, userId }) => {
 const book = ({ tasting }) => {
   return {
     type: BOOK,
-    tasting
+    tasting,
   };
 };
 
@@ -27,15 +27,17 @@ export const loadTastings = (userId) => async (dispatch) => {
 };
 
 export const bookOneTasting =
-  ({ userId, wineryId, date, numGuests }) =>
+  ({ userId, wineryId, date, time, numGuests }) =>
   async (dispatch) => {
     const response = await csrfFetch(`/api/wineries/${wineryId}/book`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, wineryId, date, numGuests }),
+      body: JSON.stringify({ userId, wineryId, date, numGuests, time }),
     });
     const tasting = await response.json();
+    console.log(tasting);
     dispatch(book({ tasting }));
+    return tasting;
   };
 
 const initialState = { userTastings: {} };

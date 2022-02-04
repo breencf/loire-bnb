@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: { type: DataTypes.INTEGER, allowNull: false },
     wineryId: { type: DataTypes.INTEGER, allowNull: false },
     date: { type: DataTypes.DATEONLY, allowNull: false },
+    time: { type: DataTypes.STRING(5), allowNull: false },
     numGuests: { type: DataTypes.INTEGER, allowNull: false }
   }, {});
   Tasting.associate = function(models) {
