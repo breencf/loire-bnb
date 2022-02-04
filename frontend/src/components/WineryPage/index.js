@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 // import { getOneWinery } from "../../store/winery";
 import { EditWineryForm } from "../EditWineryForm";
 import { deleteWinery } from "../../store/winery";
-import { LikeButton } from "../LikeButton";
-import {BookingWidget, bookingWidget} from '../BookingWidget'
+import {BookingWidget} from '../BookingWidget'
 import("./WineryPage.css");
 
 export const WineryPage = () => {

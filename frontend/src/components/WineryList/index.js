@@ -13,7 +13,7 @@ export const WineryList = () => {
 
   useEffect (() => {
     dispatch(getWineries())
-  },[])
+  },[dispatch])
 
   return (
     <div>

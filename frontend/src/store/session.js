@@ -18,7 +18,6 @@ export const endSession = () => {
 
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
-  console.log("in the login thunk");
 
   const response = await csrfFetch("/api/session", {
     method: "POST",

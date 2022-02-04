@@ -21,7 +21,6 @@ const validateWinery = [
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
-    console.log('in the get all route!!!!!')
     const wineries = await db.Winery.findAll({
       include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User],
     });
@@ -75,7 +74,6 @@ router.put(
     varietals.forEach((varietalObj) => {
       updatedVarietals.push(varietalObj.value);
     });
-    console.log(updatedVarietals);
 
     const varietalsInDb = await db.VarietalToWineries.findAll({
       where: { wineryId: id },
@@ -228,9 +226,6 @@ router.post(
   "/:id/book",
   asyncHandler(async (req, res) => {
     const { userId, wineryId, date, numGuests, time } = req.body;
-    console.log(req.body);
-    console.log("time is", time);
-    console.log("date is", date);
     const exists = await db.Tasting.findOne({
       where: { userId, wineryId: +wineryId, date, numGuests, time },
     });
@@ -242,7 +237,6 @@ router.post(
         numGuests,
         time,
       });
-      console.log("created");
       res.json(tasting);
     }
   })

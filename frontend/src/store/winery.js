@@ -1,11 +1,11 @@
 import { csrfFetch } from "./csrf";
 
-//
+
 const LOAD = "wineries/LOAD";
 const ADD = "wineries/ADD";
 const UPDATE = "wineries/UPDATE";
 const DELETE = "wineries/DELETE";
-const GET = "wineries/GET"
+// const GET = "wineries/GET"
 
 const load = (wineries) => {
   return {
@@ -108,7 +108,7 @@ function wineryReducer(state = initialState, action) {
         wineryList?.push(action.winery);
         newState.wineries = wineryList;
         return newState;
-      }
+      };
     case UPDATE:
       newState = { ...state };
       newState.wineries[action.winery.id] = action.winery;

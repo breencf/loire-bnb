@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
+import Modal from 'react-modal'
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import "./MyTastings.css";
 
 import { Route, Switch, Link } from "react-router-dom";
 import { deleteTasting, loadTastings } from "../../store/tasting";
@@ -10,12 +12,13 @@ import { WineryPage } from "../WineryPage";
 
 export const MyTastings = () => {
   const { wineries, tasting, sessions } = useSelector((state) => state);
+
   const tastingsArray = Object.values(tasting);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadTastings(sessions.user.id));
-  }, []);
+  }, [dispatch]);
 
   return (
     tastingsArray && (
@@ -25,8 +28,9 @@ export const MyTastings = () => {
             return (
               <div>
                 <span>
-                  <h3>
-                    {dayjs(tasting.date).format("MMMM D, YYYY")}, {tasting.time}
+                  <h3 id="tastingH3">
+                    {dayjs(tasting.date).format("MMMM D, YYYY")}, {tasting.time}{" "}
+                    for {tasting.numGuests} guest(s)
                   </h3>
                   {/* </span>
                 <span> */}

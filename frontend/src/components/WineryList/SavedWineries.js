@@ -9,13 +9,11 @@ export const SavedWineries = () => {
   const { userLikes } = useSelector((state) => state.like);
   const wineryArr = Object.values(wineries);
   const likeArr = Object.keys(userLikes);
-  console.log(wineryArr, "==========", likeArr);
 
   const likedWineries = Object.values(
     wineryArr.filter((winery) => likeArr.includes((winery.id).toString()))
   );
 
-  console.log("========", likedWineries);
   return (
     <div>
       <ul>

@@ -7,7 +7,6 @@ function LoginFormModal() {
 
 
   const onClose = () => {
-    console.log('modal onclose')
     setShowModal(false)}
   return (
     <>

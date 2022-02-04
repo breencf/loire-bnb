@@ -29,11 +29,13 @@ export const BookingWidget = ({ wineryId }) => {
       wineryId: id,
       date,
       numGuests,
-      time,
+      time: time,
     };
 
-    const newTasting = dispatch(bookOneTasting(tasting)); ///////////////////
-    if (newTasting) console.log("tasting successful!");
+    const newTasting = dispatch(bookOneTasting(tasting));
+    if (newTasting) {
+      window.alert("tasting booked!");
+    }
   };
   return (
     <div id="bookingWidget">
@@ -53,7 +55,6 @@ export const BookingWidget = ({ wineryId }) => {
             required
             min={`${now.getFullYear()}-${nowMonth}-${nowDate}`}
             value={date}
-
           />
         </div>
         <div className="bookingDiv" id="timeDropdown">

@@ -16,7 +16,6 @@ export const LoginForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    console.log("in login dispatch");
     return dispatch(login({ credential, password })).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
@@ -36,6 +35,7 @@ export const LoginForm = () => {
         width="100"
         height="100"
         src="https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-red_zjwezu.png"
+        alt="loirebnb logo"
       />
       <h4>Login</h4>
       <form onSubmit={onSubmit}>
