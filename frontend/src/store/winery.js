@@ -14,6 +14,7 @@ const load = (wineries) => {
   };
 };
 
+
 const addOneWinery = (winery) => {
   return {
     type: ADD,
@@ -50,6 +51,8 @@ export const getWineries = () => async (dispatch) => {
     dispatch(load(data));
   }
 };
+
+
 
 // export const getOneWinery = (id) => async (dispatch) => {
 //   const response = await fetch(`/api/wineries/${id}`);

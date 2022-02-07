@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { updateTasting } from "../../store/tasting";
 import { staticTimeList } from "../CreateWineryForm/form-lists";
+import "./MyTastings.css";
 
 export const EditBookingWidget = ({ id, closeModal }) => {
   console.log(id);
@@ -42,7 +43,12 @@ export const EditBookingWidget = ({ id, closeModal }) => {
   };
 
   return (
-    <div>
+    <div id="editBooking">
+      <div className="cancel">
+          <button className="cancelButton" onClick={onCancelClick}>
+            X
+          </button>
+          </div>
       <h3>Update tasting</h3>
       <form onSubmit={onSubmit} id="book-tasting-form">
         <div className="bookingDiv">
@@ -84,10 +90,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
             required
           />
         </div>
-        <div>
-          <button className="cancelButton" onClick={onCancelClick}>
-            Cancel
-          </button>
+          <div>
           <button className="bookingSubmitButton" type="submit">
             Submit
           </button>

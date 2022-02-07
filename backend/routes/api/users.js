@@ -39,21 +39,26 @@ router.post(
   asyncHandler(async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     const user = await User.signup({ firstName, lastName, email, password });
-
     await setTokenCookie(res, user);
-    return res.json({ user });
+    return res.json(user);
   })
 );
 
-router.get("/:id/likes", asyncHandler(async (req, res) => {
-  const {id} = req.params
-  const likes = await db.Like.findAll({where: {userId: id}})
-  return res.json(likes)
-}))
+router.get(
+  "/:id/likes",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const likes = await db.Like.findAll({ where: { userId: id } });
+    return res.json(likes);
+  })
+);
 
-router.get("/:id/tastings", asyncHandler(async (req, res) => {
-  const {id} = req.params
-  const tastings = await db.Tasting.findAll({where: {userId: id} })
-  return res.json(tastings)
-}))
+router.get(
+  "/:id/tastings",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const tastings = await db.Tasting.findAll({ where: { userId: id } });
+    return res.json(tastings);
+  })
+);
 module.exports = router;

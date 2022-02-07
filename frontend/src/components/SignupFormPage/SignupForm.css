@@ -1,0 +1,29 @@
+#signupForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#signupForm form {
+  width: 400px;
+}
+
+#signupForm > form > div,
+#signupForm > form > div > input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#signupForm > form > div > label {
+  text-transform: uppercase;
+}
+
+.signupErrors * {
+  color: #ff385c;
+}

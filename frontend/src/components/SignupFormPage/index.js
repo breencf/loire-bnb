@@ -1,10 +1,12 @@
 import { signup } from "../../store/session";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 
 import "./SignupForm.css";
 
 export const SignupFormPage = () => {
+  const user = useSelector((state) => state.sessions.user);
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -13,26 +15,30 @@ export const SignupFormPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const onSubmit = async (e) => {
+  if (user) return <Redirect to="/" />;
+
+
+
+  const onSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(signup({ firstName, lastName, email, password })).catch(
-        async (res) => {
+      return dispatch(signup({ email, firstName, lastName, password }))
+        .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
-        }
-      );
+        });
     }
-    return setErrors(["Passwords do not match"]);
+    return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+
   return (
-    <div>
+    <div id="signupForm">
       <h2>Signup</h2>
       <form onSubmit={onSubmit}>
         <div>
-          <ul>
+          <ul classname="signupErrors">
             {errors.map((error, i) => (
               <li key={i}>{error}</li>
             ))}
@@ -45,7 +51,6 @@ export const SignupFormPage = () => {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            required
           />
         </div>
         <div>
@@ -55,7 +60,6 @@ export const SignupFormPage = () => {
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
-            required
           />
         </div>
         <div>
@@ -65,7 +69,6 @@ export const SignupFormPage = () => {
             type="text"
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
-            required
           />
         </div>
         <div>
@@ -75,7 +78,6 @@ export const SignupFormPage = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
-            required
           />
         </div>
         <div>
@@ -85,7 +87,6 @@ export const SignupFormPage = () => {
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword}
-            required
           />
         </div>
         <button className="submitButton">Submit</button>

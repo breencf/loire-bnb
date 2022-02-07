@@ -9,15 +9,17 @@ module.exports = {
           userId: 1,
           wineryId: 2,
           rating: 5,
-          content: "Had a lovely time -- would highly recommend",
+          content:
+            "My friends and I had a lovely time tasting with Nicolas. The Coulee de Serrant vineyard is indeed one of the most special in the world, as evidenced by the wines we tasted and the expertise Nicolas displayed",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          userId: 1,
-          wineryId: 3,
-          rating: 5,
-          content: "Loved the reds!",
+          userId: 14,
+          wineryId: 2,
+          rating: 3,
+          content:
+            "I was very disappointed as this winery only makes white wines, while my husband and I wouldn't dare drink anything but full bodied reds. Preposterous!",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -25,7 +27,8 @@ module.exports = {
           userId: 2,
           wineryId: 17,
           rating: 3,
-          content: "Our server was fantastic",
+          content:
+            "Our server was fantastic, we loved the wines. tell all your friends!",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

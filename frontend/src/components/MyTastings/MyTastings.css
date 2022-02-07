@@ -2,3 +2,31 @@
   display: inline-block;
   font-size: 30px;
 }
+
+.cancel {
+  display: flex;
+  width: 100%;
+ justify-content: flex-end !important;
+}
+
+#book-tasting-form input#date, input#numGuests, #bookingWidget input#time {
+  font-size: 20px !important;
+  font-family: "Raleway", "Futura", "Helvetica", sans-serif;
+  border: none;
+  padding: 10px;
+}
+
+#editBooking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel > button {
+  background-color: inherit;
+  border: none;
+  font-family: "Raleway", "Futura", "Helvetica", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}

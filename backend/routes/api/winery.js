@@ -242,4 +242,12 @@ router.post(
   })
 );
 
+router.get("/:id/reviews", asyncHandler(async(req, res) => {
+  const {id} = req.params
+  const reviews = await db.Review.findAll({where: {wineryId: id}, include: [db.User]})
+  res.json(reviews)
+
+
+}))
+
 module.exports = router;

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { bookOneTasting } from "../../store/tasting";
 import { staticTimeList } from "../CreateWineryForm/form-lists";
 
-export const BookingWidget = ({ wineryId }) => {
+export const BookingWidget = ({ count, average }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.sessions.user.id);
   const { id } = useParams(); /////????????
@@ -41,7 +41,7 @@ export const BookingWidget = ({ wineryId }) => {
     <div id="bookingWidget">
       <div id="bookingHeading">
         <h4>Book</h4>
-        <h5>Rating Reviews</h5>
+        <h5><i className="fas fa-star"></i>{average} {count} reviews</h5>
       </div>
 
       <form onSubmit={onSubmit} id="book-tasting-form">

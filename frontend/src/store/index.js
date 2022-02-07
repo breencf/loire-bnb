@@ -6,6 +6,7 @@ import sessionReducer from './session';
 import formReducer from './form';
 import {likeReducer} from './like'
 import { tastingReducer } from './tasting';
+import reviewReducer from './review';
 let enhancer;
 
 if(process.env.NODE_ENV === 'production') {
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
     wineries: wineryReducer,
     form: formReducer,
     like: likeReducer,
-    tasting: tastingReducer
+    tasting: tastingReducer,
+    reviews: reviewReducer
 })
 
 export default configureStore;

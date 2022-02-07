@@ -31,6 +31,8 @@ export const MyTastings = () => {
       transform: "translate(-50%, -50%)",
       backgroundColor: "white",
       border: "none",
+      borderRadius: "12px",
+      boxShadow: "rgb(0 0 0 / 12%) 0px 6px 16px"
     },
   };
 
@@ -52,7 +54,7 @@ export const MyTastings = () => {
                   </h3>
                   {/* </span>
                 <span> */}
-                  <button onClick={openModal}>Reschedule</button>
+                  <button onClick={openModal} className="deleteButton">Reschedule</button>
                   <Modal
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
