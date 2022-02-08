@@ -44,6 +44,7 @@ h3 {
   font-size: inherit;
   color: #ff385c;
   font-weight: 500;
+  width: fit-content;
 }
 
 input:not(#location, #date, #time, #guests) {

@@ -29,6 +29,7 @@ router.get(
         db.WineStyle,
         db.User,
         db.Review,
+        db.Amenity
       ],
     });
     res.json(wineries);
@@ -47,6 +48,7 @@ router.get(
         db.WineStyle,
         db.User,
         db.Review,
+        db.Amenity
       ],
     });
     console.log(winery);

@@ -1,0 +1,34 @@
+.amenities {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.amenities ul{
+    height: 345px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 0;
+}
+
+.amenities li, .amenities li div {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
+.amenityIcon{
+    height: 75px;
+    width: 75px;
+}
+
+.amenityIcon img {
+    width: 100%;
+    height: 75px;
+    object-fit: cover;
+}

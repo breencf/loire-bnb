@@ -1,4 +1,6 @@
 #bookingWidget {
+  position: sticky;
+  top: 20%;
   border: 1px solid rgb(221, 221, 221);
   max-width: 300px;
   display: flex;

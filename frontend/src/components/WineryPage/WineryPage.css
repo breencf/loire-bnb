@@ -115,7 +115,9 @@
   color: white;
   font-weight: 500;
   margin-left: 10px;
+  width: fit-content;
 }
+
 
 .wineryContainerTitle {
   display: flex;
@@ -176,6 +178,10 @@
 #reviewForm {
   width: inherit;
   height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
 #reviewForm #content {
@@ -186,5 +192,5 @@
   background-color: #ff385c;
   position: absolute;
   left:50
-  
+
 }

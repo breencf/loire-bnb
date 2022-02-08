@@ -48,7 +48,6 @@ module.exports = (sequelize, DataTypes) => {
     Winery.hasMany(models.Review, { foreignKey: "wineryId" });
     Winery.hasMany(models.Tasting, { foreignKey: "wineryId" });
 
-
     const wineStyleColumnMapping = {
       through: "WineStyleToWineries", //joinTable
       otherKey: "wineStyleId", //join other key
@@ -64,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     Winery.belongsToMany(models.AOC, AOCColumnMapping);
 
     const amenityColumnMapping = {
-      through: "AmenityToWinery", //joinTable
+      through: "AmenityToWineries", //joinTable
       otherKey: "amenityId", //join other key
       foreignKey: "wineryId", //join key that references this
     };

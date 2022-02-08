@@ -5,10 +5,8 @@ import { staticTimeList } from "../CreateWineryForm/form-lists";
 import "./MyTastings.css";
 
 export const EditBookingWidget = ({ id, closeModal }) => {
-  console.log(id);
   const dispatch = useDispatch();
   const tasting = useSelector((state) => state.tasting[id]);
-  console.log("=======================", tasting);
 
   const now = new Date();
   const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;

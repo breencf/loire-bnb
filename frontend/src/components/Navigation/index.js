@@ -47,7 +47,7 @@ export function Navigation({ isLoaded }) {
             List your Winery
           </NavLink>
           {/* {isLoaded && sessionLinks} */}
-          <ProfileButton isLoaded={isLoaded} />
+          <ProfileButton />
         </div>
       </div>
       <div

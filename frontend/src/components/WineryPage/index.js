@@ -9,6 +9,7 @@ import { getReviews } from "../../store/review";
 import { BookingWidget } from "../BookingWidget";
 import { ReviewCard } from "./ReviewCard";
 import { ReviewFormWidget } from "./ReviewFormWidget";
+import { Amenities } from "./Amenities/index";
 import("./WineryPage.css");
 
 export const WineryPage = () => {
@@ -65,7 +66,7 @@ export const WineryPage = () => {
           <div className="varietals">
             <h4>Varietals</h4>
             <div className="buttons">
-              {winery.Varietals?.map((varietalObj) => {
+              {winery?.Varietals.map((varietalObj) => {
                 return (
                   <div className="pageVarietalButton" key={varietalObj.id}>
                     <i className="fas fa-wine-glass"></i> {varietalObj.type}{" "}
@@ -75,7 +76,7 @@ export const WineryPage = () => {
             </div>
           </div>
           <div className="styles">
-            <h4>{winery?.name} makes</h4>
+            <h4>Wine Styles</h4>
             <div className="buttons">
               {winery?.WineStyles?.map((styleObj) => {
                 return (
@@ -92,6 +93,8 @@ export const WineryPage = () => {
           <div>
             <h4>About</h4>
             <p>{winery?.content}</p>
+            <hr className="full" />
+            <Amenities amenities={winery.Amenities} />
             <hr className="full" />
           </div>
           <div>

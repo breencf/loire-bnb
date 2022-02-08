@@ -19,7 +19,6 @@ export const MyTastings = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => setModalIsOpen(true);
-  const afterOpenModal = () => console.log("afteropenmodal triggered");
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
     content: {
@@ -58,11 +57,10 @@ export const MyTastings = () => {
                   <button onClick={openModal} className="deleteButton">Reschedule</button>
                   <Modal
                     isOpen={modalIsOpen}
-                    onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
                     style={modalStyle}
+                    ariaHideApp={false}
                   >
-                      {/* {Modal.setAppElement(`${tasting.id}`)} */}
 
                     <EditBookingWidget id={tasting.id} closeModal={closeModal} />
                   </Modal>

@@ -22,29 +22,29 @@ function ProfileButton({ user }) {
 
     sessionLinks = (
       <>
-        <li>
+        <li key="name">
           {sessionUser.firstName} {sessionUser.lastName}
         </li>
-        <li>{sessionUser.email}</li>
+        <li key="email">{sessionUser.email}</li>
         <hr />
-        <li>
+        <li key="tastings">
           <NavLink to="/tastings" className="NavLink">
             Tastings
           </NavLink>
         </li>
-        <li>
+        <li key="mywineries">
           <NavLink to="/mywineries" className="NavLink">
             My Wineries
           </NavLink>
         </li>
-        <li>
+        <li key="savedwineries">
           <NavLink to="/savedwineries" className="NavLink">
             My Saved Wineries
           </NavLink>
         </li>
 
         <hr />
-        <li>
+        <li key="logout">
           <button onClick={logout} className="loginlogout">
             Log Out
           </button>
@@ -54,15 +54,15 @@ function ProfileButton({ user }) {
   } else {
     sessionLinks = (
       <>
-        <li>
+        <li key="create">
           <NavLink to="/wineries/create">Host your winery</NavLink>
         </li>
         <hr />
 
-        <li>
+        <li key="login">
           <LoginFormModal />
         </li>
-        <li>
+        <li key="signup">
           <NavLink to="/signup">Sign Up</NavLink>
         </li>
       </>
