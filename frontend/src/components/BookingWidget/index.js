@@ -8,14 +8,14 @@ import { staticTimeList } from "../CreateWineryForm/form-lists";
 export const BookingWidget = ({ count, average }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.sessions.user.id);
-  const { id } = useParams(); /////????????
+  const { id } = useParams()
   const now = new Date();
 
-  const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;
-  const nowDate = now.getDate() > 9 ? now.getDate() : `0${now.getDate()}`;
+  let nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;
+  let nowDate = now.getDate() > 9 ? now.getDate() : `0${now.getDate()}`;
 
   const [date, setDate] = useState(
-    `${now.getFullYear()}-${nowMonth}-${nowDate + 1}`
+    `${now.getFullYear()}-${nowMonth}-${nowDate}`
   );
   const [numGuests, setNumGuests] = useState(1);
   const [time, setTime] = useState(staticTimeList[0]);
@@ -37,11 +37,14 @@ export const BookingWidget = ({ count, average }) => {
       window.alert("tasting booked!");
     }
   };
+
   return (
     <div id="bookingWidget">
       <div id="bookingHeading">
-        <h4>Book</h4>
-        <h5><i className="fas fa-star"></i>{average} {count} reviews</h5>
+        <h4>Book a Tasting</h4>
+        <h5>
+          <i className="fas fa-star"></i> {average ? average : 0} · {count} reviews
+        </h5>
       </div>
 
       <form onSubmit={onSubmit} id="book-tasting-form">
@@ -85,7 +88,7 @@ export const BookingWidget = ({ count, average }) => {
           />
         </div>
         <div>
-          <button className="bookingSubmitButton">Submit</button>
+          <button className="bookingSubmitButton">Book</button>
         </div>
       </form>
     </div>

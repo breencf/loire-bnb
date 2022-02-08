@@ -22,21 +22,37 @@ router.get(
   "/",
   asyncHandler(async (req, res, next) => {
     const wineries = await db.Winery.findAll({
-      include: [db.Region, db.Image, db.Varietal, db.WineStyle, db.User],
+      include: [
+        db.Region,
+        db.Image,
+        db.Varietal,
+        db.WineStyle,
+        db.User,
+        db.Review,
+      ],
     });
     res.json(wineries);
   })
 );
 
-// router.get(
-//   "/:id",
-//   asyncHandler(async (req, res) => {
-//     const id = req.params.id;
-//     const winery = await db.Winery.findByPk(parseInt(id));
-//     console.log(winery);
-//     res.json(winery);
-//   })
-// );
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const winery = await db.Winery.findByPk(parseInt(id), {
+      include: [
+        db.Region,
+        db.Image,
+        db.Varietal,
+        db.WineStyle,
+        db.User,
+        db.Review,
+      ],
+    });
+    console.log(winery);
+    res.json(winery);
+  })
+);
 
 router.put(
   "/:id",
@@ -242,12 +258,34 @@ router.post(
   })
 );
 
-router.get("/:id/reviews", asyncHandler(async(req, res) => {
-  const {id} = req.params
-  const reviews = await db.Review.findAll({where: {wineryId: id}, include: [db.User]})
-  res.json(reviews)
+router.get(
+  "/:id/reviews",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const reviews = await db.Review.findAll({
+      where: { wineryId: id },
+      include: [db.User],
+    });
+    res.json(reviews);
+  })
+);
 
+router.post(
+  "/:id/reviews",
+  asyncHandler(async (req, res) => {
+    const { userId, wineryId, rating, content } = req.body;
+    const review = await db.Review.create({
+      userId,
+      wineryId,
+      rating,
+      content,
+    });
 
-}))
+    const newReview = await db.Review.findByPk(review.id, {
+      include: [db.User],
+    });
+    res.json(newReview);
+  })
+);
 
 module.exports = router;

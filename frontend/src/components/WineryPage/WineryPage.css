@@ -33,6 +33,7 @@
 .styles {
   margin: 20px;
 }
+
 .styleButton {
   border: 2px solid #bebebe;
   padding: 15px;
@@ -126,16 +127,57 @@
 
 #wineryContainer h4 {
   font-weight: 500;
-  font-size: 1.5vw;
+  font-size: 1.7vw;
 }
 
-.styleButtons {
-  height: 75px;
+.buttons {
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .fullDetails {
   display: flex;
+}
+
+.wineryPageDetails > div {
+  margin: 30px 0px;
+}
+
+.pageVarietalButton .fa-wine-glass {
+  color: #bebebe;
+}
+
+.pageVarietalButton {
+  font-size: 18px;
+  border: 2px solid #bebebe;
+  padding: 15px;
+  border-radius: 32px;
+  margin: 5px;
+  width: fit-content;
+}
+
+.reviewWidgetHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.reviewWidget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+#reviewForm {
+  width: inherit;
+  height: 250px;
+}
+
+#reviewForm #content {
+  height: 150px;
 }

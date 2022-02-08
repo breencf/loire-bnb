@@ -1,11 +1,19 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD = "reviews/LOAD";
+const CREATE = "reviews/CREATE";
 
 const load = (reviews) => {
   return {
     type: LOAD,
     reviews,
+  };
+};
+
+const create = (newReview) => {
+  return {
+    type: CREATE,
+    newReview,
   };
 };
 
@@ -17,7 +25,21 @@ export const getReviews = (id) => async (dispatch) => {
   }
 };
 
+export const createReview = (payload) => async (dispatch) => {
+  const response = await csrfFetch(
+    `/api/wineries/${payload.wineryId}/reviews`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }
+  );
+  const newReview = await response.json();
+  dispatch(create(newReview));
+};
+
 let initialState = {};
+let newState;
 function reviewReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD:
@@ -26,6 +48,10 @@ function reviewReducer(state = initialState, action) {
         allReviews[review.id] = review;
       });
       return { ...state, ...allReviews };
+    case CREATE:
+      newState = { ...state };
+      newState[action.newReview.id] = action.newReview;
+      return newState;
     default:
       return state;
   }

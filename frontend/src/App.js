@@ -22,17 +22,16 @@ import { loadTastings } from "./store/tasting";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const {user} = useSelector(state => state.sessions)
-    useEffect(() => {
+  const { user } = useSelector((state) => state.sessions);
+  useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     dispatch(getWineries());
   }, [dispatch]);
 
-
   return (
     isLoaded && (
       <>
-        <Navigation isLoaded={isLoaded} />
+        <Navigation />
         <Switch>
           <Route exact path="/">
             <Homepage />
@@ -53,10 +52,10 @@ function App() {
             <WineryPage />
           </Route>
           <Route path="/mywineries">
-            <MyWineries isLoaded={isLoaded} />
+            <MyWineries />
           </Route>
           <Route path="/tastings">
-            <MyTastings isLoaded={isLoaded} />
+            <MyTastings />
           </Route>
           <Route path="/savedwineries">
             <SavedWineries />

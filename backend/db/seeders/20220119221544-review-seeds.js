@@ -17,7 +17,7 @@ module.exports = {
         {
           userId: 14,
           wineryId: 2,
-          rating: 3,
+          rating: 2,
           content:
             "I was very disappointed as this winery only makes white wines, while my husband and I wouldn't dare drink anything but full bodied reds. Preposterous!",
           createdAt: new Date(),

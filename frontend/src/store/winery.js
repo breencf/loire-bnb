@@ -1,11 +1,10 @@
 import { csrfFetch } from "./csrf";
 
-
 const LOAD = "wineries/LOAD";
 const ADD = "wineries/ADD";
 const UPDATE = "wineries/UPDATE";
 const DELETE = "wineries/DELETE";
-// const GET = "wineries/GET"
+// const GET = "wineries/GET";
 
 const load = (wineries) => {
   return {
@@ -14,7 +13,6 @@ const load = (wineries) => {
   };
 };
 
-
 const addOneWinery = (winery) => {
   return {
     type: ADD,
@@ -22,12 +20,12 @@ const addOneWinery = (winery) => {
   };
 };
 
-// const getWinery = winery => {
+// const getWinery = (winery) => {
 //   return {
 //     type: GET,
-//     winery
-//   }
-// }
+//     winery,
+//   };
+// };
 
 const updateOneWinery = (winery) => {
   return {
@@ -51,8 +49,6 @@ export const getWineries = () => async (dispatch) => {
     dispatch(load(data));
   }
 };
-
-
 
 // export const getOneWinery = (id) => async (dispatch) => {
 //   const response = await fetch(`/api/wineries/${id}`);
@@ -111,7 +107,7 @@ function wineryReducer(state = initialState, action) {
         wineryList?.push(action.winery);
         newState.wineries = wineryList;
         return newState;
-      };
+      }
     case UPDATE:
       newState = { ...state };
       newState.wineries[action.winery.id] = action.winery;

@@ -73,3 +73,14 @@
   margin: 10px;
   font-family: inherit;
 }
+
+#bookingHeading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#bookingHeading h5 {
+  font-size: 20px;
+}
