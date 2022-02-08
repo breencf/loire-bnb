@@ -36,6 +36,7 @@ export const MyTastings = () => {
     },
   };
 
+
   useEffect(() => {
     dispatch(loadTastings(sessions.user.id));
   }, [dispatch, sessions.user.id]);
@@ -61,6 +62,8 @@ export const MyTastings = () => {
                     onRequestClose={closeModal}
                     style={modalStyle}
                   >
+                      {/* {Modal.setAppElement(`${tasting.id}`)} */}
+
                     <EditBookingWidget id={tasting.id} closeModal={closeModal} />
                   </Modal>
                   <button

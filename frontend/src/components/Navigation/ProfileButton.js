@@ -4,8 +4,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
 
-function ProfileButton({ user, isLoaded }) {
-  const history = useHistory()
+function ProfileButton({ user }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector((state) => state.sessions.user);
@@ -13,12 +13,13 @@ function ProfileButton({ user, isLoaded }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
-    history.push('/')
+    history.push("/");
     closeMenu();
   };
 
   let sessionLinks;
   if (sessionUser) {
+
     sessionLinks = (
       <>
         <li>
@@ -27,13 +28,19 @@ function ProfileButton({ user, isLoaded }) {
         <li>{sessionUser.email}</li>
         <hr />
         <li>
-          <NavLink to="/tastings" className="NavLink">Tastings</NavLink>
+          <NavLink to="/tastings" className="NavLink">
+            Tastings
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/mywineries" className="NavLink">My Wineries</NavLink>
+          <NavLink to="/mywineries" className="NavLink">
+            My Wineries
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/savedwineries" className="NavLink">My Saved Wineries</NavLink>
+          <NavLink to="/savedwineries" className="NavLink">
+            My Saved Wineries
+          </NavLink>
         </li>
 
         <hr />
@@ -47,8 +54,10 @@ function ProfileButton({ user, isLoaded }) {
   } else {
     sessionLinks = (
       <>
-        <li><NavLink to="/wineries/create">Host your winery</NavLink></li>
-        <hr/>
+        <li>
+          <NavLink to="/wineries/create">Host your winery</NavLink>
+        </li>
+        <hr />
 
         <li>
           <LoginFormModal />
@@ -90,7 +99,9 @@ function ProfileButton({ user, isLoaded }) {
       {showMenu && (
         <>
           <div className="profile-button-background" onClick={closeMenu}></div>
-          <ul className="profile-dropdown">{isLoaded && sessionLinks}</ul>
+          <ul className="profile-dropdown">
+            {sessionLinks}
+          </ul>
         </>
       )}
     </>

@@ -181,3 +181,10 @@
 #reviewForm #content {
   height: 150px;
 }
+
+.tastingBookedPopup{
+  background-color: #ff385c;
+  position: absolute;
+  left:50
+  
+}

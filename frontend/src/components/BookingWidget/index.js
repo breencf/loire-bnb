@@ -20,6 +20,11 @@ export const BookingWidget = ({ count, average }) => {
   const [numGuests, setNumGuests] = useState(1);
   const [time, setTime] = useState(staticTimeList[0]);
   const [errors, setErrors] = useState([]);
+  const [book, setBooked] = useState("Book")
+
+  useEffect(()=> {
+    setBooked('Book')
+  },[numGuests, time, date])
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -32,9 +37,10 @@ export const BookingWidget = ({ count, average }) => {
       time: time,
     };
 
+
     const newTasting = dispatch(bookOneTasting(tasting));
     if (newTasting) {
-      window.alert("tasting booked!");
+      setBooked("Booked!")
     }
   };
 
@@ -43,7 +49,7 @@ export const BookingWidget = ({ count, average }) => {
       <div id="bookingHeading">
         <h4>Book a Tasting</h4>
         <h5>
-          <i className="fas fa-star"></i> {average ? average : 0} · {count} reviews
+          <i className="fas fa-star"></i> {average ? average.toPrecision(3) : 0} · {count} reviews
         </h5>
       </div>
 
@@ -88,7 +94,7 @@ export const BookingWidget = ({ count, average }) => {
           />
         </div>
         <div>
-          <button className="bookingSubmitButton">Book</button>
+          <button className="bookingSubmitButton">{book}</button>
         </div>
       </form>
     </div>

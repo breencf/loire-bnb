@@ -5,7 +5,7 @@ export const ImageSlider = ({ images }) => {
 
   let slideRight = () => {
     let nextIndex = index + 1
-    if(nextIndex === images?.length -1) {
+    if(nextIndex === images?.length) {
       setIndex(0)
     }
     else setIndex(nextIndex)

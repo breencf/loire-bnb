@@ -46,7 +46,8 @@ export const WineryCard = ({ winery }) => {
           <div className="parties">
             <p>
               <i className="fas fa-star"></i>{" "}
-              {reviewAverage ? reviewAverage : 0} · {reviewArr.length} reviews
+              {reviewAverage ? reviewAverage.toPrecision(3) : 0} ·{" "}
+              {reviewArr.length} reviews
             </p>
             <h6>Welcomes parties of up to {winery.maxGuests} guests </h6>
           </div>

@@ -20,7 +20,9 @@ export const WineryPage = () => {
   const sessionUser = useSelector((state) => state.sessions.user);
   const reviews = useSelector((state) => state.reviews);
 
-  const reviewArr = Object.values(reviews);
+  const reviewArr = Object.values(reviews).filter(
+    (review) => review.wineryId === +id
+  );
   const ratings = [];
   for (let i = 0; i < reviewArr.length; i++) {
     ratings.push(reviewArr[i].rating);
@@ -94,9 +96,9 @@ export const WineryPage = () => {
           </div>
           <div>
             <ReviewFormWidget wineryId={id} />
-            <hr className="full"/>
+            <hr className="full" />
             <h4>Reviews</h4>
-            {Object.values(reviews)?.map((review) => {
+            {reviewArr.map((review) => {
               return (
                 <>
                   <ReviewCard key={review.id} review={review} wineryId={id} />
