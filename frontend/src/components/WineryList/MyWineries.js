@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, Link } from "react-router-dom";
-import { getWineries } from "../../store/winery";
+import { getWineries, deleteWinery } from "../../store/winery";
 
 import { WineryCard } from "../WineryCard";
 import { WineryPage } from "../WineryPage";
@@ -29,11 +29,18 @@ export const MyWineries = () => {
         {myWineries?.map((winery) => {
           return (
             <div>
+              {/* {user.id === winery?.ownerId && (
+              <div>
+                <button onClick={(e) => dispatch(deleteWinery(winery.id))} className="deleteButton">
+                  Delete Winery
+                </button>
+              </div>
+            )} */}
               <Link to={`/wineries/${winery.id}`}>
-                <WineryCard key={winery.id} id={winery.id} winery={winery} />;
+                <WineryCard key={winery.id} id={winery.id} winery={winery} />
               </Link>
             </div>
-          );
+          )
         })}
       </ul>
 

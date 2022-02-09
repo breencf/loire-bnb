@@ -43,7 +43,6 @@ const deleteOneWinery = (id) => {
 
 export const getWineries = () => async (dispatch) => {
   const response = await fetch("/api/wineries");
-
   if (response.ok) {
     const data = await response.json();
     dispatch(load(data));
@@ -67,12 +66,14 @@ export const addWinery = (payload) => async (dispatch) => {
 };
 
 export const updateWinery = (payload) => async (dispatch) => {
+  console.log(payload,"=!!!!!")
   const response = await csrfFetch(`/api/wineries/${payload.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   const winery = await response.json();
+  console.log("============", response)
   dispatch(updateOneWinery(winery));
 };
 
@@ -98,23 +99,17 @@ function wineryReducer(state = initialState, action) {
       });
       return { ...allWineries, ...state };
     case ADD:
-      if (!state[action.winery.id]) {
-        newState = {
-          ...state,
-          [action.winery.id]: action.winery,
-        };
-        const wineryList = newState.wineries?.map((id) => newState[id]);
-        wineryList?.push(action.winery);
-        newState.wineries = wineryList;
-        return newState;
-      }
+      newState = { ...state };
+      newState[action.winery.id] = action.winery;
+      return newState;
     case UPDATE:
       newState = { ...state };
-      newState.wineries[action.winery.id] = action.winery;
+      console.log("action.winery", action.winery)
+      newState[action.winery.id] = action.winery;
       return newState;
     case DELETE:
       newState = { ...state };
-      delete newState.wineries[action.id];
+      delete newState[action.id];
       return newState;
     default:
       return state;

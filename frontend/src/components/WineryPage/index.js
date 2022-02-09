@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ImageSlider } from "./ImageSlider";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import { Amenities } from "./Amenities/index";
 import("./WineryPage.css");
 
 export const WineryPage = () => {
+  const history = useHistory()
   const dispatch = useDispatch();
   const { id } = useParams();
   const winery = useSelector((state) => state.wineries[id]);
@@ -32,12 +33,13 @@ export const WineryPage = () => {
 
   useEffect(() => {
     dispatch(getReviews(id));
-    dispatch(getWineries());
+    // dispatch(getWineries());
     setIsLoaded(true);
   }, [dispatch]);
 
   const setDelete = () => {
     dispatch(deleteWinery(id));
+    history.push("/")
   };
 
   useEffect(() => {
@@ -94,7 +96,7 @@ export const WineryPage = () => {
             <h4>About</h4>
             <p>{winery?.content}</p>
             <hr className="full" />
-            <Amenities amenities={winery.Amenities} />
+            <Amenities amenities={winery?.Amenities} />
             <hr className="full" />
           </div>
           <div>

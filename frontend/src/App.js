@@ -25,7 +25,7 @@ function App() {
   const { user } = useSelector((state) => state.sessions);
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
-    dispatch(getWineries());
+    // dispatch(getWineries());
   }, [dispatch]);
 
   return (

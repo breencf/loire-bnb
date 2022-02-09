@@ -36,9 +36,9 @@ const CreateWineryForm = () => {
 
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    dispatch(getForm());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getForm());
+  // }, [dispatch]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

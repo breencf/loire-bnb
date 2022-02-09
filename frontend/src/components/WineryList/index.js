@@ -12,6 +12,7 @@ export const WineryList = () => {
   const wineries = useSelector((state) => state.wineries);
 
   useEffect (() => {
+    console.log('in the winery list dispatch use effect')
     dispatch(getWineries())
   },[dispatch])
 
@@ -20,7 +21,7 @@ export const WineryList = () => {
       <ul>
         {Object.values(wineries).map((winery) => {
           return (
-            <div>
+            <div key={winery?.id} >
               <Link to={`/wineries/${winery?.id}`}>
                 <WineryCard key={winery?.id} id={winery?.id} winery={winery} />
               </Link>

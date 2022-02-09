@@ -17,14 +17,13 @@ export const EditWineryForm = ({ hideForm }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  const { varietalList, wineStyleList, regionList } = useSelector(
-    (state) => state.form
-  );
+  // const { varietalList, wineStyleList, regionList } = useSelector(
+  //   (state) => state.form
+  // );
   const ownerId = useSelector((state) => state.sessions.user.id);
 
   const { wineries } = useSelector((state) => state);
   const winery = wineries[id];
-  console.log(winery.region);
 
   const varietalsInState = [];
   for (const key in winery.Varietals) {
@@ -90,15 +89,15 @@ export const EditWineryForm = ({ hideForm }) => {
     setVarietals(varietalsInState);
     setWineStyles(stylesInState);
     setAmenities(amenitiesInState);
-    setImage1(winery.Images[0].imageURL);
-    setImage2(winery.Images[1].imageURL);
-    setImage3(winery.Images[2].imageURL);
+    if(winery?.Images[0]) setImage1(winery?.Images[0].imageURL ? winery?.Images[0].imageURL : "");
+    if(winery?.Images[1]) setImage2(winery?.Images[1].imageURL ? winery?.Images[1].imageURL : "");
+    if(winery?.Images[2]) setImage3(winery?.Images[2].imageURL ? winery?.Images[2].imageURL : "");
     setRegion(winery.Region.name);
   }, [winery]);
 
-  useEffect(() => {
-    dispatch(getForm());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getForm());
+  // }, [dispatch]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -128,10 +127,11 @@ export const EditWineryForm = ({ hideForm }) => {
       images,
     };
     const updatedWinery = dispatch(updateWinery(winery));
+    dispatch(getWineries());
+
     if (updatedWinery) {
-      dispatch(getWineries());
       hideForm();
-      history.push(`/wineries/${id}`);
+      // history.push(`/wineries/${id}`);
     }
   };
 

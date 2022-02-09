@@ -53,6 +53,6 @@ export const WineryCard = ({ winery }) => {
           </div>
         </div>
       </div>
-    );
+    )
   }
 };

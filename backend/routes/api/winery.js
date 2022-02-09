@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
+const { Op } = require("sequelize");
 const db = require("../../db/models");
 
 const validateWinery = [
@@ -90,97 +91,99 @@ router.put(
       regionId,
       ownerId,
     });
+    console.log('in the backend put routes')
 
-    let updatedVarietals = []; ///[3,4,5,6,7,8,9] /[3]
-    varietals.forEach((varietalObj) => {
-      updatedVarietals.push(varietalObj.value);
-    });
 
-    const varietalsInDb = await db.VarietalToWineries.findAll({
-      where: { wineryId: id },
-    });
+    /************Varietals*********************** */
+    let varietalsKeepArray = [];
+    varietals.forEach((obj) => varietalsKeepArray.push(obj.value));
 
-    for (const varietalId of updatedVarietals) {
-      const existing = await db.VarietalToWineries.findOne({
-        where: { wineryId: id, varietalId },
+    for (const i in varietalsKeepArray) {
+      const exists = await db.VarietalToWineries.findOne({
+        where: { wineryId: id, varietalId: varietalsKeepArray[i] },
       });
-      if (!existing) {
+      if (!exists) {
         await db.VarietalToWineries.create({
           wineryId: id,
-          varietalId: varietalId,
-        });
-      }
-      if (existing && !updatedVarietals.includes(existing.varietalId)) {
-        await db.VarietalToWineries.destroy({
-          wineryId: id,
-          varietalId: existing.varietalId,
+          varietalId: varietalsKeepArray[i],
         });
       }
     }
-    // for (const i in varietalsToBeDeleted) {
-    //   await db.VarietalToWineries.destroy({
-    //     where: { wineryId: id, varietalId: varietalsToBeDeleted[i] },
-    //   });
-    // }
+    await db.VarietalToWineries.destroy({
+      where: {
+        varietalId: {
+          [Op.notIn]: varietalsKeepArray,
+        },
+      },
+    });
 
-    /*********** */
-    let stylesToBeDeleted = [];
-    const oldStyles = await db.WineStyleToWineries.findAll({
-      where: { wineryId: id },
-    });
-    oldStyles.forEach((entry) => {
-      if (!wineStyles.includes(entry.wineStyleId)) {
-        stylesToBeDeleted.push(entry.wineStyleId);
-      }
-    });
-    for (const styleObj of wineStyles) {
-      const existing = await db.WineStyleToWineries.findOne({
-        where: { wineryId: id, wineStyleId: styleObj.value },
+    /************Styles*********************** */
+    let stylesKeepArray = [];
+    wineStyles.forEach((obj) => stylesKeepArray.push(obj.value));
+
+    for (const i in stylesKeepArray) {
+      const exists = await db.WineStyleToWineries.findOne({
+        where: { wineryId: id, wineStyleId: stylesKeepArray[i] },
       });
-      if (!existing) {
+      if (!exists) {
         await db.WineStyleToWineries.create({
           wineryId: id,
-          wineStyleId: styleObj.value,
+          wineStyleId: stylesKeepArray[i],
         });
       }
     }
-    for (const i in stylesToBeDeleted) {
-      await db.WineStyleToWineries.destroy({
-        where: { wineryId: id, wineStyleId: stylesToBeDeleted[i] },
-      });
-    }
-    /********* */
-    let amenitiesToBeDeleted = [];
-    const oldAmenities = await db.AmenityToWineries.findAll({
-      where: { wineryId: id },
+    await db.WineStyleToWineries.destroy({
+      where: {
+        wineStyleId: {
+          [Op.notIn]: stylesKeepArray,
+        },
+      },
     });
-    oldAmenities.forEach((entry) => {
-      if (!wineStyles.includes(entry.AmenityId)) {
-        amenitiesToBeDeleted.push(entry.AmenityId);
-      }
-    });
-    for (const amenityObj of amenities) {
-      const existing = await db.AmenityToWineries.findOne({
-        where: { wineryId: id, amenityId: amenityObj.value },
+
+    /************Amenities*********************** */
+    let amenityKeepArray = [];
+    amenities.forEach((obj) => amenityKeepArray.push(obj.value));
+
+    for (const i in amenityKeepArray) {
+      const exists = await db.AmenityToWineries.findOne({
+        where: { wineryId: id, amenityId: amenityKeepArray[i] },
       });
-      if (!existing) {
+      if (!exists) {
         await db.AmenityToWineries.create({
           wineryId: id,
-          amenityId: amenityObj.value,
+          amenityId: amenityKeepArray[i],
         });
       }
     }
-    for (const i in amenitiesToBeDeleted) {
-      await db.AmenityToWineries.destroy({
-        where: { wineryId: id, amenityId: stylesToBeDeleted[i] },
-      });
-    }
+
+    await db.AmenityToWineries.destroy({
+      where: {
+        amenityId: {
+          [Op.notIn]: amenityKeepArray,
+        },
+      },
+    });
+
     /********* */
 
     await db.Image.destroy({ where: { wineryId: id } });
     for (const i in images) {
       await db.Image.create({ imageURL: images[i], wineryId: id });
     }
+
+    const updatedWineryToReturn = await db.Winery.findByPk(parseInt(id), {
+      include: [
+        db.Region,
+        db.Image,
+        db.Varietal,
+        db.WineStyle,
+        db.User,
+        db.Review,
+        db.Amenity,
+      ],
+    });
+
+    res.json(updatedWineryToReturn)
   })
 );
 
@@ -232,7 +235,7 @@ router.post(
     for (const amenityObj of amenities) {
       await db.AmenityToWineries.create({
         wineryId: winery.id,
-        wineStyleId: amenityObj.value,
+        amenityId: amenityObj.value,
       });
     }
     for (const imgURL of images) {
@@ -241,7 +244,19 @@ router.post(
         imageURL: imgURL,
       });
     }
-    return res.json({ winery });
+    const newWineryToReturn = await db.Winery.findByPk(winery.id, {
+      include: [
+        db.Region,
+        db.Image,
+        db.Varietal,
+        db.WineStyle,
+        db.User,
+        db.Review,
+        db.Amenity,
+      ],
+    });
+
+    res.json(newWineryToReturn)
   })
 );
 
@@ -255,8 +270,10 @@ router.delete(
     await db.Image.destroy({ where: { wineryId: winery.id } });
     await db.VarietalToWineries.destroy({ where: { wineryId: winery.id } });
     await db.WineStyleToWineries.destroy({ where: { wineryId: winery.id } });
+    await db.Review.destroy({ where: { wineryId: winery.id } });
+    await db.AmenityToWineries.destroy({ where: { wineryId: winery.id } });
     await winery.destroy();
-    return res.json("success");
+    return res.json(req.params.id);
   })
 );
 

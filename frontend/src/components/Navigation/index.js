@@ -4,7 +4,7 @@ import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { SearchBar } from "./SearchBar/SearchBar";
 
-export function Navigation({ isLoaded }) {
+export function Navigation() {
   const [bigBlackNav, setbigBlackNav] = useState(true);
 
   //scrollY 150px/154px
@@ -46,7 +46,6 @@ export function Navigation({ isLoaded }) {
           <NavLink exact to="/wineries/create" className="NavLink">
             List your Winery
           </NavLink>
-          {/* {isLoaded && sessionLinks} */}
           <ProfileButton />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import "./Amenities.css";
 
 export const Amenities = ({ amenities }) => {
-  return (
+  return amenities && (
     <>
       <h4>Amenities</h4>
       <div className="amenities">

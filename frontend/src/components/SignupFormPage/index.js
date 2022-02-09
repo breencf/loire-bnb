@@ -38,7 +38,7 @@ export const SignupFormPage = () => {
       <h2>Signup</h2>
       <form onSubmit={onSubmit}>
         <div>
-          <ul classname="signupErrors">
+          <ul className="signupErrors">
             {errors.map((error, i) => (
               <li key={i}>{error}</li>
             ))}

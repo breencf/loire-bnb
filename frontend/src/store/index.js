@@ -24,7 +24,7 @@ const configureStore = preloadedState => {
 const rootReducer = combineReducers({
     sessions: sessionReducer,
     wineries: wineryReducer,
-    form: formReducer,
+    // form: formReducer,
     like: likeReducer,
     tasting: tastingReducer,
     reviews: reviewReducer
