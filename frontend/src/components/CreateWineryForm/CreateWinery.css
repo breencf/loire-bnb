@@ -12,7 +12,7 @@
 }
 .dropdown, .formDiv> input,
 textarea {
-  width: 95%;
+  width: 100%;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -33,15 +33,16 @@ textarea {
 
 }
 
-.formDiv > label {
+.formDiv > label, .dropdown > label {
   font-weight: 500;
+  font-size: 18px;
+}
+
+.rmsc .multi-select {
+  padding: 10px;
 }
 
 .formDiv > textarea {
   height: 150px;
   border-width: 2px;
 }
-
-/* .dropdown {
-  width: 100%;
-} */

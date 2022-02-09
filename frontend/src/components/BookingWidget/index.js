@@ -11,7 +11,7 @@ export const BookingWidget = ({ count, average }) => {
   const { id } = useParams()
   const now = new Date();
 
-  let nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;
+  let nowMonth = now.getMonth() > 9 ? (now.getMonth())+1 : `0${(now.getMonth())+1}`;
   let nowDate = now.getDate() > 9 ? now.getDate() : `0${now.getDate()}`;
 
   const [date, setDate] = useState(
@@ -34,7 +34,7 @@ export const BookingWidget = ({ count, average }) => {
       wineryId: id,
       date,
       numGuests,
-      time: time,
+      time: time.label,
     };
 
 

@@ -21,8 +21,8 @@ export const WineryList = () => {
         {Object.values(wineries).map((winery) => {
           return (
             <div>
-              <Link to={`/wineries/${winery.id}`}>
-                <WineryCard key={winery.id} id={winery.id} winery={winery} />
+              <Link to={`/wineries/${winery?.id}`}>
+                <WineryCard key={winery?.id} id={winery?.id} winery={winery} />
               </Link>
             </div>
           );

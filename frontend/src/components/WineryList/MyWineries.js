@@ -1,5 +1,7 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, Link } from "react-router-dom";
+import { getWineries } from "../../store/winery";
 
 import { WineryCard } from "../WineryCard";
 import { WineryPage } from "../WineryPage";
@@ -7,10 +9,17 @@ import { WineryPage } from "../WineryPage";
 export const MyWineries = () => {
   const wineries = useSelector((state) => state.wineries);
   const user = useSelector((state) => state.sessions.user);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getWineries())
+  },[])
+
+
   const wineryArr = Object.values(wineries);
 
   const  myWineries = Object.values(
-      wineryArr.filter((winery) => winery.ownerId === user.id)
+      wineryArr?.filter((winery) => winery?.ownerId === user.id)
     );
 
 

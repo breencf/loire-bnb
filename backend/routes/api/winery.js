@@ -18,6 +18,8 @@ const validateWinery = [
   handleValidationErrors,
 ];
 
+const validateTasting = [check("date")];
+
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
@@ -29,7 +31,7 @@ router.get(
         db.WineStyle,
         db.User,
         db.Review,
-        db.Amenity
+        db.Amenity,
       ],
     });
     res.json(wineries);
@@ -48,7 +50,7 @@ router.get(
         db.WineStyle,
         db.User,
         db.Review,
-        db.Amenity
+        db.Amenity,
       ],
     });
     console.log(winery);
@@ -72,6 +74,7 @@ router.put(
       regionId,
       varietals,
       wineStyles,
+      amenities,
       images,
     } = req.body;
 
@@ -147,6 +150,33 @@ router.put(
       });
     }
     /********* */
+    let amenitiesToBeDeleted = [];
+    const oldAmenities = await db.AmenityToWineries.findAll({
+      where: { wineryId: id },
+    });
+    oldAmenities.forEach((entry) => {
+      if (!wineStyles.includes(entry.AmenityId)) {
+        amenitiesToBeDeleted.push(entry.AmenityId);
+      }
+    });
+    for (const amenityObj of amenities) {
+      const existing = await db.AmenityToWineries.findOne({
+        where: { wineryId: id, amenityId: amenityObj.value },
+      });
+      if (!existing) {
+        await db.AmenityToWineries.create({
+          wineryId: id,
+          amenityId: amenityObj.value,
+        });
+      }
+    }
+    for (const i in amenitiesToBeDeleted) {
+      await db.AmenityToWineries.destroy({
+        where: { wineryId: id, amenityId: stylesToBeDeleted[i] },
+      });
+    }
+    /********* */
+
     await db.Image.destroy({ where: { wineryId: id } });
     for (const i in images) {
       await db.Image.create({ imageURL: images[i], wineryId: id });
@@ -171,6 +201,7 @@ router.post(
       regionId,
       varietals,
       wineStyles,
+      amenities,
       images,
     } = req.body;
 
@@ -196,6 +227,12 @@ router.post(
       await db.WineStyleToWineries.create({
         wineryId: winery.id,
         wineStyleId: styleObj.value,
+      });
+    }
+    for (const amenityObj of amenities) {
+      await db.AmenityToWineries.create({
+        wineryId: winery.id,
+        wineStyleId: amenityObj.value,
       });
     }
     for (const imgURL of images) {
@@ -245,7 +282,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const { userId, wineryId, date, numGuests, time } = req.body;
     const exists = await db.Tasting.findOne({
-      where: { userId, wineryId: +wineryId, date, numGuests, time },
+      where: { wineryId: +wineryId, date, time },
     });
     if (!exists) {
       const tasting = await db.Tasting.create({
@@ -256,6 +293,8 @@ router.post(
         time,
       });
       res.json(tasting);
+    } else {
+      res.json("Please select another time");
     }
   })
 );

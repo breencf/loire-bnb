@@ -10,6 +10,7 @@ import {
   staticVarietalList,
   staticRegionList,
   staticWineStyleList,
+  staticAmenityList,
 } from "../CreateWineryForm/form-lists";
 
 export const EditWineryForm = ({ hideForm }) => {
@@ -41,6 +42,13 @@ export const EditWineryForm = ({ hideForm }) => {
     });
   }
 
+  const amenitiesInState = [];
+  for (const key in winery.Amenities) {
+    amenitiesInState.push({
+      label: winery.Amenities[key].name,
+      value: winery.Amenities[key].id,
+    });
+  }
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [lat, setLat] = useState(0);
@@ -53,6 +61,7 @@ export const EditWineryForm = ({ hideForm }) => {
   );
   const [varietals, setVarietals] = useState(varietalsInState);
   const [wineStyles, setWineStyles] = useState(stylesInState);
+  const [amenities, setAmenities] = useState(amenitiesInState);
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
@@ -80,6 +89,7 @@ export const EditWineryForm = ({ hideForm }) => {
     setMaxGuests(winery.maxGuests);
     setVarietals(varietalsInState);
     setWineStyles(stylesInState);
+    setAmenities(amenitiesInState);
     setImage1(winery.Images[0].imageURL);
     setImage2(winery.Images[1].imageURL);
     setImage3(winery.Images[2].imageURL);
@@ -114,6 +124,7 @@ export const EditWineryForm = ({ hideForm }) => {
       regionId: regionId.id,
       varietals,
       wineStyles,
+      amenities,
       images,
     };
     const updatedWinery = dispatch(updateWinery(winery));
@@ -205,7 +216,7 @@ export const EditWineryForm = ({ hideForm }) => {
           />
         </div>
         <div className="dropdown">
-          <h4>Select Region</h4>
+          <label htmlFor="region">Region</label>
           <select onChange={updateRegion} value={region}>
             {staticRegionList?.map((region) => {
               return (
@@ -232,7 +243,7 @@ export const EditWineryForm = ({ hideForm }) => {
           />
         </div>
         <div className="dropdown">
-          <h4>Select Varietals</h4>
+          <label htmlFor="varietals">Varietals</label>
           <MultiSelect
             options={staticVarietalList}
             value={varietals}
@@ -240,10 +251,17 @@ export const EditWineryForm = ({ hideForm }) => {
             labelledBy="Select"
           />
         </div>
-
-        <hr />
         <div className="dropdown">
-          <h4>Select Wine Styles</h4>
+          <label htmlFor="amenities">Amenities</label>
+          <MultiSelect
+            options={staticAmenityList}
+            value={amenities}
+            onChange={setAmenities}
+            labelledBy="Select"
+          />
+        </div>
+        <div className="dropdown">
+          <label htmlFor="styles">Wine Styles</label>
           <MultiSelect
             options={staticWineStyleList}
             value={wineStyles}
@@ -281,7 +299,11 @@ export const EditWineryForm = ({ hideForm }) => {
         <hr />
         <div>
           <button className="submitButton">Save Changes</button>
-          <button type="button" onClick={handleCancelClick}>
+          <button
+            type="button"
+            className="deleteButton"
+            onClick={handleCancelClick}
+          >
             Cancel
           </button>
         </div>

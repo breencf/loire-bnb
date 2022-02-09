@@ -42,6 +42,7 @@ export const loadTastings = (userId) => async (dispatch) => {
   }
 };
 
+
 export const bookOneTasting =
   ({ userId, wineryId, date, time, numGuests }) =>
   async (dispatch) => {

@@ -9,6 +9,7 @@ import {
   staticVarietalList,
   staticWineStyleList,
   staticRegionList,
+  staticAmenityList,
 } from "./form-lists";
 
 const CreateWineryForm = () => {
@@ -28,6 +29,7 @@ const CreateWineryForm = () => {
   const [region, setRegion] = useState("");
   const [varietals, setVarietals] = useState([]);
   const [wineStyles, setWineStyles] = useState([]);
+  const [amenities, setAmenities] = useState([]);
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
@@ -49,6 +51,8 @@ const CreateWineryForm = () => {
     if (image2) images.push(image2);
     if (image3) images.push(image3);
 
+    console.log(regionId, "===============");
+
     const winery = {
       name,
       ownerId: userId,
@@ -59,6 +63,7 @@ const CreateWineryForm = () => {
       town,
       maxGuests,
       regionId: regionId.id,
+      amenities,
       varietals,
       wineStyles,
       images,
@@ -148,7 +153,7 @@ const CreateWineryForm = () => {
           />
         </div>
         <div className="dropdown">
-          <h4>Select Region</h4>
+          <label htmlFor="region">Region</label>
           <select onChange={(e) => setRegion(e.target.value)}>
             {staticRegionList.map((region) => {
               return (
@@ -175,7 +180,16 @@ const CreateWineryForm = () => {
           />
         </div>
         <div className="dropdown">
-          <h4>Select Varietals</h4>
+          <label htmlFor="amenities">Amenities</label>
+          <MultiSelect
+            options={staticAmenityList}
+            value={amenities}
+            onChange={setAmenities}
+            labelledBy="Select"
+          />
+        </div>
+        <div className="dropdown">
+          <label htmlFor="varietals">Varietals</label>
           <MultiSelect
             options={staticVarietalList}
             value={varietals}
@@ -186,7 +200,7 @@ const CreateWineryForm = () => {
 
         <hr />
         <div className="dropdown">
-          <h4>Select Wine Styles</h4>
+          <label htmlFor="styles">Wine Styles</label>
           <MultiSelect
             options={staticWineStyleList}
             value={wineStyles}

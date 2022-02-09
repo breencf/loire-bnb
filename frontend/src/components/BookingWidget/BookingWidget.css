@@ -1,6 +1,6 @@
 #bookingWidget {
   position: sticky;
-  top: 20%;
+  top: 25%;
   border: 1px solid rgb(221, 221, 221);
   max-width: 300px;
   display: flex;
@@ -36,7 +36,8 @@
   align-items: flex-start;
 }
 
-#bookingWidget > form > div:first-child, #bookingWidget > form > div:nth-child(2)  {
+#bookingWidget > form > div:first-child,
+#bookingWidget > form > div:nth-child(2) {
   border-bottom: 1px solid black;
   border-radius: 0px;
 }
@@ -46,14 +47,14 @@
   padding: 12px 10px;
 }
 
-#bookingWidget input#date, input#numGuests, #bookingWidget input#time {
+#bookingWidget input#date,
+input#numGuests,
+#bookingWidget input#time {
   font-size: 20px !important;
   font-family: "Raleway", "Futura", "Helvetica", sans-serif;
   border: none;
   padding: 10px;
 }
-
-
 
 .bookingSubmitButton {
   padding: 20px;
@@ -65,10 +66,9 @@
   font-size: 18px;
   border-radius: 0px 0px 12px 12px;
   border: none;
-
 }
 
-#timeDropdown select{
+#timeDropdown select {
   width: 80%;
   border: none;
   font-size: 20px;
