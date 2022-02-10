@@ -55,7 +55,6 @@ router.get(
         db.Amenity,
       ],
     });
-    console.log(winery);
     res.json(winery);
   })
 );
@@ -92,7 +91,6 @@ router.put(
       regionId,
       ownerId,
     });
-    console.log("in the backend put routes");
 
     /************Varietals*********************** */
     let varietalsKeepArray = [];
@@ -368,12 +366,10 @@ router.get(
 
     const bookedTimes = [];
     existingTastings.forEach((tastingObj) => bookedTimes.push(tastingObj.time));
-    // console.log("bookedTimes", bookedTimes);
 
     const availableTimes = staticTimeList.filter((timeObj) =>
       !bookedTimes.includes(timeObj.label)
     );
-    console.log("available==============", availableTimes);
     res.json(availableTimes);
   })
 );
