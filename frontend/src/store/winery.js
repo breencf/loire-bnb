@@ -42,7 +42,9 @@ const deleteOneWinery = (id) => {
 };
 
 export const getWineries = () => async (dispatch) => {
+  console.log('getwineries')
   const response = await fetch("/api/wineries");
+
   if (response.ok) {
     const data = await response.json();
     dispatch(load(data));
@@ -66,14 +68,12 @@ export const addWinery = (payload) => async (dispatch) => {
 };
 
 export const updateWinery = (payload) => async (dispatch) => {
-  console.log(payload,"=!!!!!")
   const response = await csrfFetch(`/api/wineries/${payload.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   const winery = await response.json();
-  console.log("============", response)
   dispatch(updateOneWinery(winery));
 };
 
@@ -104,7 +104,6 @@ function wineryReducer(state = initialState, action) {
       return newState;
     case UPDATE:
       newState = { ...state };
-      console.log("action.winery", action.winery)
       newState[action.winery.id] = action.winery;
       return newState;
     case DELETE:

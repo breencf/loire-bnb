@@ -12,7 +12,6 @@ export const WineryList = () => {
   const wineries = useSelector((state) => state.wineries);
 
   useEffect (() => {
-    console.log('in the winery list dispatch use effect')
     dispatch(getWineries())
   },[dispatch])
 

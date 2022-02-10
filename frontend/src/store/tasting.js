@@ -35,15 +35,16 @@ const deleteOneTasting = (id) => {
   };
 };
 
-const loadDayTimes = (tastings) => {
+const loadDayTimes = (availableTimes) => {
   return {
     type:LOADTIMES,
-    tastings
+    availableTimes
   }
 }
 
 export const loadTastings = (userId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/users/${userId}/tastings`);
+  console.log("loadtastings")
+  const response = await fetch(`/api/users/${userId}/tastings`);
   if (response.ok) {
     const tastings = await response.json();
     dispatch(load({ tastings, userId }));
@@ -51,10 +52,11 @@ export const loadTastings = (userId) => async (dispatch) => {
 };
 
 export const loadTimes = ({date, id}) => async dispatch => {
+  console.log("loadtimes")
   const response = await fetch(`/api/wineries/${id}/tastings/${date}`)
   if(response.ok) {
-    const tastings = await response.json()
-    dispatch(loadDayTimes(tastings))
+    const availableTimes = await response.json()
+    dispatch(loadDayTimes(availableTimes))
   }
 }
 
@@ -115,8 +117,7 @@ export function tastingReducer(state = {times:[]}, action) {
       return newState;
     case LOADTIMES:
       newState = {...state}
-      console.log(action.tastings)
-      action.tastings.forEach((tastingObj)=> newState.times.push(tastingObj.time))
+      newState.times = action.availableTimes
       return newState
     default:
       return state;

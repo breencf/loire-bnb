@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { loadTastings, updateTasting } from "../../store/tasting";
+import { useState, useEffect } from "react";
+import { loadTastings, updateTasting, loadTimes } from "../../store/tasting";
 import { staticTimeList } from "../CreateWineryForm/form-lists";
 import "./MyTastings.css";
 
 export const EditBookingWidget = ({ id, closeModal }) => {
   const dispatch = useDispatch();
   const tasting = useSelector((state) => state.tasting[id]);
+  const tastingTimes = useSelector((state) => state.tasting?.times);
   const winery = tasting.Winery
 
   const now = new Date();
@@ -16,7 +17,16 @@ export const EditBookingWidget = ({ id, closeModal }) => {
   const [date, setDate] = useState(tasting.date);
   const [time, setTime] = useState(tasting.time);
   const [numGuests, setNumGuests] = useState(tasting.numGuests);
+  const [availableTimes, setAvailableTimes] = useState(staticTimeList)
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    dispatch(loadTimes({ date, id: winery.id }));
+  }, [date]);
+
+  useEffect(() => {
+    setAvailableTimes(tastingTimes? [...tastingTimes, {"label":tasting.time}] : staticTimeList)
+  },[tastingTimes])
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +77,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
         <div className="bookingDiv" id="timeDropdown">
           <label htmlFor="time">Time</label>
           <select onChange={(e) => setTime(e.target.value)} value={time}>
-            {staticTimeList.map((time) => {
+            {availableTimes.map((time) => {
               return (
                 <option
                   key={`${time.label}`}

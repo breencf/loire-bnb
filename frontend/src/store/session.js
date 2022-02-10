@@ -46,7 +46,6 @@ export const signup =
       body: JSON.stringify({ firstName, lastName, email, password }),
     });
     const data = await response.json();
-    console.log("==============================", data);
     dispatch(startSession(data));
     return data;
   };

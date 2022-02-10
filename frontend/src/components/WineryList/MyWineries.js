@@ -28,7 +28,7 @@ export const MyWineries = () => {
       <ul>
         {myWineries?.map((winery) => {
           return (
-            <div>
+            <div key={winery.id}>
               {/* {user.id === winery?.ownerId && (
               <div>
                 <button onClick={(e) => dispatch(deleteWinery(winery.id))} className="deleteButton">

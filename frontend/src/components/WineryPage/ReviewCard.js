@@ -13,7 +13,7 @@ export const ReviewCard = ({ review }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => setModalIsOpen(true);
-  const afterOpenModal = () => console.log("afteropenmodal triggered");
+  const afterOpenModal = () => {};
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
     content: {

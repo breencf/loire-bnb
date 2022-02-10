@@ -8,7 +8,7 @@ import { staticTimeList } from "../CreateWineryForm/form-lists";
 export const BookingWidget = ({ count, average }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.sessions.user.id);
-  const tastingTimes = useSelector((state) => state.tastings?.times);
+  const tastingTimes = useSelector((state) => state.tasting?.times);
   const { id } = useParams();
   const now = new Date();
 
@@ -24,11 +24,15 @@ export const BookingWidget = ({ count, average }) => {
   const [time, setTime] = useState(staticTimeList[0]);
   const [errors, setErrors] = useState([]);
   const [book, setBooked] = useState("Book");
-  // const [availableTimes, setAvailableTimes] = useState()
+  const [availableTimes, setAvailableTimes] = useState(staticTimeList);
 
   useEffect(() => {
     dispatch(loadTimes({ date, id }));
   }, [date]);
+
+  useEffect(() => {
+    setAvailableTimes(tastingTimes? tastingTimes : staticTimeList)
+  },[tastingTimes])
 
 
   useEffect(() => {
@@ -69,7 +73,7 @@ export const BookingWidget = ({ count, average }) => {
             id="date"
             label="date"
             type="date"
-            onChange={(e) => setDate(e.target.value)}
+            onChange={(e) => {setDate(e.target.value); }}
             required
             min={`${now.getFullYear()}-${nowMonth}-${nowDate}`}
             value={date}
@@ -78,7 +82,7 @@ export const BookingWidget = ({ count, average }) => {
         <div className="bookingDiv" id="timeDropdown">
           <label htmlFor="time">Time</label>
           <select onChange={(e) => setTime(e.target.value)}>
-            {(tastingTimes ? staticTimeList.filter((timeObj) => !tastingTimes.includes(timeObj.label)) : staticTimeList).map((time) => {
+            {availableTimes.map((time) => {
               return (
                 <option
                   key={`${time.label}`}

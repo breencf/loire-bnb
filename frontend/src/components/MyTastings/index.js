@@ -84,7 +84,6 @@ export const MyTastings = () => {
                     onClick={(e) => {
                       dispatch(deleteTasting(e.target.id));
                       dispatch(loadTastings(e.target.value));
-                      console.log("dispatched loadTastings");
                     }}
                     className="deleteButton"
                   >
