@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
     // form: formReducer,
     like: likeReducer,
     tasting: tastingReducer,
-    reviews: reviewReducer
+    reviews: reviewReducer,
     maps: mapsReducer
 })
 
