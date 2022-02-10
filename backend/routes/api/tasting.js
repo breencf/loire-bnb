@@ -28,15 +28,15 @@ router.put(
   asyncHandler(async (req, res) => {
     const { id, userId, wineryId, date, time, numGuests } = req.body;
     const tasting = await db.Tasting.findByPk(id);
-    const updatedWinery = await tasting.update({
+    await tasting.update({
       userId,
       wineryId,
       date,
       time,
       numGuests,
     });
-    console.log(updatedWinery)
-    res.json(updatedWinery);
+    const updatedTasting = await db.Tasting.findByPk(id, {include: [db.Winery]})
+    res.json(updatedTasting);
   })
 );
 module.exports = router;

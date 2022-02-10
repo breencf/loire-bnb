@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { updateTasting } from "../../store/tasting";
+import { loadTastings, updateTasting } from "../../store/tasting";
 import { staticTimeList } from "../CreateWineryForm/form-lists";
 import "./MyTastings.css";
 
 export const EditBookingWidget = ({ id, closeModal }) => {
   const dispatch = useDispatch();
   const tasting = useSelector((state) => state.tasting[id]);
+  const winery = tasting.Winery
 
   const now = new Date();
   const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;
@@ -31,6 +32,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
 
     const updatedTasting = dispatch(updateTasting(updatedTastingInput));
     if (updatedTasting) {
+      dispatch(loadTastings(tasting.userId))
       closeModal();
     }
   };
@@ -48,6 +50,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
           </button>
           </div>
       <h3>Update tasting</h3>
+      <h3>{winery.name}</h3>
       <form onSubmit={onSubmit} id="book-tasting-form">
         <div className="bookingDiv">
           <label htmlFor="date">Date</label>

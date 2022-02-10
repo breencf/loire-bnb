@@ -2,9 +2,9 @@ import { LikeButton } from "../LikeButton";
 import("./WineryCard.css");
 
 export const WineryCard = ({ winery }) => {
-  const imgObj = Object.values(winery.Images);
+  const imgObj = winery ? Object.values(winery.Images) : {};
 
-  const reviewArr = Object.values(winery.Reviews ? winery.Reviews : []);
+  const reviewArr = winery ? Object.values(winery.Reviews) : [];
   const ratings = [];
   for (let i = 0; i < reviewArr.length; i++) {
     ratings.push(reviewArr[i].rating);
@@ -27,15 +27,15 @@ export const WineryCard = ({ winery }) => {
         <div className="wineryCardDetails">
           <div className="topline">
             <div>
-              <h6>{winery.Region.name}</h6>
-              <h4>{winery.name}</h4>
+              <h6>{winery?.Region.name}</h6>
+              <h4>{winery?.name}</h4>
               <hr />
-              <h6>{winery.town}</h6>
+              <h6>{winery?.town}</h6>
             </div>
-            <LikeButton wineryId={winery.id} />
+            <LikeButton wineryId={winery?.id} />
           </div>
           <div className="varietals">
-            {winery.Varietals?.map((varietalObj) => {
+            {winery?.Varietals?.map((varietalObj) => {
               return (
                 <span className="cardVarietalButton" key={varietalObj.id}>
                   <i className="fas fa-wine-glass"></i> {varietalObj.type}{" "}
@@ -49,7 +49,7 @@ export const WineryCard = ({ winery }) => {
               {reviewAverage ? reviewAverage.toPrecision(3) : 0} ·{" "}
               {reviewArr.length} reviews
             </p>
-            <h6>Welcomes parties of up to {winery.maxGuests} guests </h6>
+            <h6>Welcomes parties of up to {winery?.maxGuests} guests </h6>
           </div>
         </div>
       </div>

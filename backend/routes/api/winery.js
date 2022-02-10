@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const dayjs = require("dayjs")
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -91,8 +92,7 @@ router.put(
       regionId,
       ownerId,
     });
-    console.log('in the backend put routes')
-
+    console.log("in the backend put routes");
 
     /************Varietals*********************** */
     let varietalsKeepArray = [];
@@ -183,7 +183,7 @@ router.put(
       ],
     });
 
-    res.json(updatedWineryToReturn)
+    res.json(updatedWineryToReturn);
   })
 );
 
@@ -256,7 +256,7 @@ router.post(
       ],
     });
 
-    res.json(newWineryToReturn)
+    res.json(newWineryToReturn);
   })
 );
 
@@ -309,7 +309,10 @@ router.post(
         numGuests,
         time,
       });
-      res.json(tasting);
+      const newTasting = await db.Tasting.findByPk(tasting.id, {
+        include: [db.Winery],
+      });
+      res.json(newTasting);
     } else {
       res.json("Please select another time");
     }
@@ -345,5 +348,16 @@ router.post(
     res.json(newReview);
   })
 );
+
+router.get("/:id/tastings/:date", asyncHandler(async(req, res) => {
+  const {id, date} = req.params
+  console.log(id, date)
+  const convertedDate = dayjs(date).format("YYYY-MM-DD")
+  console.log("=========================", id, date)
+
+  const existingTastings = await db.Tasting.findAll({where:{wineryId: +id, date}})
+  console.log(existingTastings)
+  res.json(existingTastings)
+}))
 
 module.exports = router;

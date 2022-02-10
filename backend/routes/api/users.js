@@ -57,7 +57,7 @@ router.get(
   "/:id/tastings",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const tastings = await db.Tasting.findAll({ where: { userId: id } });
+    const tastings = await db.Tasting.findAll({ where: { userId: id }, include:[db.Winery] });
     return res.json(tastings);
   })
 );

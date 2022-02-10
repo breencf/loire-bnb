@@ -4,6 +4,7 @@ const LOAD = "users/:id/tastings";
 const BOOK = "wineries/:id/BOOK";
 const DELETE = "tastings/:id/delete";
 const UPDATE = "tastings/:id/update";
+const LOADTIMES = "tastings/LOADTIMES"
 
 const load = ({ tastings, userId }) => {
   return {
@@ -34,6 +35,13 @@ const deleteOneTasting = (id) => {
   };
 };
 
+const loadDayTimes = (tastings) => {
+  return {
+    type:LOADTIMES,
+    tastings
+  }
+}
+
 export const loadTastings = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/users/${userId}/tastings`);
   if (response.ok) {
@@ -41,6 +49,14 @@ export const loadTastings = (userId) => async (dispatch) => {
     dispatch(load({ tastings, userId }));
   }
 };
+
+export const loadTimes = ({date, id}) => async dispatch => {
+  const response = await fetch(`/api/wineries/${id}/tastings/${date}`)
+  if(response.ok) {
+    const tastings = await response.json()
+    dispatch(loadDayTimes(tastings))
+  }
+}
 
 
 export const bookOneTasting =
@@ -77,7 +93,7 @@ export const deleteTasting = (id) => async (dispatch) => {
 };
 
 let newState;
-export function tastingReducer(state = {}, action) {
+export function tastingReducer(state = {times:[]}, action) {
   switch (action.type) {
     case LOAD:
       newState = { ...state };
@@ -97,6 +113,11 @@ export function tastingReducer(state = {}, action) {
       newState = { ...state };
       newState[action.tasting.id] = action.tasting;
       return newState;
+    case LOADTIMES:
+      newState = {...state}
+      console.log(action.tastings)
+      action.tastings.forEach((tastingObj)=> newState.times.push(tastingObj.time))
+      return newState
     default:
       return state;
   }
