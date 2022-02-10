@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const dayjs = require("dayjs")
+const dayjs = require("dayjs");
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -349,15 +349,33 @@ router.post(
   })
 );
 
-router.get("/:id/tastings/:date", asyncHandler(async(req, res) => {
-  const {id, date} = req.params
-  console.log(id, date)
-  const convertedDate = dayjs(date).format("YYYY-MM-DD")
-  console.log("=========================", id, date)
+router.get(
+  "/:id/tastings/:date",
+  asyncHandler(async (req, res) => {
+    const { id, date } = req.params;
+    const existingTastings = await db.Tasting.findAll({
+      where: { wineryId: +id, date },
+    });
 
-  const existingTastings = await db.Tasting.findAll({where:{wineryId: +id, date}})
-  console.log(existingTastings)
-  res.json(existingTastings)
-}))
+    const staticTimeList = [
+      { label: "11:00" },
+      { label: "13:00" },
+      { label: "14:00" },
+      { label: "15:00" },
+      { label: "16:00" },
+      { label: "17:00" },
+    ];
+
+    const bookedTimes = [];
+    existingTastings.forEach((tastingObj) => bookedTimes.push(tastingObj.time));
+    // console.log("bookedTimes", bookedTimes);
+
+    const availableTimes = staticTimeList.filter((timeObj) =>
+      !bookedTimes.includes(timeObj.label)
+    );
+    console.log("available==============", availableTimes);
+    res.json(availableTimes);
+  })
+);
 
 module.exports = router;
