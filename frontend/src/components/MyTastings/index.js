@@ -84,7 +84,6 @@ export const MyTastings = () => {
                     value={sessions.user.id}
                     onClick={(e) => {
                       dispatch(deleteTasting(e.target.id));
-                      dispatch(loadTastings(e.target.value));
                     }}
                     className="deleteButton"
                   >

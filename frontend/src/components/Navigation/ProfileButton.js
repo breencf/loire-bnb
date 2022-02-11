@@ -10,7 +10,7 @@ function ProfileButton({ user }) {
   const location = useLocation()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const sessionUser = useSelector((state) => state.sessions.user);
+  const sessionUser = useSelector((state) => state.sessions?.user);
 
   const logout = (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ function ProfileButton({ user }) {
     sessionLinks = (
       <>
         <li key="create">
-          <NavLink to="/wineries/create">Host your winery</NavLink>
+          <NavLink to={sessionUser ?"/wineries/create" : "/signup"}>Host your winery</NavLink>
         </li>
         <hr />
 

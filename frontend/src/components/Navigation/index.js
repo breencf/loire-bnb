@@ -3,8 +3,10 @@ import { NavLink, Link } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { SearchBar } from "./SearchBar/SearchBar";
+import { useSelector } from "react-redux";
 
 export function Navigation() {
+  const userId = useSelector((state) => state.sessions?.user?.id)
   // const [bigBlackNav, setbigBlackNav] = useState(true);
 
   //scrollY 150px/154px
@@ -46,7 +48,7 @@ export function Navigation() {
         </div>
 
         <div className="navLinks-right">
-          <NavLink exact to="/wineries/create" className="NavLink">
+          <NavLink exact to={userId?"/wineries/create" : "/signup"} className="NavLink">
             List your Winery
           </NavLink>
           <ProfileButton />

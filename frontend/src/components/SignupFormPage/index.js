@@ -1,7 +1,9 @@
 import { signup } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+import { LoginForm } from "../LoginFormModal/LoginForm";
+import { Modal } from "../../context/modal";
 
 import "./SignupForm.css";
 
@@ -14,28 +16,43 @@ export const SignupFormPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const onClose = () => {
+    setShowModal(false);
+  };
 
   if (user) return <Redirect to="/" />;
-
-
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(signup({ email, firstName, lastName, password }))
-        .catch(async (res) => {
+      return dispatch(signup({ email, firstName, lastName, password })).catch(
+        async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
-        });
+        }
+      );
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    return setErrors([
+      "Confirm Password field must be the same as the Password field",
+    ]);
   };
-
 
   return (
     <div id="signupForm">
-      <h2>Signup</h2>
+      <h2>Signup for Loirebnb</h2>
+      <>
+        <button onClick={() => setShowModal(true)} className="loginlogout">
+          Click here to login
+        </button>
+        {showModal && (
+          <Modal onClose={onClose}>
+            <LoginForm />
+          </Modal>
+        )}
+      </>
       <form onSubmit={onSubmit}>
         <div>
           <ul className="signupErrors">

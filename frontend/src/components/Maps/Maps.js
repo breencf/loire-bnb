@@ -12,16 +12,17 @@ const containerStyle = {
   height: "80vh",
 };
 
-const center = { lat: 47.475055, lng: -0.556845 };
 
 export const Maps = ({ apiKey, wineries, hoveredWinery }) => {
+  const [center, setCenter] = useState({ lat: 47.475055, lng: -0.556845 });
   // const { isLoaded } = useJsApiLoader({
   //   id: "google-map-script",
   //   googleMapsApiKey: apiKey,
   // });
   const [selectedWinery, setSelectedWinery] = useState(null);
 
-  useEffect(() => setSelectedWinery(hoveredWinery), [hoveredWinery]);
+  useEffect(() => {setSelectedWinery(hoveredWinery)
+    if(hoveredWinery) setCenter({ lat: +hoveredWinery.lat, lng: +hoveredWinery.long })}, [hoveredWinery]);
 
   return (
     // isLoaded &&

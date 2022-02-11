@@ -7,7 +7,7 @@ import { ReviewFormWidget } from "./ReviewFormWidget";
 import { deleteOneReview } from "../../store/review";
 
 export const ReviewCard = ({ review }) => {
-  const { id } = useSelector((state) => state.sessions.user);
+  const  id  = useSelector((state) => state.sessions?.user?.id);
   const dispatch = useDispatch()
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -45,7 +45,7 @@ export const ReviewCard = ({ review }) => {
             {dayjs(review.createdAt).format("MMM YYYY")}
           </h5>
         </div>
-        {review.userId === id && (
+        {id && review.userId === id && (
           <div>
             <button onClick={openModal} className="deleteButton">
               Edit

@@ -6,10 +6,12 @@ import reviewReducer, {
 } from "../../store/review";
 import { useState, useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
+import { useHistory } from "react-router-dom";
 
 export const ReviewFormWidget = ({ wineryId, review, closeModal }) => {
+  const history = useHistory()
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.sessions.user.id);
+  const userId = useSelector((state) => state.sessions.user?.id);
 
   const [rating, setRating] = useState(review ? review.rating : 0);
   const [content, setContent] = useState(review ? review.content : "");
@@ -21,6 +23,7 @@ export const ReviewFormWidget = ({ wineryId, review, closeModal }) => {
   }, [rating, content])
 
   const onNewSubmit = async (e) => {
+    if(userId) {
     e.preventDefault();
     setErrors([]);
     const review = {
@@ -36,6 +39,10 @@ export const ReviewFormWidget = ({ wineryId, review, closeModal }) => {
       setRating(0)
       setContent("")
     }
+  }
+  else {
+    history.push("/signup")
+  }
   };
 
   const onCancelClick = async (e) => {

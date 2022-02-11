@@ -1,7 +1,7 @@
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./LoginForm.css";
 
 export const LoginForm = () => {
@@ -66,11 +66,14 @@ export const LoginForm = () => {
             required
           />
         </div>
-        <button type="submit" className="submitButton">
-          Submit
-        </button>
+        <Link to="/signup">
+          <h5>Click here to Signup</h5>
+        </Link>
         <button className="submitButton" onClick={onSubmitDemo}>
           Demo User
+        </button>
+        <button type="submit" className="submitButton">
+          Login
         </button>
       </form>
     </div>

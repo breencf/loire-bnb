@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import "./BookingWidget.css";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { bookOneTasting, loadTimes } from "../../store/tasting";
 import { staticTimeList } from "../CreateWineryForm/form-lists";
 import dayjs from "dayjs";
 
 export const BookingWidget = ({ count, average, maxGuests }) => {
+  const history = useHistory()
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.sessions.user.id);
+  const userId = useSelector((state) => state.sessions?.user?.id);
   const tastingTimes = useSelector((state) => state.tasting?.times);
   const { id } = useParams();
   const now = new Date();
@@ -34,7 +35,7 @@ export const BookingWidget = ({ count, average, maxGuests }) => {
   }, [date]);
 
   useEffect(() => {
-    setAvailableTimes(tastingTimes ? tastingTimes : staticTimeList);
+    if(userId) setAvailableTimes(tastingTimes ? tastingTimes : staticTimeList);
   }, [tastingTimes]);
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export const BookingWidget = ({ count, average, maxGuests }) => {
   }, [numGuests, time, date]);
 
   const onSubmit = async (e) => {
+    if(userId) {
     e.preventDefault();
     setErrors([]);
     console.log(time)
@@ -58,6 +60,10 @@ export const BookingWidget = ({ count, average, maxGuests }) => {
       setBooked("Booked!");
       dispatch(loadTimes({ date, id }));
     }
+  }
+  else {
+    history.push("/signup")
+  }
   };
 
   return (

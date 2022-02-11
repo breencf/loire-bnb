@@ -12,13 +12,13 @@ import("./WineryList.css");
 export const WineryList = () => {
   const dispatch = useDispatch();
   const wineries = useSelector((state) => state.wineries);
-  const {id} = useSelector((state)=> state.sessions.user)
+  const id = useSelector((state)=> state.sessions?.user?.id)
 
   const [hoveredWinery, setHoveredWinery] = useState(null);
 
   useEffect(() => {
     dispatch(getWineries());
-    dispatch(loadLikes(id))
+    if(id) dispatch(loadLikes(id))
   }, [dispatch]);
 
 

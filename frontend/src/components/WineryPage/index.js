@@ -19,7 +19,7 @@ export const WineryPage = () => {
   const winery = useSelector((state) => state.wineries[id]);
   const [showEditWinery, setShowEditWinery] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const sessionUser = useSelector((state) => state.sessions.user);
+  const sessionUser = useSelector((state) => state.sessions?.user);
   const reviews = useSelector((state) => state.reviews);
 
   const reviewArr = Object.values(reviews).filter(
@@ -53,7 +53,7 @@ export const WineryPage = () => {
 
   let page = null;
 
-  if (showEditWinery && sessionUser.id === winery?.ownerId) {
+  if (showEditWinery && sessionUser?.id === winery?.ownerId) {
     page = <EditWineryForm hideForm={() => setShowEditWinery(false)} />;
   } else {
     page = (
@@ -122,7 +122,7 @@ export const WineryPage = () => {
         <div id="wineryContainer">
           <div className="wineryContainerTitle">
             <h3>{winery?.name} </h3>
-            {!showEditWinery && sessionUser.id === winery?.ownerId && (
+            {!showEditWinery && sessionUser?.id === winery?.ownerId && (
               <div>
                 {/* <LikeButton wineryId={winery.id}/> */}
                 <button
