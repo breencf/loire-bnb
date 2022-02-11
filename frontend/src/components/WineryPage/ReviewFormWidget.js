@@ -33,6 +33,8 @@ export const ReviewFormWidget = ({ wineryId, review, closeModal }) => {
     if (newReview) {
       dispatch(getReviews(wineryId));
       setSubmitText("Submitted!");
+      setRating(0)
+      setContent("")
     }
   };
 
@@ -78,6 +80,9 @@ export const ReviewFormWidget = ({ wineryId, review, closeModal }) => {
           fullIcon={<i className="fas fa-star"></i>}
         />
       </div>
+      <div className="noRatingError">
+          {!rating && content && <p>Please select a star rating</p>}
+        </div>
       <form onSubmit={review ? onUpdateSubmit : onNewSubmit} id="reviewForm">
         <div>
           <label htmlFor="content"></label>
@@ -89,7 +94,7 @@ export const ReviewFormWidget = ({ wineryId, review, closeModal }) => {
             required
           />
         </div>
-        <button className={submitText !== "Submitted!" ? "submitButton" : "deleteButton"}>{submitText}</button>
+        <button className={!rating && !content.length ? "submitButton" : "deleteButton"} disabled={rating? false: true}>{submitText}</button>
       </form>
     </div>
   );

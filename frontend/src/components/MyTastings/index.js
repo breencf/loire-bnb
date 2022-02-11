@@ -13,7 +13,8 @@ import { EditBookingWidget } from "./EditBookingWidget";
 import { getWineries } from "../../store/winery";
 
 export const MyTastings = () => {
-  const { wineries, tasting, sessions } = useSelector((state) => state);
+  const { wineries, sessions } = useSelector((state) => state);
+  const tasting = useSelector((state) => state.tasting.tastings)
   const tastingsArray = Object.values(tasting);
   const dispatch = useDispatch();
 
@@ -60,7 +61,7 @@ export const MyTastings = () => {
           </Modal>
           {tastingsArray.map((tasting) => {
             return (
-              <div>
+              <div key={tasting.id}>
                 <span>
                   <h3 id="tastingH3">
                     {dayjs(tasting.date).format("MMMM D, YYYY")}, {tasting.time}{" "}

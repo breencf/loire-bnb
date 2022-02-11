@@ -6,7 +6,7 @@ import "./MyTastings.css";
 
 export const EditBookingWidget = ({ id, closeModal }) => {
   const dispatch = useDispatch();
-  const tasting = useSelector((state) => state.tasting[id]);
+  const tasting = useSelector((state) => state.tasting.tastings[id]);
   const tastingTimes = useSelector((state) => state.tasting?.times);
   const winery = tasting.Winery
 
@@ -25,7 +25,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
   }, [date]);
 
   useEffect(() => {
-    setAvailableTimes(tastingTimes? [...tastingTimes, {"label":tasting.time}] : staticTimeList)
+    setAvailableTimes(tastingTimes? [...tastingTimes] : staticTimeList)
   },[tastingTimes])
 
   const onSubmit = async (e) => {

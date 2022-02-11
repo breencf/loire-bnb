@@ -103,16 +103,16 @@ export const WineryPage = () => {
             <ReviewFormWidget wineryId={id} />
             <hr className="full" />
             <h4>Reviews</h4>
-            {reviewArr.map((review) => {
+            {(reviewArr).sort((a,b) => b.id - a.id).map((review) => {
               return (
-                <>
+                <div key={review.id}>
                   <ReviewCard key={review.id} review={review} wineryId={id} />
-                </>
+                </div>
               );
             })}
           </div>
         </div>
-        <BookingWidget count={reviewArr.length} average={reviewAverage} />
+        <BookingWidget count={reviewArr.length} average={reviewAverage} maxGuests={winery.maxGuests} />
       </div>
     );
   }

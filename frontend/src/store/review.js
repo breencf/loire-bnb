@@ -34,7 +34,6 @@ const deleteReview = (id) => {
 }
 
 export const getReviews = (id) => async (dispatch) => {
-  console.log("get reviews")
   const response = await fetch(`/api/wineries/${id}/reviews`);
   if (response.ok) {
     const reviews = await response.json();

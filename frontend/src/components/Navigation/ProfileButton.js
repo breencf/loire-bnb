@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
 
 function ProfileButton({ user }) {
   const history = useHistory();
+  const location = useLocation()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector((state) => state.sessions.user);
@@ -16,6 +18,10 @@ function ProfileButton({ user }) {
     history.push("/");
     closeMenu();
   };
+
+  useEffect(() => {
+    if(showMenu) setShowMenu(false)
+  },[location])
 
   let sessionLinks;
   if (sessionUser) {

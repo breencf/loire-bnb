@@ -19,7 +19,7 @@ export const SavedWineries = () => {
       <ul>
         {likedWineries?.map((winery) => {
           return (
-            <div>
+            <div key={winery.id}>
               <Link to={`/wineries/${winery.id}`}>
                 <WineryCard key={winery.id} id={winery.id} winery={winery} />;
               </Link>

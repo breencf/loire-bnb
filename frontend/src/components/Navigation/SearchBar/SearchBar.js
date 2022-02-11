@@ -34,7 +34,7 @@ export const SearchBar = () => {
             type="text"
             onChange={(e) => setLocation(e.target.value)}
             value={location}
-            placeholder="Where are you going?"
+            placeholder="FYI Searches don't filter!"
           />
         </div>
         |

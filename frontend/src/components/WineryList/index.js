@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Link } from "react-router-dom";
 import { getWineries } from "../../store/winery";
+import { loadLikes } from "../../store/like";
 import { MapContainer } from "../Maps";
 
 import { WineryCard } from "../WineryCard";
@@ -11,13 +12,15 @@ import("./WineryList.css");
 export const WineryList = () => {
   const dispatch = useDispatch();
   const wineries = useSelector((state) => state.wineries);
+  const {id} = useSelector((state)=> state.sessions.user)
+
   const [hoveredWinery, setHoveredWinery] = useState(null);
 
   useEffect(() => {
     dispatch(getWineries());
+    dispatch(loadLikes(id))
   }, [dispatch]);
 
-  // useEffect(() => console.log(hoveredWinery), [hoveredWinery]);
 
   const handleMouseEnter = (e) => {
     setHoveredWinery(wineries[e.target.id])

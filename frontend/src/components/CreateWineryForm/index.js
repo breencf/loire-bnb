@@ -11,15 +11,16 @@ import {
   staticRegionList,
   staticAmenityList,
 } from "./form-lists";
-import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 const CreateWineryForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userId = useSelector((state) => state.sessions.user.id);
-  // const { varietalList, wineStyleList, regionList } = useSelector(
-  //   (state) => state.form USE optional chaining ?. to make form render
-  // );
+
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [lat, setLat] = useState("");
@@ -34,12 +35,7 @@ const CreateWineryForm = () => {
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
-
   const [errors, setErrors] = useState([]);
-
-  // useEffect(() => {
-  //   dispatch(getForm());
-  // }, [dispatch]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -75,10 +71,58 @@ const CreateWineryForm = () => {
     if (newWinery) history.push(`/mywineries`);
   };
 
+  /************* */
+  const [autoAddress, setAutoAddress] = useState("");
+  const handleSelect = async (value) => {
+    const resultName=value.split(",")[0]
+    const results = await geocodeByAddress(value);
+    const latlng = await getLatLng(results[0])
+    const searchResult = results[0].address_components
+
+    const streetNumber = (searchResult.filter((addressComponent) => addressComponent.types.includes("street_number")))[0]?.short_name
+
+    const filteredAddress =[
+      streetNumber ?
+      streetNumber[0].short_name :
+      "",
+      (searchResult.filter((addressComponent) => addressComponent.types.includes("route")))[0].short_name
+    ].join(" ")
+    const filteredTown = searchResult.filter((addressComponent) => addressComponent.types.includes('locality'))[0].short_name
+
+    setName(resultName)
+    setLat(latlng.lat)
+    setLong(latlng.lng)
+    setTown(filteredTown)
+    setAddress(filteredAddress)
+
+  };
+
+  /*************** */
   return (
     <div id="create-winery-form">
       <h1>Add a winery</h1>
       <form onSubmit={onSubmit} id="create-winery-form">
+      <PlacesAutocomplete
+        value={autoAddress}
+        onChange={setAutoAddress}
+        onSelect={handleSelect}
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div className="formDiv" key={"autocompleteDiv"}>
+            <label htmlFor="autocomplete">Search for a Winery</label>
+            <input {...getInputProps({ placeholder: "" })} />
+            <div key={"suggestionDiv"}>
+              {loading ? <div> loading </div> : null}
+              {suggestions?.map((suggestion) => {
+                const suggestionStyle = {
+                  fontWeight: suggestion.active ? 500 : 400
+                }
+                return <div key={suggestion.index}{...getSuggestionItemProps(suggestion, {style: suggestionStyle})}>{suggestion.description}</div>;
+              })}
+            </div>
+          </div>
+        )}
+      </PlacesAutocomplete>
         <div className="formDiv">
           <ul>
             {errors.map((error, i) => {

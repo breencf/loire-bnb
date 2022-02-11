@@ -15,16 +15,17 @@ const containerStyle = {
 const center = { lat: 47.475055, lng: -0.556845 };
 
 export const Maps = ({ apiKey, wineries, hoveredWinery }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: apiKey,
-  });
+  // const { isLoaded } = useJsApiLoader({
+  //   id: "google-map-script",
+  //   googleMapsApiKey: apiKey,
+  // });
   const [selectedWinery, setSelectedWinery] = useState(null);
 
   useEffect(() => setSelectedWinery(hoveredWinery), [hoveredWinery]);
 
   return (
-    isLoaded && (
+    // isLoaded &&
+     (
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
         {wineries.map((winery) => {
           return (

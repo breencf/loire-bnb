@@ -42,7 +42,6 @@ const deleteOneWinery = (id) => {
 };
 
 export const getWineries = () => async (dispatch) => {
-  console.log('getwineries')
   const response = await fetch("/api/wineries");
 
   if (response.ok) {

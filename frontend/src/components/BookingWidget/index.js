@@ -4,8 +4,9 @@ import "./BookingWidget.css";
 import { useParams } from "react-router-dom";
 import { bookOneTasting, loadTimes } from "../../store/tasting";
 import { staticTimeList } from "../CreateWineryForm/form-lists";
+import dayjs from "dayjs";
 
-export const BookingWidget = ({ count, average }) => {
+export const BookingWidget = ({ count, average, maxGuests }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.sessions.user.id);
   const tastingTimes = useSelector((state) => state.tasting?.times);
@@ -21,19 +22,20 @@ export const BookingWidget = ({ count, average }) => {
     `${now.getFullYear()}-${nowMonth}-${nowDate}`
   );
   const [numGuests, setNumGuests] = useState(1);
-  const [time, setTime] = useState(staticTimeList[0]);
+  const [time, setTime] = useState(staticTimeList[0].label);
   const [errors, setErrors] = useState([]);
   const [book, setBooked] = useState("Book");
   const [availableTimes, setAvailableTimes] = useState(staticTimeList);
 
   useEffect(() => {
+    if(dayjs(date).diff(`${now.getFullYear()}-${nowMonth}-${nowDate}`) > 0) {
     dispatch(loadTimes({ date, id }));
+    }
   }, [date]);
 
   useEffect(() => {
-    setAvailableTimes(tastingTimes? tastingTimes : staticTimeList)
-  },[tastingTimes])
-
+    setAvailableTimes(tastingTimes ? tastingTimes : staticTimeList);
+  }, [tastingTimes]);
 
   useEffect(() => {
     setBooked("Book");
@@ -42,17 +44,19 @@ export const BookingWidget = ({ count, average }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    console.log(time)
     const tasting = {
       userId,
       wineryId: id,
       date,
       numGuests,
-      time: time.label,
+      time: time,
     };
 
     const newTasting = dispatch(bookOneTasting(tasting));
     if (newTasting) {
       setBooked("Booked!");
+      dispatch(loadTimes({ date, id }));
     }
   };
 
@@ -65,7 +69,6 @@ export const BookingWidget = ({ count, average }) => {
           · {count} reviews
         </h5>
       </div>
-
       <form onSubmit={onSubmit} id="book-tasting-form">
         <div className="bookingDiv">
           <label htmlFor="date">Date</label>
@@ -73,7 +76,9 @@ export const BookingWidget = ({ count, average }) => {
             id="date"
             label="date"
             type="date"
-            onChange={(e) => {setDate(e.target.value); }}
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
             required
             min={`${now.getFullYear()}-${nowMonth}-${nowDate}`}
             value={date}
@@ -103,11 +108,12 @@ export const BookingWidget = ({ count, average }) => {
             type="number"
             onChange={(e) => setNumGuests(e.target.value)}
             value={numGuests}
+            max={maxGuests}
             required
           />
         </div>
         <div>
-          <button className="bookingSubmitButton">{book}</button>
+          <button className="bookingSubmitButton" disabled={book === "Booked!" ? true: false}>{book}</button>
         </div>
       </form>
     </div>
