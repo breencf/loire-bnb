@@ -5,20 +5,22 @@ import "./Navigation.css";
 import { SearchBar } from "./SearchBar/SearchBar";
 
 export function Navigation() {
-  const [bigBlackNav, setbigBlackNav] = useState(true);
+  // const [bigBlackNav, setbigBlackNav] = useState(true);
 
   //scrollY 150px/154px
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY >= 50) {
-      setbigBlackNav(false);
-    } else {
-      setbigBlackNav(true);
-    }
-  });
+  // window.addEventListener("scroll", () => {
+  //   if (window.scrollY >= 50) {
+  //     setbigBlackNav(false);
+  //   } else {
+  //     setbigBlackNav(true);
+  //   }
+  // });
 
   return (
-    <div id="nav" className={bigBlackNav ? "nav-black" : "nav-white"}>
+    <div id="nav" className={
+      // bigBlackNav ? "nav-black" :
+       "nav-white"}>
       <div id="navigation-top">
         <div className="navigation-left">
           <Link to="/">
@@ -26,9 +28,10 @@ export function Navigation() {
               alt="logo"
               height="50"
               src={
-                bigBlackNav
-                  ? "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-white_u8jgo8.png"
-                  : "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-logo_tekkvp.png"
+                // bigBlackNav
+                //   ? "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-white_u8jgo8.png"
+                //   :
+                  "https://res.cloudinary.com/jadecabbage/image/upload/v1642016960/loirebnb%20assets/icon-logo_tekkvp.png"
               }
             />
           </Link>

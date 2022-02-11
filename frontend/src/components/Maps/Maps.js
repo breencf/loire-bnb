@@ -1,10 +1,11 @@
+
 import {
   GoogleMap,
   useJsApiLoader,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const containerStyle = {
   width: "100%",
@@ -18,10 +19,9 @@ export const Maps = ({ apiKey, wineries, hoveredWinery }) => {
     id: "google-map-script",
     googleMapsApiKey: apiKey,
   });
-  console.log(hoveredWinery);
-  const [selectedWinery, setSelectedWinery] = useState(
-    hoveredWinery ? hoveredWinery : null
-  );
+  const [selectedWinery, setSelectedWinery] = useState(null);
+
+  useEffect(() => setSelectedWinery(hoveredWinery), [hoveredWinery]);
 
   return (
     isLoaded && (
@@ -57,12 +57,6 @@ export const Maps = ({ apiKey, wineries, hoveredWinery }) => {
             </div>
           </InfoWindow>
         )}
-
-        {/* <Switch>
-          <Route path="/wineries/:id">
-            <WineryPage />
-          </Route>
-        </Switch> */}
       </GoogleMap>
     )
   );

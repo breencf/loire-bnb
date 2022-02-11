@@ -20,9 +20,10 @@ export const WineryList = () => {
   // useEffect(() => console.log(hoveredWinery), [hoveredWinery]);
 
   const handleMouseEnter = (e) => {
-    console.log('hovered')
-    console.log(e)
-  }
+    setHoveredWinery(wineries[e.target.id])
+  };
+
+  const handleMouseExit = (e) => {setHoveredWinery(null)}
 
   return (
     <div className="wineryListContainer">
@@ -30,7 +31,11 @@ export const WineryList = () => {
         <ul>
           {Object.values(wineries).map((winery) => {
             return (
-                <Link to={`/wineries/${winery?.id}`} onMouseEnter={handleMouseEnter}
+              <div value={winery.id} key={winery.id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseExit}
+              >
+                <Link
+                  to={`/wineries/${winery?.id}`}
+                  key={winery.id}
                 >
                   <WineryCard
                     key={winery?.id}
@@ -38,7 +43,7 @@ export const WineryList = () => {
                     winery={winery}
                   />
                 </Link>
-
+              </div>
             );
           })}
         </ul>

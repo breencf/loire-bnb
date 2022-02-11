@@ -9,7 +9,7 @@ h1 {
   flex-direction: column;
   background-color: black;
   z-index: 3000;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   width: 100vw;
 }

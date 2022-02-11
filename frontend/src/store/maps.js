@@ -12,7 +12,7 @@ export const getKey = () => async dispatch => {
     dispatch(loadApiKey(key))
 }
 
-const initialState = {key: null}
+let initialState = {key: null}
 
 const mapsReducer = (state = initialState, action) => {
   switch(action.type) {

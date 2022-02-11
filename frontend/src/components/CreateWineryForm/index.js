@@ -11,6 +11,7 @@ import {
   staticRegionList,
   staticAmenityList,
 } from "./form-lists";
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 
 const CreateWineryForm = () => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const CreateWineryForm = () => {
     if (image1) images.push(image1);
     if (image2) images.push(image2);
     if (image3) images.push(image3);
-    
+
     const winery = {
       name,
       ownerId: userId,
