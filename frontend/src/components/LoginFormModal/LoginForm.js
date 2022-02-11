@@ -1,11 +1,12 @@
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 import "./LoginForm.css";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const sessionUser = useSelector((state) => state.sessions.user);
@@ -19,6 +20,7 @@ export const LoginForm = () => {
     return dispatch(login({ credential, password })).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
+      else history.push("/tastings")
     });
   };
 
