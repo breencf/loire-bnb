@@ -104,7 +104,6 @@ export const uploadImages =
     });
     if(response.ok) {
       const {images, id} = await response.json();
-      console.log('images coming from backend', images)
       dispatch(upload({images, id}))
     }
   };

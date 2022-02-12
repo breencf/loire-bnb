@@ -46,7 +46,6 @@ export const BookingWidget = ({ count, average, maxGuests }) => {
     if(userId) {
     e.preventDefault();
     setErrors([]);
-    console.log(time)
     const tasting = {
       userId,
       wineryId: id,

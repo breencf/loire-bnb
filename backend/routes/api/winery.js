@@ -237,7 +237,6 @@ router.post(
       });
     }
 
-    console.log(images)
     for (const imgURL of images) {
       await db.Image.create({
         wineryId: winery.id,

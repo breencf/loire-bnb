@@ -153,7 +153,6 @@ const CreateWineryForm = () => {
     if (image1) images.push(image1);
     if (image2) images.push(image2);
     if (image3) images.push(image3);
-    console.log(images);
 
     const winery = {
       name,
