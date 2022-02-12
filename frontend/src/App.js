@@ -18,6 +18,7 @@ import { loadLikes } from "./store/like";
 import { SavedWineries } from "./components/WineryList/SavedWineries";
 import { MyTastings } from "./components/MyTastings";
 import { loadTastings } from "./store/tasting";
+import { About } from "./components/About/index";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ function App() {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
     // dispatch(getWineries());
   }, [dispatch]);
-
 
   return (
     isLoaded && (
@@ -60,6 +60,9 @@ function App() {
           </Route>
           <Route path="/savedwineries">
             <SavedWineries />
+          </Route>
+          <Route path="/about">
+            <About />
           </Route>
           <Route>
             <div id="fourzerofour">

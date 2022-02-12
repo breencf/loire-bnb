@@ -42,7 +42,7 @@ export function Navigation() {
           <Link to="/wineries" className="NavLink">
             Explore Wineries
           </Link>
-          <Link to="/" className="NavLink">
+          <Link to="/about" className="NavLink">
             About Loirebnb
           </Link>
         </div>
