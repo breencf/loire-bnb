@@ -154,7 +154,7 @@ module.exports = {
         {
           wineryId: 8,
           imageURL:
-            "http://www.wineanorak.com/pictures/renemosseinitialsbb.JPG",
+            "https://www.wineanorak.com/pictures/renemosseinitialsbb.JPG",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -298,7 +298,7 @@ module.exports = {
         {
           wineryId: 19,
           imageURL:
-            "http://www.jennyandfrancois.com/wp-content/uploads/2018/03/000.jpg",
+            "https://www.jennyandfrancois.com/wp-content/uploads/2018/03/000.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -311,7 +311,7 @@ module.exports = {
         {
           wineryId: 19,
           imageURL:
-            "http://www.jennyandfrancois.com/wp-content/uploads/2017/06/grange-tiphaine3.jpg",
+            "https://www.jennyandfrancois.com/wp-content/uploads/2017/06/grange-tiphaine3.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

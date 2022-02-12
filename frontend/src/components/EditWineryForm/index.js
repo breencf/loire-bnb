@@ -1,11 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-//ADD STORE
-import { getForm } from "../../store/form";
 import { getWineries, updateWinery } from "../../store/winery";
 import { MultiSelect } from "react-multi-select-component";
 import "../CreateWineryForm/CreateWinery.css";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   staticVarietalList,
   staticRegionList,
@@ -15,7 +13,6 @@ import {
 
 export const EditWineryForm = ({ hideForm }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { id } = useParams();
   // const { varietalList, wineStyleList, regionList } = useSelector(
   //   (state) => state.form

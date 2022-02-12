@@ -112,7 +112,7 @@ export const WineryPage = () => {
             })}
           </div>
         </div>
-        <BookingWidget count={reviewArr.length} average={reviewAverage} maxGuests={winery.maxGuests} />
+        <BookingWidget count={reviewArr.length} average={reviewAverage} maxGuests={winery?.maxGuests} />
       </div>
     );
   }

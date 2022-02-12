@@ -32,11 +32,11 @@ export const BookingWidget = ({ count, average, maxGuests }) => {
     if(dayjs(date).diff(`${now.getFullYear()}-${nowMonth}-${nowDate}`) > 0) {
     dispatch(loadTimes({ date, id }));
     }
-  }, [date]);
+  }, [date, dispatch, id,]);
 
   useEffect(() => {
     if(userId) setAvailableTimes(tastingTimes ? tastingTimes : staticTimeList);
-  }, [tastingTimes]);
+  }, [tastingTimes, userId]);
 
   useEffect(() => {
     setBooked("Book");
@@ -75,6 +75,11 @@ export const BookingWidget = ({ count, average, maxGuests }) => {
           · {count} reviews
         </h5>
       </div>
+      <ul>
+            {errors.map((error, i) => {
+              return <li key={i}>{error}</li>;
+            })}
+          </ul>
       <form onSubmit={onSubmit} id="book-tasting-form">
         <div className="bookingDiv">
           <label htmlFor="date">Date</label>

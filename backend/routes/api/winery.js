@@ -203,7 +203,7 @@ router.post(
       varietals,
       wineStyles,
       amenities,
-      images,
+      images
     } = req.body;
 
     const winery = await db.Winery.create({
@@ -236,12 +236,15 @@ router.post(
         amenityId: amenityObj.value,
       });
     }
+
+    console.log(images)
     for (const imgURL of images) {
       await db.Image.create({
         wineryId: winery.id,
         imageURL: imgURL,
       });
     }
+
     const newWineryToReturn = await db.Winery.findByPk(winery.id, {
       include: [
         db.Region,
@@ -257,6 +260,20 @@ router.post(
     res.json(newWineryToReturn);
   })
 );
+
+// router.post("/:id/images", asyncHandler(async (req, res) => {
+//   const imageURLs = req.body
+//   const wineryId = req.params.id
+//   for (const imgURL of imageURLs) {
+//     console.log(imgURL)
+//     await db.Image.create({
+//       wineryId,
+//       imageURL: imgURL,
+//     });
+//   }
+// const images = await db.Image.findAll({where: {wineryId}})
+// res.json({images, wineryId})
+// }))
 
 router.delete(
   "/:id",

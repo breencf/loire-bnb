@@ -4,6 +4,7 @@ const LOAD = "wineries/LOAD";
 const ADD = "wineries/ADD";
 const UPDATE = "wineries/UPDATE";
 const DELETE = "wineries/DELETE";
+const UPLOAD = "wineries/UPLOAD"
 // const GET = "wineries/GET";
 
 const load = (wineries) => {
@@ -20,6 +21,13 @@ const addOneWinery = (winery) => {
   };
 };
 
+const upload = ({images, id}) => {
+  return {
+    type: UPLOAD,
+    images,
+    id
+  }
+}
 // const getWinery = (winery) => {
 //   return {
 //     type: GET,
@@ -86,6 +94,21 @@ export const deleteWinery = (id) => async (dispatch) => {
   }
 };
 
+export const uploadImages =
+  ({ id, urls }) =>
+  async (dispatch) => {
+    const response = await csrfFetch(`/api/wineries/${id}/images`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(urls),
+    });
+    if(response.ok) {
+      const {images, id} = await response.json();
+      console.log('images coming from backend', images)
+      dispatch(upload({images, id}))
+    }
+  };
+
 const initialState = {};
 let newState;
 
@@ -109,6 +132,13 @@ function wineryReducer(state = initialState, action) {
       newState = { ...state };
       delete newState[action.id];
       return newState;
+    case UPLOAD:
+      newState = {...state}
+      newState[action.id].Images=[]
+      action.images.forEach((image) =>
+      newState[image.wineryId].Images.push(image)
+      )
+      return newState
     default:
       return state;
   }

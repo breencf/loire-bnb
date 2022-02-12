@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import {  useState, useCallback } from "react";
 import { addWinery } from "../../store/winery";
-import { getForm } from "../../store/form";
 import { MultiSelect } from "react-multi-select-component";
 import { useHistory } from "react-router-dom";
 import "./CreateWinery.css";
@@ -15,6 +14,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import DropZone from "./DropZone";
 
 const CreateWineryForm = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,113 @@ const CreateWineryForm = () => {
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
+  const [image4, setImage4] = useState("");
+  const [image5, setImage5] = useState("");
+  const [image6, setImage6] = useState("");
   const [errors, setErrors] = useState([]);
+  // const [images, setImages] = useState([])
+
+  const onDrop1 = useCallback((acceptedFiles) => {
+    const url = "https://api.cloudinary.com/v1_1/jadecabbage/upload";
+
+    acceptedFiles.forEach(async (acceptedFile) => {
+      const formData = new FormData();
+      formData.append("file", acceptedFile);
+      formData.append("upload_preset", "vngvmpuf");
+
+      const response = await fetch(url, {
+        method: "post",
+        body: formData,
+      });
+      const data = await response.json();
+      setImage1(data.secure_url);
+    });
+  }, []);
+
+  const onDrop2 = useCallback((acceptedFiles) => {
+    const url = "https://api.cloudinary.com/v1_1/jadecabbage/upload";
+
+    acceptedFiles.forEach(async (acceptedFile) => {
+      const formData = new FormData();
+      formData.append("file", acceptedFile);
+      formData.append("upload_preset", "vngvmpuf");
+
+      const response = await fetch(url, {
+        method: "post",
+        body: formData,
+      });
+      const data = await response.json();
+      setImage2(data.secure_url);
+    });
+  }, []);
+
+  const onDrop3 = useCallback((acceptedFiles) => {
+    const url = "https://api.cloudinary.com/v1_1/jadecabbage/upload";
+
+    acceptedFiles.forEach(async (acceptedFile) => {
+      const formData = new FormData();
+      formData.append("file", acceptedFile);
+      formData.append("upload_preset", "vngvmpuf");
+
+      const response = await fetch(url, {
+        method: "post",
+        body: formData,
+      });
+      const data = await response.json();
+      setImage3(data.secure_url);
+    });
+  }, []);
+
+  const onDrop4 = useCallback((acceptedFiles) => {
+    const url = "https://api.cloudinary.com/v1_1/jadecabbage/upload";
+
+    acceptedFiles.forEach(async (acceptedFile) => {
+      const formData = new FormData();
+      formData.append("file", acceptedFile);
+      formData.append("upload_preset", "vngvmpuf");
+
+      const response = await fetch(url, {
+        method: "post",
+        body: formData,
+      });
+      const data = await response.json();
+      setImage4(data.secure_url);
+    });
+  }, []);
+
+  const onDrop5 = useCallback((acceptedFiles) => {
+    const url = "https://api.cloudinary.com/v1_1/jadecabbage/upload";
+
+    acceptedFiles.forEach(async (acceptedFile) => {
+      const formData = new FormData();
+      formData.append("file", acceptedFile);
+      formData.append("upload_preset", "vngvmpuf");
+
+      const response = await fetch(url, {
+        method: "post",
+        body: formData,
+      });
+      const data = await response.json();
+      setImage5(data.secure_url);
+    });
+  }, []);
+
+  const onDrop6 = useCallback((acceptedFiles) => {
+    const url = "https://api.cloudinary.com/v1_1/jadecabbage/upload";
+
+    acceptedFiles.forEach(async (acceptedFile) => {
+      const formData = new FormData();
+      formData.append("file", acceptedFile);
+      formData.append("upload_preset", "vngvmpuf");
+
+      const response = await fetch(url, {
+        method: "post",
+        body: formData,
+      });
+      const data = await response.json();
+      setImage6(data.secure_url);
+    });
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +153,7 @@ const CreateWineryForm = () => {
     if (image1) images.push(image1);
     if (image2) images.push(image2);
     if (image3) images.push(image3);
+    console.log(images);
 
     const winery = {
       name,
@@ -66,63 +173,83 @@ const CreateWineryForm = () => {
     const newWinery = dispatch(addWinery(winery)).catch(async (res) => {
       const data = await newWinery.json();
       if (data && data.errors) setErrors(data.errors);
+      // else history.push("/mywineries")
     });
-
-    if (newWinery) history.push(`/mywineries`);
+    if (newWinery) {
+      history.push(`/mywineries`);
+    }
   };
 
   /************* */
   const [autoAddress, setAutoAddress] = useState("");
   const handleSelect = async (value) => {
-    const resultName=value.split(",")[0]
+    const resultName = value.split(",")[0];
     const results = await geocodeByAddress(value);
-    const latlng = await getLatLng(results[0])
-    const searchResult = results[0].address_components
+    const latlng = await getLatLng(results[0]);
+    const searchResult = results[0].address_components;
 
-    const streetNumber = (searchResult.filter((addressComponent) => addressComponent.types.includes("street_number")))[0]?.short_name
+    const streetNumber = searchResult.filter((addressComponent) =>
+      addressComponent.types.includes("street_number")
+    )[0]?.short_name;
 
-    const filteredAddress =[
-      streetNumber ?
-      streetNumber[0].short_name :
-      "",
-      (searchResult.filter((addressComponent) => addressComponent.types.includes("route")))[0].short_name
-    ].join(" ")
-    const filteredTown = searchResult.filter((addressComponent) => addressComponent.types.includes('locality'))[0].short_name
+    const filteredAddress = [
+      streetNumber ? streetNumber[0].short_name : "",
+      searchResult.filter((addressComponent) =>
+        addressComponent.types.includes("route")
+      )[0].short_name,
+    ].join(" ");
+    const filteredTown = searchResult.filter((addressComponent) =>
+      addressComponent.types.includes("locality")
+    )[0].short_name;
 
-    setName(resultName)
-    setLat(latlng.lat)
-    setLong(latlng.lng)
-    setTown(filteredTown)
-    setAddress(filteredAddress)
-
+    setName(resultName);
+    setLat(latlng.lat);
+    setLong(latlng.lng);
+    setTown(filteredTown);
+    setAddress(filteredAddress);
   };
 
   /*************** */
   return (
     <div id="create-winery-form">
       <h1>Add a winery</h1>
+
       <form onSubmit={onSubmit} id="create-winery-form">
-      <PlacesAutocomplete
-        value={autoAddress}
-        onChange={setAutoAddress}
-        onSelect={handleSelect}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="formDiv" key={"autocompleteDiv"}>
-            <label htmlFor="autocomplete">Search for a Winery</label>
-            <input {...getInputProps({ placeholder: "" })} />
-            <div key={"suggestionDiv"}>
-              {loading ? <div> loading </div> : null}
-              {suggestions?.map((suggestion) => {
-                const suggestionStyle = {
-                  fontWeight: suggestion.active ? 500 : 400
-                }
-                return <div key={suggestion.index}{...getSuggestionItemProps(suggestion, {style: suggestionStyle})}>{suggestion.description}</div>;
-              })}
+        <PlacesAutocomplete
+          value={autoAddress}
+          onChange={setAutoAddress}
+          onSelect={handleSelect}
+        >
+          {({
+            getInputProps,
+            suggestions,
+            getSuggestionItemProps,
+            loading,
+          }) => (
+            <div className="formDiv" key={"autocompleteDiv"}>
+              <label htmlFor="autocomplete">Search for a Winery</label>
+              <input {...getInputProps({ placeholder: "" })} />
+              <div key={"suggestionDiv"}>
+                {loading ? <div> loading </div> : null}
+                {suggestions?.map((suggestion) => {
+                  const suggestionStyle = {
+                    fontWeight: suggestion.active ? 500 : 400,
+                  };
+                  return (
+                    <div
+                      key={suggestion.index}
+                      {...getSuggestionItemProps(suggestion, {
+                        style: suggestionStyle,
+                      })}
+                    >
+                      {suggestion.description}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
+          )}
+        </PlacesAutocomplete>
         <div className="formDiv">
           <ul>
             {errors.map((error, i) => {
@@ -253,7 +380,17 @@ const CreateWineryForm = () => {
         </div>
         <div className="formDiv">
           <h4>Images</h4>
-          <label htmlFor="image1"></label>
+          <DropZone onDrop={onDrop1} image={image1} />
+          <DropZone onDrop={onDrop2} image={image2} />
+          <DropZone onDrop={onDrop3} image={image3} />
+          {image1&& image2 && image3 && (
+            <>
+              <DropZone onDrop={onDrop4} image={image4} />
+              <DropZone onDrop={onDrop5} image={image5} />
+              <DropZone onDrop={onDrop6} image={image6} />
+            </>
+          )}
+          {/* <label htmlFor="image1"></label>
           <input
             id="image1"
             label="text"
@@ -276,7 +413,7 @@ const CreateWineryForm = () => {
             onChange={(e) => setImage3(e.target.value)}
             value={image3}
             placeholder="Image URL #3"
-          />
+          /> */}
         </div>
 
         <hr />
