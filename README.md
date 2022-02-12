@@ -4,6 +4,8 @@ Loirebnb is a Loire Valley wine-focused airbnb clone. Users can find wineries, b
 
 Loirebnb was built with PostgreSQL, Sequelize, Express and Javascript in the backend, and React, Redux and Javascript in the frontend with plain CSS.
 
+live link: loirebnb.herokuapp.com
+
 ## Features
 
 ### 1. Wineries(Spots)
