@@ -8,7 +8,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
   const dispatch = useDispatch();
   const tasting = useSelector((state) => state.tasting.tastings[id]);
   const tastingTimes = useSelector((state) => state.tasting?.times);
-  const winery = tasting.Winery
+  const winery = tasting.Winery;
 
   const now = new Date();
   const nowMonth = now.getMonth() > 9 ? now.getMonth() : `0${now.getMonth()}`;
@@ -17,7 +17,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
   const [date, setDate] = useState(tasting.date);
   const [time, setTime] = useState(tasting.time);
   const [numGuests, setNumGuests] = useState(tasting.numGuests);
-  const [availableTimes, setAvailableTimes] = useState(staticTimeList)
+  const [availableTimes, setAvailableTimes] = useState(staticTimeList);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
@@ -25,8 +25,8 @@ export const EditBookingWidget = ({ id, closeModal }) => {
   }, [date]);
 
   useEffect(() => {
-    setAvailableTimes(tastingTimes? [...tastingTimes] : staticTimeList)
-  },[tastingTimes])
+    setAvailableTimes(tastingTimes ? [...tastingTimes] : staticTimeList);
+  }, [tastingTimes]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ export const EditBookingWidget = ({ id, closeModal }) => {
 
     const updatedTasting = dispatch(updateTasting(updatedTastingInput));
     if (updatedTasting) {
-      dispatch(loadTastings(tasting.userId))
+      dispatch(loadTastings(tasting.userId));
       closeModal();
     }
   };
@@ -55,10 +55,10 @@ export const EditBookingWidget = ({ id, closeModal }) => {
   return (
     <div id="editBooking">
       <div className="cancel">
-          <button className="cancelButton" onClick={onCancelClick}>
-            X
-          </button>
-          </div>
+        <button className="cancelButton" onClick={onCancelClick}>
+          X
+        </button>
+      </div>
       <h3>Update tasting</h3>
       <h3>{winery.name}</h3>
       <form onSubmit={onSubmit} id="book-tasting-form">
@@ -98,10 +98,12 @@ export const EditBookingWidget = ({ id, closeModal }) => {
             type="number"
             onChange={(e) => setNumGuests(e.target.value)}
             value={numGuests}
+            max={winery.maxGuests}
+            min={1}
             required
           />
         </div>
-          <div>
+        <div>
           <button className="bookingSubmitButton" type="submit">
             Submit
           </button>

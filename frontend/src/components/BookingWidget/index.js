@@ -119,6 +119,7 @@ export const BookingWidget = ({ count, average, maxGuests }) => {
             onChange={(e) => setNumGuests(e.target.value)}
             value={numGuests}
             max={maxGuests}
+            min={1}
             required
           />
         </div>

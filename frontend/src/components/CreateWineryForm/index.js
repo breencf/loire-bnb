@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {  useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { addWinery } from "../../store/winery";
 import { MultiSelect } from "react-multi-select-component";
 import { useHistory } from "react-router-dom";
@@ -301,7 +301,7 @@ const CreateWineryForm = () => {
           />
         </div>
         <div className="formDiv">
-          <label htmlFor="address">Address(optional)</label>
+          <label htmlFor="address">Address (optional)</label>
           <input
             id="address"
             label="string"
@@ -323,7 +323,7 @@ const CreateWineryForm = () => {
         </div>
         <div className="dropdown">
           <label htmlFor="region">Region</label>
-          <select onChange={(e) => setRegion(e.target.value)}>
+          <select required onChange={(e) => setRegion(e.target.value)}>
             {staticRegionList.map((region) => {
               return (
                 <option
@@ -349,7 +349,7 @@ const CreateWineryForm = () => {
           />
         </div>
         <div className="dropdown">
-          <label htmlFor="amenities">Amenities</label>
+          <label htmlFor="amenities">Amenities (optional)</label>
           <MultiSelect
             options={staticAmenityList}
             value={amenities}
@@ -358,7 +358,7 @@ const CreateWineryForm = () => {
           />
         </div>
         <div className="dropdown">
-          <label htmlFor="varietals">Varietals</label>
+          <label htmlFor="varietals">Varietals (optional)</label>
           <MultiSelect
             options={staticVarietalList}
             value={varietals}
@@ -369,7 +369,7 @@ const CreateWineryForm = () => {
 
         <hr />
         <div className="dropdown">
-          <label htmlFor="styles">Wine Styles</label>
+          <label htmlFor="styles">Wine Styles (optional)</label>
           <MultiSelect
             options={staticWineStyleList}
             value={wineStyles}
@@ -378,11 +378,11 @@ const CreateWineryForm = () => {
           />
         </div>
         <div className="formDiv">
-          <h4>Images</h4>
+          <h4>Images (optional)</h4>
           <DropZone onDrop={onDrop1} image={image1} />
           <DropZone onDrop={onDrop2} image={image2} />
           <DropZone onDrop={onDrop3} image={image3} />
-          {image1&& image2 && image3 && (
+          {image1 && image2 && image3 && (
             <>
               <DropZone onDrop={onDrop4} image={image4} />
               <DropZone onDrop={onDrop5} image={image5} />
