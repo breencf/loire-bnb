@@ -73,3 +73,9 @@ hr.full {
 #fourzerofour > * {
   margin: 10px;
 }
+
+/* @media screen and (max-width:500px) {
+  body > * {
+    width: 100%;
+  }
+} */
