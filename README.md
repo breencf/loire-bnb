@@ -35,10 +35,10 @@ live link: http://www.loirebnb.herokuapp.com
 - `CREATE USER <name> WITH CREATEDB PASSWORD <'password'>`
 
 4. Create a .env file in the backend directory based on the .env.example found within the respective directory.
-5. Enter your username and password information into your .env file along with your desired database name, a secured combination of characters for your `JWT_SECRET`, and your desired `PORT`, (preferably 5000).
-6. Add the following proxy to your package.json file within your frontend directory, replacing or keeping the `5000` port to match your `PORT` configuration found in the .env file.
+5. Enter your username and password information into your .env file along with your desired database name, a secured combination of characters for your `JWT_SECRET`, and your desired `PORT`, (preferably 5002).
+6. Add the following proxy to your package.json file within your frontend directory, replacing or keeping the `5002` port to match your `PORT` configuration found in the .env file.
 
-- `"proxy": "http://localhost:5000"`
+- `"proxy": "http://localhost:5002"`
 
 7. Create the Database, then Migrate and Seed models.
 

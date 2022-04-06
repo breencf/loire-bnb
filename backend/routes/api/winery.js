@@ -203,7 +203,7 @@ router.post(
       varietals,
       wineStyles,
       amenities,
-      images
+      images,
     } = req.body;
 
     const winery = await db.Winery.create({
@@ -383,8 +383,8 @@ router.get(
     const bookedTimes = [];
     existingTastings.forEach((tastingObj) => bookedTimes.push(tastingObj.time));
 
-    const availableTimes = staticTimeList.filter((timeObj) =>
-      !bookedTimes.includes(timeObj.label)
+    const availableTimes = staticTimeList.filter(
+      (timeObj) => !bookedTimes.includes(timeObj.label)
     );
     res.json(availableTimes);
   })
@@ -393,17 +393,27 @@ router.get(
 router.post(
   "/search",
   asyncHandler(async (req, res) => {
-    const { value } = req.body;
-    let data = await db.User.findAll({
+    const { location, date } = req.body;
+
+    let regions= await db.Region.findAll({attributes:['id'], where: {name: {[Op.like]: `%${location}%`}}})
+    console.log(regions)
+
+    let wineries = await db.Winery.findAll({
+      include: [
+        db.Region,
+        db.Image,
+        db.Varietal,
+        db.WineStyle,
+        db.User,
+        db.Review,
+        db.Amenity,
+      ],
       where: {
-        [Op.or]: [
-          { name: { [Op.like]: `%${value}%` } },
-          { username: { [Op.like]: `%${value}%` } },
-        ],
+        [Op.or]: [{ name: { [Op.like]: `%${location}%` }}, {region: {[Op.in]: regions}}],
       },
     });
 
-    res.json(data);
+    res.json(wineries);
   })
 );
 

@@ -130,24 +130,27 @@ h1 {
   border-radius: 32px;
   border: 1px solid lightgray;
   filter: drop-shadow(0.75rem, black);
+  width: 600px;
 }
 
 .search-bar > form {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+
 }
 
 .search-bar > form > div {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   color: black;
   font-weight: 600;
   font-size: 12px;
   padding: 14px 24px;
   border-radius: 32px;
+  width: 200px;
 }
 
 .searchButton {
@@ -166,6 +169,7 @@ h1 {
 .search-bar input {
   font-family: inherit;
   border: none;
+  width: inherit;
 }
 
 .profile-button-background {

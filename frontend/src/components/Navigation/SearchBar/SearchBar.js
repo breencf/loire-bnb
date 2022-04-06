@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { searchVal } from "../../../store/search";
+import { useDispatch } from "react-redux";
 
 export const SearchBar = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [location, setLocation] = useState("");
   const [date, setDate] = useState();
@@ -18,24 +19,21 @@ export const SearchBar = () => {
     const query = {
       location,
       date,
-      time,
-      guests,
     };
-
-    history.push("/wineries")
-
+    await dispatch(searchVal(query));
+    await history.push("/search");
   };
   return (
     <div className="search-bar">
       <form onSubmit={onSubmit}>
         <div>
-          <label htmlFor="location">Location</label>
+          <label htmlFor="location">Location/Winery</label>
           <input
             id="location"
             type="text"
             onChange={(e) => setLocation(e.target.value)}
             value={location}
-            placeholder="FYI Searches don't filter!"
+            placeholder="Try a region or winery name"
           />
         </div>
         |
@@ -50,7 +48,7 @@ export const SearchBar = () => {
             // min={year, month, day}
           />
         </div>
-        |
+        {/* |
         <div>
           <label htmlFor="time">Time</label>
           <input
@@ -71,7 +69,7 @@ export const SearchBar = () => {
             value={guests}
             placeholder="Add guests"
           />
-        </div>
+        </div> */}
         <button className="searchButton">
           <div id="search">
             <i className="fas fa-search"></i>

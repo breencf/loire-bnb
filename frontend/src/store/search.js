@@ -2,31 +2,34 @@ import { csrfFetch } from "./csrf";
 
 const SEARCH_VALUE = "user/SEARCH";
 
-const search = (value) => {
+const search = (wineries) => {
   return {
     type: SEARCH_VALUE,
-    value,
+    wineries,
   };
 };
 
-export const searchVal = (value) => async (dispatch) => {
-  const response = await csrfFetch("/api/wineries/search", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ value }),
-  });
-  const data = await response.json();
-  dispatch(search(data));
-  return data;
-};
+export const searchVal =
+  ({ location, date }) =>
+  async (dispatch) => {
+    const response = await csrfFetch("/api/wineries/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ location, date }),
+    });
+    const wineries = await response.json();
+    dispatch(search(wineries));
+    return wineries;
+  };
 
 const searchReducer = (state = {}, action) => {
-  let newState;
   switch (action.type) {
     case SEARCH_VALUE:
-      newState = { ...state };
-      newState = action.value;
-      return newState;
+      const allWineries = {};
+      action.wineries.forEach((winery) => {
+        allWineries[winery.id] = winery;
+      });
+      return { ...allWineries, ...state };
     default:
       return state;
   }
