@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { searchVal } from "../../../store/search";
 
 export const SearchBar = () => {
-
+  const dispatch = useDispatch()
   const history = useHistory()
 
   const [location, setLocation] = useState("");
@@ -20,7 +21,7 @@ export const SearchBar = () => {
       time,
       guests,
     };
-    console.log(query);
+
     history.push("/wineries")
 
   };

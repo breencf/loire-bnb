@@ -8,6 +8,7 @@ import {likeReducer} from './like'
 import { tastingReducer } from './tasting';
 import reviewReducer from './review';
 import mapsReducer from './maps';
+import searchReducer from './search';
 let enhancer;
 
 if(process.env.NODE_ENV === 'production') {
@@ -25,7 +26,7 @@ const configureStore = preloadedState => {
 const rootReducer = combineReducers({
     sessions: sessionReducer,
     wineries: wineryReducer,
-    // form: formReducer,
+    search: searchReducer,
     like: likeReducer,
     tasting: tastingReducer,
     reviews: reviewReducer,

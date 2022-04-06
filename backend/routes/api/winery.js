@@ -390,4 +390,21 @@ router.get(
   })
 );
 
+router.post(
+  "/search",
+  asyncHandler(async (req, res) => {
+    const { value } = req.body;
+    let data = await db.User.findAll({
+      where: {
+        [Op.or]: [
+          { name: { [Op.like]: `%${value}%` } },
+          { username: { [Op.like]: `%${value}%` } },
+        ],
+      },
+    });
+
+    res.json(data);
+  })
+);
+
 module.exports = router;
