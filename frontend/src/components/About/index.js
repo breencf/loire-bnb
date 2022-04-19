@@ -32,7 +32,7 @@ export const About = () => {
                 <i className="fab fa-github-square"></i> Github
               </button>
             </a>
-            <a href="https://www.linkedin.com/in/breencf/">
+            <a target="_blank" href="https://www.linkedin.com/in/breencf/">
               <button className="developerCTA">
                 <i className="fab fa-linkedin"></i> Linkedin
               </button>
