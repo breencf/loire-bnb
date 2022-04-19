@@ -24,10 +24,10 @@ export const About = () => {
           <div>
           </div>
           <div id="links">
-            <a href="mailto:breencf@gmail.com">
+            <a target="_blank" href="mailto:breencf@gmail.com">
               <button className="developerCTA">Email</button>
             </a>
-            <a href="http://www.github.com/breencf">
+            <a target="_blank" href="http://www.github.com/breencf">
               <button className="developerCTA">
                 <i className="fab fa-github-square"></i> Github
               </button>

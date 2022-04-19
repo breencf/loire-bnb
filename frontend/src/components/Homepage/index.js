@@ -46,15 +46,15 @@ export const Homepage = () => {
               <h2>Reach out!</h2>
             </div>
             <div id="links">
-              <a href="mailto:breencf@gmail.com">
+              <a target="_blank" href="mailto:breencf@gmail.com">
                 <button className="developerCTA">Email</button>
               </a>
-              <a href="http://www.github.com/breencf">
+              <a target="_blank" href="http://www.github.com/breencf">
                 <button className="developerCTA">
                   <i className="fab fa-github-square"></i> Github
                 </button>
               </a>
-              <a href="https://www.linkedin.com/in/breencf/">
+              <a target="_blank" href="https://www.linkedin.com/in/breencf/">
                 <button className="developerCTA">
                   <i className="fab fa-linkedin"></i> Linkedin
                 </button>
